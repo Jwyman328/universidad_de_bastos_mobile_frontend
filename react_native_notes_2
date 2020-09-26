@@ -1,0 +1,34 @@
+react_native_notes_2
+ 
+
+ - you can not put text in a view 
+ - the views main job is to apply styles and do layouting
+
+ - like react must have a parent component like a view.
+
+ only about tne core components
+ - react native buttons are self closing with a title property 
+ <Button title='hello world'/>
+
+ react native is all about compoennts and then adding the right structure to the components 
+
+ - react components take arguments with curls brackets 
+
+ <View something={'something'}> 
+ // if you wnat to pass in styles each component has a style parameter 
+
+ <View style={{my style go here, padding:30}}> 
+ - the styles parameters takes a styles object which you cna put your css like styles 
+ - this is considered na inline style
+ -all multie word style properties are camel case like borderColor:'red'
+
+ - each component will have a huge list of props you can set on it 
+
+
+
+LAYOUT style    
+- must use flexbox 
+- things are set by default to use flexbox and use column setting
+
+
+navigation 
