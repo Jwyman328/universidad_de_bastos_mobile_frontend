@@ -10,66 +10,15 @@ const AuthCard = ({cardTypeTitle, title}) => {
 
   const navigation = useNavigation();
 
-  const [navigateInButton, setNavigateInButton] = useState();
-  const [navigateToButton, setNavigateToButton] = useState();
-
-  const navigateToPage = cardTypeTitle === 'Login'? 'Signup' : 'Login';
-
-  const buttonSeparatorText = (
-    <Text style={styles.buttonSeparatorText}>Or</Text>
-  );
+  const navigateToPageName = cardTypeTitle === 'Login' ? 'Signup' : 'Login';
 
   const handleNavigateIn = () => {
     navigation.navigate('Home');
   };
 
   const handleNavigateTo = () => {
-    navigation.navigate(navigateToPage);
+    navigation.navigate(navigateToPageName);
   };
-
-  function setNavigateButton() {
-    if (cardTypeTitle === 'Login') {
-      setLoginAuthCardButtons();
-    } else {
-      setSignUpAuthCardButton();
-    }
-  }
-
-  function setLoginAuthCardButtons() {
-    setNavigateInButton(
-      <SubmitButton
-        buttonColor="#03b1fc"
-        handleClick={handleNavigateIn}
-        title={'Login'}></SubmitButton>,
-    );
-
-    setNavigateToButton(
-      <SubmitButton
-        buttonColor="#99d0e8"
-        handleClick={handleNavigateTo}
-        title="Signup"></SubmitButton>,
-    );
-  }
-
-  function setSignUpAuthCardButton() {
-    setNavigateInButton(
-      <SubmitButton
-        buttonColor="#03b1fc"
-        handleClick={handleNavigateIn}
-        title={'Signup'}></SubmitButton>,
-    );
-
-    setNavigateToButton(
-      <SubmitButton
-        buttonColor="#99d0e8"
-        handleClick={handleNavigateTo}
-        title="Login"></SubmitButton>,
-    );
-  }
-
-  useEffect(() => {
-    setNavigateButton();
-  },[]);
 
   return (
     <View style={styles.container}>
@@ -94,7 +43,15 @@ const AuthCard = ({cardTypeTitle, title}) => {
       </View>
 
       <View style={styles.submitButtonContainer}>
-        {[navigateInButton, buttonSeparatorText, navigateToButton]}
+        <SubmitButton
+          buttonColor="#03b1fc"
+          handleClick={handleNavigateIn}
+          title={cardTypeTitle}></SubmitButton>
+        <Text style={styles.buttonSeparatorText}>Or</Text>
+        <SubmitButton
+          buttonColor="#99d0e8"
+          handleClick={handleNavigateTo}
+          title={navigateToPageName}></SubmitButton>
       </View>
     </View>
   );
