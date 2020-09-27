@@ -93,3 +93,21 @@ FLEXBOX REVIEW
     - flex:1, this means give me 100% of the main axis space and put it in my component, expand my component 
         by that amount of space
     - use flex and pixels so spacing and widths and heights
+
+
+NAVIGATION 
+    - i want to access navigation from any screen so there is a useNavigation hook
+    - https://reactnavigation.org/docs/connecting-navigation-prop/
+    - alternatively you could use the context api, and put the naviation there  
+        but the useNAvigation hook will basically do that for oyu
+
+
+DYNAMIC VAIRABLES in STYLE SHEET?
+    - you must create a function that takes in an argument that 
+        you want to set to a style parameter and then you set it and return the stylesheet object 
+        https://stackoverflow.com/questions/42707327/passing-props-into-external-stylesheet-in-react-native
+
+
+USEEFFECT STACK OVERFLOW 
+    - if you set a state in useEffect aka you only want it to run once 
+    remember to set an empty array to the useEffect so it only runs once.

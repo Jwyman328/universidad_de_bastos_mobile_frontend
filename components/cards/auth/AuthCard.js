@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import SubmitButton from '../../buttons/SubmitButton';
@@ -7,9 +8,68 @@ const AuthCard = ({cardTypeTitle, title}) => {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
-  const logIn = () => {
-    console.log('log in component');
+  const navigation = useNavigation();
+
+  const [navigateInButton, setNavigateInButton] = useState();
+  const [navigateToButton, setNavigateToButton] = useState();
+
+  const navigateToPage = cardTypeTitle === 'Login'? 'Signup' : 'Login';
+
+  const buttonSeparatorText = (
+    <Text style={styles.buttonSeparatorText}>Or</Text>
+  );
+
+  const handleNavigateIn = () => {
+    navigation.navigate('Home');
   };
+
+  const handleNavigateTo = () => {
+    navigation.navigate(navigateToPage);
+  };
+
+  function setNavigateButton() {
+    if (cardTypeTitle === 'Login') {
+      setLoginAuthCardButtons();
+    } else {
+      setSignUpAuthCardButton();
+    }
+  }
+
+  function setLoginAuthCardButtons() {
+    setNavigateInButton(
+      <SubmitButton
+        buttonColor="#03b1fc"
+        handleClick={handleNavigateIn}
+        title={'Login'}></SubmitButton>,
+    );
+
+    setNavigateToButton(
+      <SubmitButton
+        buttonColor="#99d0e8"
+        handleClick={handleNavigateTo}
+        title="Signup"></SubmitButton>,
+    );
+  }
+
+  function setSignUpAuthCardButton() {
+    setNavigateInButton(
+      <SubmitButton
+        buttonColor="#03b1fc"
+        handleClick={handleNavigateIn}
+        title={'Signup'}></SubmitButton>,
+    );
+
+    setNavigateToButton(
+      <SubmitButton
+        buttonColor="#99d0e8"
+        handleClick={handleNavigateTo}
+        title="Login"></SubmitButton>,
+    );
+  }
+
+  useEffect(() => {
+    setNavigateButton();
+  },[]);
 
   return (
     <View style={styles.container}>
@@ -34,7 +94,7 @@ const AuthCard = ({cardTypeTitle, title}) => {
       </View>
 
       <View style={styles.submitButtonContainer}>
-        <SubmitButton handleClick={logIn} title={cardTypeTitle}></SubmitButton>
+        {[navigateInButton, buttonSeparatorText, navigateToButton]}
       </View>
     </View>
   );
@@ -85,7 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     //backgroundColor: 'purple',
-
   },
   userInput: {
     color: 'black',
@@ -98,15 +157,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingLeft: 5,
   },
-  submitButtonContainer:{
-    flex:1,
+  submitButtonContainer: {
+    flex: 1.5,
     //backgroundColor: 'green',
     width: '100%',
     //justifyContent:'flex-end',
-    alignItems:'flex-end',
-    marginTop:40,
-
-  }
+    alignItems: 'flex-end',
+    marginTop: 40,
+  },
+  buttonSeparatorText: {
+    textAlign: 'center',
+    width: '100%',
+    marginBottom: 7,
+    fontSize: 20,
+    color: 'white',
+  },
 });
 
 export default AuthCard;

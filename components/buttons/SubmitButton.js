@@ -1,35 +1,42 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const SubmitButton = ({title, handleClick}) => {
+const SubmitButton = ({title, handleClick, buttonColor}) => {
+  //const buttonBackgroundColor = {backgroundColor:buttonColor}
+  
   return (
-    <TouchableHighlight onPress={handleClick} style={styles.buttonContainer}>
-      <View style={styles.submitButton}>
-        <Text style={styles.buttonTitle}>{title}</Text>
+    <TouchableHighlight onPress={handleClick} style={createStyleSheet(buttonColor).buttonContainer}>
+      <View style={createStyleSheet(buttonColor).submitButton}>
+        <Text style={createStyleSheet(buttonColor).buttonTitle}>{title}</Text>
       </View>
     </TouchableHighlight>
   );
 };
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex:1,
-    width: '100%',
-    alignItems: 'center',
-  },
-  submitButton: {
-    backgroundColor: '#03b1fc',
-    width: '100%',
-    flex:.7,
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
+function createStyleSheet(backgroundColor){
+  const styles = StyleSheet.create({
+    buttonContainer: {
+      flex:1,
+      width: '100%',
+      alignItems: 'center',
+    },
+    submitButton: {
+      backgroundColor: backgroundColor, 
+      width: '100%',
+      flex:.7,
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+  
+      borderRadius: 10,
+    },
+    buttonTitle: {
+      fontSize: 20,
+    },
+  });
+  return styles
+}
 
-    borderRadius: 10,
-  },
-  buttonTitle: {
-    fontSize: 20,
-  },
-});
 
 export default SubmitButton;

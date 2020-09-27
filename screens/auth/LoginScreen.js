@@ -10,9 +10,7 @@ import {
 import AuthCard from '../../components/cards/auth/AuthCard';
 
 const LoginScreen = ({navigation}) => {
-  const navigateTo = () => {
-    navigation.navigate('Signup');
-  };
+
   return (
     <ScrollView
       style={styles.scrollContainer}
@@ -22,13 +20,7 @@ const LoginScreen = ({navigation}) => {
           cardTypeTitle="Login"
           title="Universidad de Bastos"></AuthCard>
       </View>
-      <View style={styles.navigateButtonContainer}>
-        <Button
-          style={styles.navigateButton}
-          onPress={navigateTo}
-          title="navigate"
-        />
-      </View>
+
     </ScrollView>
   );
 };
@@ -46,8 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardContainer: {
-    flex: 1,
-    marginTop: '20%',
+    flex: .6,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
