@@ -13,17 +13,18 @@ const SubmitButton = ({title, handleClick}) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    flex:1,
     width: '100%',
     alignItems: 'center',
   },
   submitButton: {
     backgroundColor: '#03b1fc',
-    width: '60%',
+    width: '100%',
+    flex:.7,
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-    marginTop: 20,
+
     borderRadius: 10,
   },
   buttonTitle: {

@@ -15,35 +15,23 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import AuthCard from './components/cards/auth/AuthCard';
+import LoginScreen from './screens/auth/LoginScreen';
+import 'react-native-gesture-handler';
+import {NavigationContainer, StackActions} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import SignUpScreen from './screens/auth/SignUpScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.cardContainer}>
-        <AuthCard
-          cardTypeTitle="Login"
-          title="Universidad de Bastos"></AuthCard>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} options={{}} />
+        <Stack.Screen name="Signup" component={SignUpScreen} options={{}} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#add8e6',
-
-  },
-  cardContainer: {
-    width: '100%',
-    height: '100%',
-    marginTop:'40%',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  }
-});
 
 export default App;

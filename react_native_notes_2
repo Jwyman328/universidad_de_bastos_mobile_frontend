@@ -32,3 +32,64 @@ LAYOUT style
 
 
 navigation 
+- set up an outer navigation shell like in react. 
+- each component that is defined as a screen gets a navigation object passed to it 
+    - this navigation object is used to navigate to other screens.
+    - you should descrture this navigation object in the props with {{navigation}}
+- the navigation uses the Animated library
+
+
+
+STARTING APP 
+- you need to start up the server with npm start 
+
+- you must start the simulator with a different command
+
+
+SCROLLVIEW
+    - without scroll view we can not scroll to anything that is hidden off the page.
+    - must be a bounded height in order to work
+    - the children have unbounded height so the scroll view must have bounded height
+    - should pass down flex:1 ? 
+also could use FlatList,
+    - flatlist will only render the elemetns that show on the page where as 
+    scrolllview will render everything on the page when the page laods.
+    - use contentContainerStyle to style a scrollview 
+    - use flexgrow:1 if you want to be able to scroll and have it lock 
+    when you scrll down on components
+    - so on the scrollview you must use two different style properties one for setting styles 
+    and one for setting the layout the styles are the regular style prop 
+    and the layout of the elements insde of it is the contentContainerStyle
+
+
+SafeAreaView?? waht is it 
+    - since ios adds this navigation header, you must add this 
+    if tou want to automaticallt respond to the header padding 
+    instead of manually having to make components have a margin 
+    or padding to that autoehader added for navigation
+
+
+Button!
+    - you can barly add styles to a traditional button
+    - cant even add a padding so must do a wrapper over it 
+
+seems like a lot of styling problems come from the % based styling i like to do
+- never assign a width and a height and jsut use flex box for positions
+- as well just use paddings and margins when you ahve no choice 
+
+
+FLEXBOX REVIEW 
+    - fr means free space so it says if there is any free space remaining put it in this component?
+    - flexbox by default sets everythign to only as wide and tall as it needs to be when the 
+        outer container width and height is not set.
+    - if you set the width and height of the parent then the children will expand ot the height of the parent 
+    if it is a row, or expand to the width of the parent if it is a column
+        - aka they stretch across the cross axis
+        - aka align items is stretch by default
+        - stretch tells the child how much space to take 
+            - where as all other align-items do not
+    - space evenly etc. will take the remaining space and distribute it between the items, 
+    aka set auto margins
+    - flex:1, this means give me 100% of the main axis space and put it in my component, expand my component 
+        by that amount of space
+    - use flex and pixels so spacing and widths and heights
