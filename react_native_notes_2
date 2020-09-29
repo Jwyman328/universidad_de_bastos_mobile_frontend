@@ -164,7 +164,7 @@ useContext
         - so i can consume context but how do i change it in other places?
             - the value you pass in must be from a useState or some type of state hook 
                 and then you must pass in the function that changes it. 
-    - i was looking at the context api instead of the useContext hook 
+    - i was looking at the conte¸¸¸xt api instead of the useContext hook 
 
 
 
@@ -174,3 +174,7 @@ API NOTES
     and .json wonr handle it 
     - you have to stringify your http requests you cant sned javascript objects,
         everything must be in a string like this {"username":"guestUser@gmail.com" , "password": "test123!123"}
+
+
+MOVING TO TYPESCRIPT NOTES 
+    - all ts files actually have to be tsx files in react if you want to use typescript.

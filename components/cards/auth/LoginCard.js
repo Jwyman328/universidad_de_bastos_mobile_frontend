@@ -12,8 +12,9 @@ const LoginCard = () => {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const globalContext = useContext(GlobalDataContext)
-  const setToken = globalContext.token?.setToken
-  //const setLoginRequestStatus = globalContext.
+  const setToken = globalContext.token.setValue
+  const loginRequestStatus = globalContext.loginRequestStatus.value
+  const setLoginRequestStatus = globalContext.loginRequestStatus.setValue
 
   const title = 'Universidad de Bastos';
   const cardTypeTitle = 'Login';
@@ -23,9 +24,9 @@ const LoginCard = () => {
   const navigateToHomeScreen = async () => {
     //send a post request to check if it is logging in
     try{
-      console.log('current token', globalContext.token)
+      console.log('current token', globalContext.value2)
 
-      const postResponse = await loginUser(username, password,setLoginRequestStatus)
+      const postResponse = await loginUser(username, password, setLoginRequestStatus)
       const responseJson = await postResponse.json()
 
       const userToken = await responseJson.token
@@ -37,6 +38,7 @@ const LoginCard = () => {
       }
       //;
     }catch(err){
+      setLoginRequestStatus("ERROR")
       console.log('grr bear', err)
     }
    
