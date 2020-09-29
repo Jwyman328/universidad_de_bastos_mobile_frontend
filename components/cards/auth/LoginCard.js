@@ -1,0 +1,88 @@
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState, useContext} from 'react';
+
+import {StyleSheet, View, Text, TextInput} from 'react-native';
+import GlobalDataContext from '../../../data/global/globalContext';
+import loginUser from '../../../httpRequests/auth/login';
+import SubmitButton from '../../buttons/SubmitButton';
+import authCardStyles from './styles';
+
+
+const LoginCard = () => {
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+  const globalContext = useContext(GlobalDataContext)
+  const setToken = globalContext.token?.setToken
+  //const setLoginRequestStatus = globalContext.
+
+  const title = 'Universidad de Bastos';
+  const cardTypeTitle = 'Login';
+
+  const navigation = useNavigation();
+
+  const navigateToHomeScreen = async () => {
+    //send a post request to check if it is logging in
+    try{
+      console.log('current token', globalContext.token)
+
+      const postResponse = await loginUser(username, password,setLoginRequestStatus)
+      const responseJson = await postResponse.json()
+
+      const userToken = await responseJson.token
+      
+      if (userToken){
+        // create context api? add token to it and username 
+        setToken(userToken)
+        navigation.navigate('Home')
+      }
+      //;
+    }catch(err){
+      console.log('grr bear', err)
+    }
+   
+  };
+
+  const navigateToSignupScreen = () => {
+    navigation.navigate('Signup');
+  };
+
+  return (
+    <View style={authCardStyles.container}>
+      <Text style={authCardStyles.title}>{title.toUpperCase()}</Text>
+
+      <View style={authCardStyles.cardTypeTitleContainer}>
+        <Text style={authCardStyles.cardTypeTitle}>{cardTypeTitle}</Text>
+      </View>
+
+      <View style={authCardStyles.userInputContainer}>
+        <TextInput
+          placeholderTextColor="black"
+          placeholder="username"
+          style={authCardStyles.userInput}
+          onChangeText={(username) => setUserName(username)}></TextInput>
+        <TextInput
+          secureTextEntry={true}
+          placeholderTextColor="black"
+          placeholder="password"
+          style={authCardStyles.userInput}
+          onChangeText={(password) => setPassword(password)}></TextInput>
+      </View>
+
+      <View style={authCardStyles.submitButtonContainer}>
+        <SubmitButton
+          buttonColor="#03b1fc"
+          handleClick={navigateToHomeScreen}
+          title={cardTypeTitle}></SubmitButton>
+
+        <Text style={authCardStyles.buttonSeparatorText}>Or</Text>
+
+        <SubmitButton
+          buttonColor="#99d0e8"
+          handleClick={navigateToSignupScreen}
+          title="Signup"></SubmitButton>
+      </View>
+    </View>
+  );
+};
+
+export default LoginCard;

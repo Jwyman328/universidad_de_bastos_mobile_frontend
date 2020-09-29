@@ -111,3 +111,66 @@ DYNAMIC VAIRABLES in STYLE SHEET?
 USEEFFECT STACK OVERFLOW 
     - if you set a state in useEffect aka you only want it to run once 
     remember to set an empty array to the useEffect so it only runs once.
+
+REGONAL STYLES / GLOBAL 
+    - you can make a stylesheet variable and save it anywhere and then export it and 
+        import it like any other object/variable
+
+
+HADNLING STATE WITH HTTP REQUESTS ? 
+    - hooks 
+    https://reactjs.org/docs/hooks-overview.html
+    what are hooks? they let you hook into life cycle and state features 
+    of a class based component.
+    - useEffect hook is used for all start, did update, did close lifecycles.
+    - effect hook as access to the latest state of the component.
+    - useEffect hook may also specify how to clean up a component
+    - a return statement in a useEffect hook will produce a clean up and 
+    will not run the function returned from a useEffect hook untill after the component is torn down
+
+    RULES 
+        - hooks can not be called inside loops or anything nested 
+            they must only be called at the top level of a component
+
+
+    CUSTOM HOOKS ?
+        - custom hooks allow you to customize the interactions between state hooks 
+            inside other components while allowing that customization to be utilized in other areas 
+           . it is a way to reuse stateful logic but not reuse the same state.
+           if you want to reuse the same state it would need to be accessed from inside that hook 
+           and set to that custom hooks state. for example like a redux call 
+           that sets that hooks state and then provides actions on it.
+        - each call to a hook has completley isolated state just like when we use useState,
+        useState creates a brand new state object and state changing function, 
+        so a custom hook just allows you to modify what you passBack like passing back a function
+        to change the state in some unique way, or some type of action that takes place on the 
+        data at the beggining of the initializtion or the closign of the component.
+
+
+useReducer 
+
+
+
+useContext 
+    - add state and the functions that change that state and consume said state and functions 
+        at any level in a tree  
+    - using context makes re-using a component difficult. 
+        re-used components should more so be using props to get there data but this makes sense 
+        an outer component that wont be re-used could use the context api to get the data and then 
+        pass it into the component.
+    - context takes a default value which when no value is passed into the context api 
+        it will use that default value
+    - DYNAMIC CONTEXT 
+        - so i can consume context but how do i change it in other places?
+            - the value you pass in must be from a useState or some type of state hook 
+                and then you must pass in the function that changes it. 
+    - i was looking at the context api instead of the useContext hook 
+
+
+
+
+API NOTES 
+    - react native deals with errors differently because its possible a response in html is sent back 
+    and .json wonr handle it 
+    - you have to stringify your http requests you cant sned javascript objects,
+        everything must be in a string like this {"username":"guestUser@gmail.com" , "password": "test123!123"}

@@ -1,12 +1,15 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import GlobalDataContext from '../../data/global/globalContext';
 
 // create a component
 const HomepageScreen = () => {
+    const globalContext = useContext(GlobalDataContext)
+    const token = globalContext.token.value
     return (
         <View style={styles.container}>
-            <Text>MyComponent</Text>
+            <Text>{token}</Text>
         </View>
     );
 };
