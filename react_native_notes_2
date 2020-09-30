@@ -195,3 +195,5 @@ useReducer
             case ('')
         }
     }
+
+## use useEffect to listen for changes 

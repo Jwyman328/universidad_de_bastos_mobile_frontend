@@ -42,7 +42,7 @@ const authCardStyles = StyleSheet.create({
     userInputContainer: {
       width: '100%',
       position: 'relative',
-      height: '30%',
+      //height: '30%',
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,

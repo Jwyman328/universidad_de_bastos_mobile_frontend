@@ -14,7 +14,7 @@ const authScreenStyles =StyleSheet.create({
       flex: 1,
     },
     cardContainer: {
-      flex: .6,
+      flex: .8,
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',

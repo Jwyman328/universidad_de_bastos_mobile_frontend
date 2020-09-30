@@ -2,24 +2,41 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
-import {signUpCardFormReducer, SET_USERNAME, SET_PASSWORD, SET_PASSWORD_RETYPED,SIGNUP_USER, initialSignupCardReducerValues } from '../../../reducers/forms/signUpCardFormReducer';
+import {
+  signUpCardFormReducer,
+  SET_USERNAME,
+  SET_PASSWORD,
+  SET_PASSWORD_RETYPED,
+  SIGNUP_USER,
+  initialSignupCardReducerValues,
+} from '../../../reducers/forms/signUpCardFormReducer';
 import SubmitButton from '../../buttons/SubmitButton';
+import ErrorMessage from '../../messages/ErrorMessage';
+import MultiMessageContainer from '../../messages/MultiMessageContainer';
 import authCardStyles from './styles';
 
 const SignupCard = () => {
-  const [passwordRetyped, setPasswordRetyped] = useState();
 
-  
-  const [signUpFormReducerValues, dispatch] = useReducer(signUpCardFormReducer,initialSignupCardReducerValues);
+  const [signUpFormReducerValues, dispatch] = useReducer(
+    signUpCardFormReducer,
+    initialSignupCardReducerValues,
+  );
+
+  const {
+    username,
+    password,
+    passwordRetyped,
+    signupSuccessful,
+    signUpErrorMessages,
+  } = signUpFormReducerValues;
 
   const title = 'Universidad de Bastos';
   const cardTypeTitle = 'Signup';
 
   const navigation = useNavigation();
 
+  
   const navigateToHomeScreen = () => {
-    dispatch({type:SIGNUP_USER})
-
     navigation.navigate('Home');
   };
 
@@ -27,17 +44,37 @@ const SignupCard = () => {
     navigation.navigate('Login');
   };
 
-  function setUserName(username){
-    dispatch({type:SET_USERNAME, payload:{username:username}})
+  function setUserName(username) {
+    dispatch({type: SET_USERNAME, payload: {username: username}});
   }
 
-  function setPassword(password){
-    dispatch({type:SET_PASSWORD, payload:{password:password}})
+  function setPassword(password) {
+    dispatch({type: SET_PASSWORD, payload: {password: password}});
   }
 
-  function setPasswordReTyped(passwordRetyped){
-    dispatch({type:SET_PASSWORD_RETYPED, payload:{passwordRetyped:passwordRetyped}})
+  function setPasswordRetyped(passwordRetyped){
+    dispatch({type: SET_PASSWORD_RETYPED, payload: {passwordRetyped:passwordRetyped}})
   }
+
+  function signUpUser(){
+    dispatch({type:SIGNUP_USER})
+  }
+
+ function displayErrorMessageComponents(){
+    const errorMessages = signUpErrorMessages.map((errorMessageTextContent) => {
+      return <ErrorMessage key={errorMessageTextContent} errorMessage={errorMessageTextContent}></ErrorMessage>
+    })    
+      
+    return <MultiMessageContainer>
+      {errorMessages}
+    </MultiMessageContainer>
+  }
+
+  useEffect(()=> {
+    if (signupSuccessful){
+      navigateToHomeScreen()
+    }
+  },[signupSuccessful])
 
   return (
     <View style={authCardStyles.container}>
@@ -47,6 +84,8 @@ const SignupCard = () => {
         <Text style={authCardStyles.cardTypeTitle}>{cardTypeTitle}</Text>
       </View>
 
+      {displayErrorMessageComponents()}
+      
       <View style={authCardStyles.userInputContainer}>
         <TextInput
           placeholderTextColor="black"
@@ -59,18 +98,20 @@ const SignupCard = () => {
           placeholder="password"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
-                  <TextInput
+        <TextInput
           secureTextEntry={true}
           placeholderTextColor="black"
           placeholder="retype password"
           style={authCardStyles.userInput}
-          onChangeText={(passwordRetyped) => setPasswordRetyped(passwordRetyped)}></TextInput>
+          onChangeText={(passwordRetyped) =>
+            setPasswordRetyped(passwordRetyped)
+          }></TextInput>
       </View>
 
       <View style={authCardStyles.submitButtonContainer}>
         <SubmitButton
           buttonColor="#03b1fc"
-          handleClick={navigateToHomeScreen}
+          handleClick={signUpUser}
           title={cardTypeTitle}></SubmitButton>
 
         <Text style={authCardStyles.buttonSeparatorText}>Or</Text>
