@@ -1,16 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {signUpCardFormReducer, SET_USERNAME, SET_PASSWORD, SET_PASSWORD_RETYPED,SIGNUP_USER, initialSignupCardReducerValues } from '../../../reducers/forms/signUpCardFormReducer';
 import SubmitButton from '../../buttons/SubmitButton';
 import authCardStyles from './styles';
 
 const SignupCard = () => {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
   const [passwordRetyped, setPasswordRetyped] = useState();
 
   
+  const [signUpFormReducerValues, dispatch] = useReducer(signUpCardFormReducer,initialSignupCardReducerValues);
 
   const title = 'Universidad de Bastos';
   const cardTypeTitle = 'Signup';
@@ -18,12 +18,26 @@ const SignupCard = () => {
   const navigation = useNavigation();
 
   const navigateToHomeScreen = () => {
+    dispatch({type:SIGNUP_USER})
+
     navigation.navigate('Home');
   };
 
   const navigateToLoginScreen = () => {
     navigation.navigate('Login');
   };
+
+  function setUserName(username){
+    dispatch({type:SET_USERNAME, payload:{username:username}})
+  }
+
+  function setPassword(password){
+    dispatch({type:SET_PASSWORD, payload:{password:password}})
+  }
+
+  function setPasswordReTyped(passwordRetyped){
+    dispatch({type:SET_PASSWORD_RETYPED, payload:{passwordRetyped:passwordRetyped}})
+  }
 
   return (
     <View style={authCardStyles.container}>

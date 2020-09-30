@@ -24,7 +24,6 @@ const LoginCard = () => {
   const navigateToHomeScreen = async () => {
     //send a post request to check if it is logging in
     try{
-      console.log('current token', globalContext.value2)
 
       const postResponse = await loginUser(username, password, setLoginRequestStatus)
       const responseJson = await postResponse.json()

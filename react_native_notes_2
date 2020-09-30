@@ -178,3 +178,20 @@ API NOTES
 
 MOVING TO TYPESCRIPT NOTES 
     - all ts files actually have to be tsx files in react if you want to use typescript.
+
+
+useReducer
+    - useReducer is prefereable to useState when you have complex state or when 
+        one state relies on another state 
+    - also you can pass dispatch down to components allowing them to manipulate state 
+        from below where they are initiated, you could do this with passing hte useState 
+        changing function but you would have to pass down multiple if you needed to change multiple.
+
+    const [value,dispatch] = useReducer(myReducerSwitchFunction, initialValue);
+
+
+    reducerFunction(state,action){
+        case(action.type){
+            case ('')
+        }
+    }
