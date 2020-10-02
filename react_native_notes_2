@@ -197,3 +197,83 @@ useReducer
     }
 
 ## use useEffect to listen for changes 
+
+
+#REACT NATIVE  ANIMATIONS - REACT NATIVE REANIMATED LIBRARY 
+    - https://www.youtube.com/watch?v=KnQ6xcVgJec&ab_channel=BenAwad
+        it basically wraps the react native animation library and makes it a lot 
+            more performant and declaritive
+    - original animation library for react native 
+        - https://reactnative.dev/docs/animations
+    - react native reanimation library 
+        - https://docs.swmansion.com/react-native-reanimated/
+    - anything you want to interact with you use a PanGestureHandler wrapper around an animated view 
+    <PanGestureHandler>
+         <Animated.View> <Text> </Text> </Animated.View> 
+    </PanGestureHandler>
+    and you put stuff inside of it like the Text Box 
+
+
+    -Info on PanGestureHandler 
+        - https://docs.swmansion.com/react-native-gesture-handler/docs/handler-pan/
+            - the handler activates when a finger is put on the screen 
+            - can detect multiple finger, 
+            - can detect where exactly by x,y cordinate the user is.
+            - the PanGestureHandler  will send back a lot of data including hte x,y cordinate, the velocity of finger movement 
+                - we can use this data in our application, maybe in our styles, or soewehre else
+            - how to use that data?
+                - the js thread and the UI thread are interacting with eachother 
+                - when you interact with the js thread it must then go to the ui thread through the bridge,
+                    this takes time and is there for slower,
+                    - for animations it is best to interact with just the UI thread so you dont have to 
+                        go through the bridge and take more time because animations need to be just in time.
+                    -so reanimated offers you differnet functions to use in order to interact with 
+                        the native UI thread
+            - so PanGestureHandler allows you to react to touching and dragging things 
+
+            - CONDITIONALLY REACT TO A PanGestureHandler
+                - you can use the give UI conditional functions to call other functions to happen 
+                    depending on a PanGestureHandler data
+                - to use these functions you must use a <Animated.code>{some custom library functions here} </Amimated.code>
+
+            - so dragging is only one of the many geatures you can use others like 
+                -TapGestureHandler, for registering taps 
+                - RotationGestureHandler - for registering the turning of fingers.
+                - FlingGestureHandler - tracking a hard and fast movement
+                - PinchGestureHandler - track the distance between two fingers 
+
+
+            - ALso include compoennts 
+                - buttons 
+                - swipeables - like the email swipe to the left to delete it.
+
+    - MUST LEARN BUILT IN REACT NATIVE ANIMATIONS FIRST 
+
+
+
+ANT DESIGN
+    https://ant.design/
+
+
+
+
+RESPONSIVE DESIGN 
+https://dev.to/newbiebr/how-to-make-your-react-native-apps-responsive-45d8#:~:text=react%2Dnative%2Dnormalize%20is%20a,fontSize%2C%20borderRadius%2C...
+- use flexbox 
+- avoid hard values 
+- use percents 
+- flexible hard coded values with normalize function that will generate a hard value depending on the 
+    size of the screens height and width 
+
+-IOS SafeAreaView
+    - this will only position items avoiding the ios notch.
+
+- develop with the iphone 8 because it is the medium 
+then 
+- test your app on three screens to make sure it works with small medium and big screens 
+iPhone5s (small)
+iPhone8 (medium)
+iPhoneXs Max (big)
+
+- command line with specific devices 
+    - https://blog.echobind.com/how-to-run-react-native-apps-on-a-specific-device-in-the-ios-simulator-41912e69a277

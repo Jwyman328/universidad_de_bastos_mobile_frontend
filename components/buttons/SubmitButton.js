@@ -20,12 +20,13 @@ function createStyleSheet(backgroundColor){
       flex:1,
       width: '100%',
       alignItems: 'center',
+      //marginBottom:40,
     },
     submitButton: {
       backgroundColor: backgroundColor, 
       width: '100%',
-      flex:.7,
-      position: 'relative',
+      flex:1,
+      //position: 'relative',
       alignItems: 'center',
       justifyContent: 'center',
   

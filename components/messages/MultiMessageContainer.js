@@ -18,13 +18,13 @@ const MultiMessageContainer = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
-    marginBottom: 15,
+    marginBottom: '5%',
   },
   contentContainerStyle: {
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%',
-    padding: 10,
+    //padding: 10,
   },
 });
 

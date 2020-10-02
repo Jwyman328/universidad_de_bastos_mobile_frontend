@@ -11,12 +11,13 @@ import {
   initialSignupCardReducerValues,
 } from '../../../reducers/forms/signUpCardFormReducer';
 import SubmitButton from '../../buttons/SubmitButton';
+import TextButtonSeparator from '../../buttons/TextButtonSeparator';
 import ErrorMessage from '../../messages/ErrorMessage';
 import MultiMessageContainer from '../../messages/MultiMessageContainer';
 import authCardStyles from './styles';
 
-const SignupCard = () => {
 
+const SignupCard = () => {
   const [signUpFormReducerValues, dispatch] = useReducer(
     signUpCardFormReducer,
     initialSignupCardReducerValues,
@@ -35,7 +36,6 @@ const SignupCard = () => {
 
   const navigation = useNavigation();
 
-  
   const navigateToHomeScreen = () => {
     navigation.navigate('Home');
   };
@@ -52,29 +52,35 @@ const SignupCard = () => {
     dispatch({type: SET_PASSWORD, payload: {password: password}});
   }
 
-  function setPasswordRetyped(passwordRetyped){
-    dispatch({type: SET_PASSWORD_RETYPED, payload: {passwordRetyped:passwordRetyped}})
+  function setPasswordRetyped(passwordRetyped) {
+    dispatch({
+      type: SET_PASSWORD_RETYPED,
+      payload: {passwordRetyped: passwordRetyped},
+    });
   }
 
-  function signUpUser(){
-    dispatch({type:SIGNUP_USER})
+  function signUpUser() {
+    dispatch({type: SIGNUP_USER});
   }
 
- function displayErrorMessageComponents(){
+  function displayErrorMessageComponents() {
     const errorMessages = signUpErrorMessages.map((errorMessageTextContent) => {
-      return <ErrorMessage key={errorMessageTextContent} errorMessage={errorMessageTextContent}></ErrorMessage>
-    })    
-      
-    return <MultiMessageContainer>
-      {errorMessages}
-    </MultiMessageContainer>
+      return (
+        <ErrorMessage
+          key={errorMessageTextContent}
+          errorMessage={errorMessageTextContent}></ErrorMessage>
+      );
+    });
+    if (errorMessages.length > 0) {
+      return <MultiMessageContainer>{errorMessages}</MultiMessageContainer>;
+    }
   }
 
-  useEffect(()=> {
-    if (signupSuccessful){
-      navigateToHomeScreen()
+  useEffect(() => {
+    if (signupSuccessful) {
+      navigateToHomeScreen();
     }
-  },[signupSuccessful])
+  }, [signupSuccessful]);
 
   return (
     <View style={authCardStyles.container}>
@@ -85,7 +91,7 @@ const SignupCard = () => {
       </View>
 
       {displayErrorMessageComponents()}
-      
+
       <View style={authCardStyles.userInputContainer}>
         <TextInput
           placeholderTextColor="black"
@@ -114,8 +120,8 @@ const SignupCard = () => {
           handleClick={signUpUser}
           title={cardTypeTitle}></SubmitButton>
 
-        <Text style={authCardStyles.buttonSeparatorText}>Or</Text>
-
+        <TextButtonSeparator></TextButtonSeparator>
+        
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToLoginScreen}

@@ -5,8 +5,9 @@ import {StyleSheet, View, Text, TextInput} from 'react-native';
 import GlobalDataContext from '../../../data/global/globalContext';
 import loginUser from '../../../httpRequests/auth/login';
 import SubmitButton from '../../buttons/SubmitButton';
+import TextButtonSeparator from '../../buttons/TextButtonSeparator';
+import loadingSpinnerStyles from '../../loadingSpinner/loadingSpinnerStyles';
 import authCardStyles from './styles';
-
 
 const LoginCard = () => {
   const [username, setUserName] = useState();
@@ -20,6 +21,16 @@ const LoginCard = () => {
   const cardTypeTitle = 'Login';
 
   const navigation = useNavigation();
+
+
+  function shouldShowLoadingSpinner(){
+    if (loginRequestStatus === "PENDING"){
+      return true
+    }else{
+      return false
+    }
+  }
+
 
   const navigateToHomeScreen = async () => {
     //send a post request to check if it is logging in
@@ -55,7 +66,9 @@ const LoginCard = () => {
         <Text style={authCardStyles.cardTypeTitle}>{cardTypeTitle}</Text>
       </View>
 
-      <View style={authCardStyles.userInputContainer}>
+      {shouldShowLoadingSpinner()?<View style={loadingSpinnerStyles.container}><Text>...LOADING</Text></View>: undefined}
+
+     {shouldShowLoadingSpinner()? undefined :  <View style={authCardStyles.userInputContainer}>
         <TextInput
           placeholderTextColor="black"
           placeholder="username"
@@ -67,21 +80,24 @@ const LoginCard = () => {
           placeholder="password"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
-      </View>
+      </View>}
 
+     { shouldShowLoadingSpinner() ? undefined: 
       <View style={authCardStyles.submitButtonContainer}>
         <SubmitButton
           buttonColor="#03b1fc"
           handleClick={navigateToHomeScreen}
           title={cardTypeTitle}></SubmitButton>
 
-        <Text style={authCardStyles.buttonSeparatorText}>Or</Text>
+        <TextButtonSeparator></TextButtonSeparator>
 
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToSignupScreen}
-          title="Signup"></SubmitButton>
-      </View>
+          title="Signup">
+
+          </SubmitButton>
+      </View> }
     </View>
   );
 };
