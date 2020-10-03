@@ -11,40 +11,48 @@ const MainHeader = () => {
     navigation.navigate('Home')
   }
   return (
-    <SafeAreaView style={styles.mainHeaderContainer}>
+    <View style={styles.mainHeaderContainer}>
       <TouchableHighlight onPress={navigateToHomePage} >
           <View  style={styles.imageContainer} >
             <Image style={styles.image} source={xoanDeLugoImage} />
           </View>
       </TouchableHighlight>
 
-    </SafeAreaView>
+    </View>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
   mainHeaderContainer: {
-    height: '15%',
-    minHeight: 100,
+    height: '23%',
+    minHeight: 130,
     width: '100%',
     backgroundColor: '#3483eb',
     position: 'absolute',
     top: 0,
     left: 0,
     //flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    //  justifyContent: 'center',
+    //  alignItems: 'center',
   },
+
   imageContainer:{
     height:'100%',
     //flex:1,
+    width:'100%',
     justifyContent: 'center',
     alignItems: 'center',
+    //position:'relative',
+    //backgroundColor:'pink',
+    minHeight:100,
+    paddingTop:20
+
   },
   image: {
-    width: 70,
-    height: '90%',
+    //width: 75,
+    //height: 70,
+    position: 'relative'
   },
 });
 

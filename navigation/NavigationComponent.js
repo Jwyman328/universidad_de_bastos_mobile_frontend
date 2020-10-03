@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import 'react-native-gesture-handler';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
@@ -12,13 +12,24 @@ const Stack = createStackNavigator();
 const NavigationComponent = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Login" component={LoginScreen} options={{title:'Login'}} />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{title: 'Login'}}
+        />
         <Stack.Screen name="Signup" component={SignUpScreen} options={{}} />
-        <Stack.Screen name="Home" component={MainCentersNavigation} options={{title:'Universidad de Bastos'}} />
+        <Stack.Screen
+          name="Home"
+          component={MainCentersNavigation}
+          options={{title: 'Universidad de Bastos'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-
   );
 };
 

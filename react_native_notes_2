@@ -138,6 +138,7 @@ NAVIGATION DESIGN IN NATIVE
     ICONS 
         - https://github.com/oblador/react-native-vector-icons
         - then you have to put the font folder in node modules into the ios folder 
+        - list of all icons https://oblador.github.io/react-native-vector-icons/
 
 
     NESTED NAVIGATION -- COMBINDING STACK NAVIGATION AND TAB NAVIGATION 
