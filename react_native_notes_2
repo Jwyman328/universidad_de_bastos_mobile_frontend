@@ -95,11 +95,57 @@ FLEXBOX REVIEW
     - use flex and pixels so spacing and widths and heights
 
 
-NAVIGATION 
+NAVIGATION COMPONENTS
     - i want to access navigation from any screen so there is a useNavigation hook
     - https://reactnavigation.org/docs/connecting-navigation-prop/
     - alternatively you could use the context api, and put the naviation there  
         but the useNAvigation hook will basically do that for oyu
+
+
+NAVIGATION DESIGN IN NATIVE 
+    - https://www.udemy.com/course/react-native-the-practical-guide/learn/lecture/15674770#overview
+    - in the web you enter a url and then react navigator will load a different react component 
+    - aka url is the source of truth in the web 
+
+    - difference there is no url in mobile apps, instead we have tabs often at the bottom 
+    - or we have stacks of pages, one page to another page and so forth
+    - the web uses a single stack to navigate, but navigation on a pgone is more 
+        complex.
+
+
+    STACK NAVIGATION 
+        - this is having pages and screens stacked ontop of each other 
+        - it is like any other stack it is putting a somethign on top of the stack 
+            - and having the previous location below it, and then navigating somewhere else 
+                and putting that on the top, 
+            - if you want to go back you just pop the screen off hte top of the stack 
+        - if you jsut used a single stack navigator it would be exactly like the web
+            - being able to go forward and then press back to go to the back page.
+        npm install @react-navigation/stack
+        - the stack navigation has a screen and a Navigator
+        - the screen can have an options prop set on it to name the screen title 
+        - sometime we want to add aditional data to a screen header, we can do that by using 
+            react context .
+
+
+
+    TAB NAVIGATION 
+        - adding bottom tabs 
+        yarn add @react-navigation/bottom-tabs
+       -docs for bottom tab navigator https://reactnavigation.org/docs/bottom-tab-navigator/
+        - 
+
+
+    NESTED NAVIGATION -- COMBINDING STACK NAVIGATION AND TAB NAVIGATION 
+        -https://reactnavigation.org/docs/nesting-navigators/
+        - we set a <Tab.navigation> as a page in the screen navigator 
+            - so when you navigate to that page the screen navigator takes over 
+        - react navigation 4 and 5 are very different for custimizing the navigators 
+
+
+
+
+
 
 
 DYNAMIC VAIRABLES in STYLE SHEET?

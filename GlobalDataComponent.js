@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import GlobalDataContext from './data/global/globalContext';
-import NavigationComponent from './NavigationComponent';
+import NavigationComponent from './navigation/NavigationComponent';
 
 
 const GlobalDataComponent = () => {

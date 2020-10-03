@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const SubmitButton = ({title, handleClick, buttonColor}) => {
   //const buttonBackgroundColor = {backgroundColor:buttonColor}
