@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import VideoCard from '../../components/cards/video/videoCard';
 
 // create a component
 const VideoCenterScreen = () => {
@@ -21,6 +22,9 @@ const VideoCenterScreen = () => {
                     </Text>
                 </View>
             </TouchableHighlight>
+            <VideoCard>
+
+            </VideoCard>
         </View>
     );
 };
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        //backgroundColor: '#2c3e50',
     },
 });
 
