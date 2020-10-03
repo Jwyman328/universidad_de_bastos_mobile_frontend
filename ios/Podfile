@@ -3,6 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
+
+
 target 'bastos_mobile_app' do
   config = use_native_modules!
 
@@ -31,5 +33,13 @@ target 'bastos_mobile_app-tvOS' do
   target 'bastos_mobile_app-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+  end
+end
+
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
   end
 end

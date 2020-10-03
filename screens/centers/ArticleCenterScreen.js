@@ -1,12 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import ArticleCard from '../../components/cards/articles/ArticleCard';
 
 // create a component
 const ArticleCenterScreen = () => {
     return (
         <View style={styles.container}>
             <Text>ArticleCenterScreen</Text>
+            <ArticleCard></ArticleCard>
         </View>
     );
 };
