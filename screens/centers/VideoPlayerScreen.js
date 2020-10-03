@@ -1,12 +1,16 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-const VideoPlayerScreen = () => {
+const VideoPlayerScreen = ({route:{params:{videoData}}}) => {
+
+    useEffect(() => {
+        console.log('vd', videoData)
+    })
     return (
         <View style={styles.container}>
-            <Text>VideoPlayerScreen</Text>
+            <Text>{videoData.title}</Text>
         </View>
     );
 };

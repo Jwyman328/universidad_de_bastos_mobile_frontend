@@ -1,10 +1,11 @@
 import React from 'react';
-
+//'http://localhost:5000
+//https://universidad-de-bastos.herokuapp.com/auth/login
 const loginUser = async (username, password, setRequestStatus) => {
     try{
         setRequestStatus('PENDING');
         const loginUserResponse =  await fetch(
-            'https://universidad-de-bastos.herokuapp.com/auth/login',
+            'http://localhost:5000/auth/login',
             {
               method: 'POST',
               headers: {

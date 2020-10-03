@@ -112,6 +112,9 @@ NAVIGATION DESIGN IN NATIVE
     - the web uses a single stack to navigate, but navigation on a pgone is more 
         complex.
 
+    - passign props via navigation https://reactnavigation.org/docs/params
+        - {route} is what will be passed contining route.params
+
 
     STACK NAVIGATION 
         - this is having pages and screens stacked ontop of each other 
