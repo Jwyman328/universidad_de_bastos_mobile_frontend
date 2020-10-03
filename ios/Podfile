@@ -8,6 +8,8 @@ target 'bastos_mobile_app' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'bastos_mobile_appTests' do
     inherit! :complete
     # Pods for testing
