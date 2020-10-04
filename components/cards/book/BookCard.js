@@ -11,6 +11,7 @@ import {
 import FlipCard from 'react-native-flip-card';
 import ReadButton from '../../buttons/ReadButton';
 import {useWindowDimensions} from 'react-native';
+import NavToBook from '../../buttons/NavToBookButton';
 
 // create a component
 const BookCard = ({bookData}) => {
@@ -21,7 +22,11 @@ const BookCard = ({bookData}) => {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
 
-  const styles = createStyleSheet(windowWidth, windowWidth)
+  const styles = createStyleSheet(windowWidth, windowWidth);
+
+  function goToBook(){
+    console.log('a')
+  }
   return (
     <FlipCard
       style={styles.outerContainer}
@@ -43,13 +48,14 @@ const BookCard = ({bookData}) => {
           <Text style={styles.authorText}>{author}</Text>
         </View>
         <ReadButton />
+      <NavToBook />
       </View>
     </FlipCard>
   );
 };
 
 // define your styles
-function createStyleSheet(windowWidth,windowHeight){
+function createStyleSheet(windowWidth, windowHeight) {
   const styles = StyleSheet.create({
     outerContainer: {
       marginBottom: 20,
@@ -61,8 +67,8 @@ function createStyleSheet(windowWidth,windowHeight){
       flexWrap: 'wrap',
     },
     back: {
-      width: windowWidth * .65,
-      height: windowHeight * .7,
+      width: windowWidth * 0.65,
+      height: windowHeight * 0.7,
       backgroundColor: '#429ac7',
       borderColor: 'black',
       borderWidth: 2,
@@ -70,8 +76,8 @@ function createStyleSheet(windowWidth,windowHeight){
       padding: 10,
     },
     image: {
-      width: windowWidth * .65,
-      height: windowHeight * .7,
+      width: windowWidth * 0.65,
+      height: windowHeight * 0.7,
       resizeMode: 'stretch',
       borderColor: 'black',
       borderWidth: 2,
@@ -97,9 +103,8 @@ function createStyleSheet(windowWidth,windowHeight){
       textTransform: 'capitalize',
     },
   });
-  return styles
+  return styles;
 }
-
 
 //make this component available to the app
 export default BookCard;
