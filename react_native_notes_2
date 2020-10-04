@@ -331,3 +331,18 @@ iPhoneXs Max (big)
 
 - command line with specific devices 
     - https://blog.echobind.com/how-to-run-react-native-apps-on-a-specific-device-in-the-ios-simulator-41912e69a277
+
+- useWindowDimensions for getting screen width and height 
+    -https://reactnative.dev/docs/usewindowdimensions
+
+
+
+IMAGES 
+    - dont forget that images need to have a fixed width and height 
+        for them to show correctly, 
+    - you can do responsive image but it is more difficult 
+    - also the parent having     flexDirection: 'row',  flexWrap: 'wrap'  is osmetimes needed 
+
+
+STOPROPAGATION 
+    - onStartShouldSetResponder={event => true} on a view to stop it from bubbling up
