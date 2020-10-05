@@ -14,7 +14,6 @@ import {useWindowDimensions} from 'react-native';
 import NavToBook from '../../buttons/NavToBookButton';
 import GlobalDataContext from '../../../data/global/globalContext';
 import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
-//import { WebView } from 'react-native-webview';
 
 // create a component
 const BookCard = ({bookData}) => {
@@ -65,7 +64,6 @@ const BookCard = ({bookData}) => {
       <NavToBook />
       </View>
     </FlipCard>
-    // <WebView source={{ uri: 'https://reactnative.dev/' }} />
   );
 };
 

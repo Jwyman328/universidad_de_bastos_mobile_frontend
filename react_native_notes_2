@@ -380,3 +380,11 @@ REACT NATIVE DEEPER DIVE TO INTERNALS
 
         - vector icons being built twice error 
             - https://github.com/oblador/react-native-vector-icons/issues/851
+
+
+
+
+MODAL 
+    - react native has a built in modal component 
+    - https://reactnative.dev/docs/modal
+    - contains a visible property for setting if visible or not 

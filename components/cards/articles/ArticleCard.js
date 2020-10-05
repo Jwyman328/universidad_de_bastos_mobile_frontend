@@ -23,7 +23,7 @@ const ArticleCard = ({articleData}) => {
       <View>
         <Text>{categories}</Text>
       </View>
-      <NavToArticleButton />
+      <NavToArticleButton pageUri={articleData.url} />
     </View>
   );
 };

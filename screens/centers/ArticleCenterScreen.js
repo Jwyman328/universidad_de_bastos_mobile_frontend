@@ -41,6 +41,7 @@ const ArticleCenterScreen = () => {
         {allArticleData ? allArticleData : null}
       </View>
     </ScrollView>
+
   );
 };
 

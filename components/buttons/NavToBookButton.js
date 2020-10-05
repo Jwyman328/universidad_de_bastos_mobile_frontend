@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
 import Icon from 'react-native-ionicons'
 
 // create a component
