@@ -8,20 +8,17 @@ import BookCenterScreen from '../screens/centers/BookCenterScreen';
 import HomepageScreen from '../screens/auth/HomepageScreen';
 import VideoCenterScreen from '../screens/centers/VideoCenterScreen';
 import VideoCenterStackNavigation from './VideoCenterStackNavigation';
-//import Icon from 'react-native-ionicons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-ionicons'
 
 
 const Tab = createBottomTabNavigator();
 
 // create a component
 const MainCentersNavigation = () => {
-  const HomeIcon = <FontAwesome5 size={20} name={'home'} />;
-  const VideoIcon = <Entypo size={23} name={'video'} />;
-  const BookIcon = <FontAwesome5 size={20} name={'book'} />;
-  const ArticleIcon = <MaterialIcons size={24} name={'article'} />;
+  const HomeIcon = <Icon size={20} name={'home'} />;
+  const VideoIcon = <Icon size={23} name={'videocam'} />;
+  const BookIcon = <Icon size={20} name={'book'} />;
+  const ArticleIcon = <Icon size={24} name={'document'} />;
 
   return (
     <Tab.Navigator>

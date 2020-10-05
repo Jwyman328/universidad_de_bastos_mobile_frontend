@@ -4,10 +4,11 @@ import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 // create a component
-const ReadButton = ({hasRead}) => {
+const ReadButton = ({hasRead,onPressButton}) => {
   const buttonText = hasRead ? 'NO LEIDO?' : 'LEIDO?';
   let handleOnPress = () => {
     //event.stopPropagation()
+    onPressButton()
   };
   return (
     <View style={{flex: 1}} onStartShouldSetResponder={(event) => true}>

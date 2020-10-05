@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -12,17 +12,31 @@ import FlipCard from 'react-native-flip-card';
 import ReadButton from '../../buttons/ReadButton';
 import {useWindowDimensions} from 'react-native';
 import NavToBook from '../../buttons/NavToBookButton';
+import GlobalDataContext from '../../../data/global/globalContext';
+import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
+//import { WebView } from 'react-native-webview';
 
 // create a component
 const BookCard = ({bookData}) => {
+  const [markBookAsReadStatus, setMarkBookAsReadStatus] = useState(undefined)
+
   const imageUri = bookData.image;
   const title = bookData.title;
   const author = bookData.author;
-
+  const hasBeenReadByUser = bookData.hasBeenReadByUser
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
 
-  const styles = createStyleSheet(windowWidth, windowWidth);
+  const styles = createStyleSheet(windowWidth, windowWidth, hasBeenReadByUser);
+
+  const globalContext = useContext(GlobalDataContext)
+  const mockToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+  
+  function markTheBookAsRead(){
+    markBookAsRead(bookData._id,mockToken,setMarkBookAsReadStatus )
+    //reload all books
+  }
 
   function goToBook(){
     console.log('a')
@@ -47,15 +61,17 @@ const BookCard = ({bookData}) => {
         <View style={styles.authorContainer}>
           <Text style={styles.authorText}>{author}</Text>
         </View>
-        <ReadButton />
+        <ReadButton onPressButton={markTheBookAsRead} />
       <NavToBook />
       </View>
     </FlipCard>
+    // <WebView source={{ uri: 'https://reactnative.dev/' }} />
   );
 };
 
 // define your styles
-function createStyleSheet(windowWidth, windowHeight) {
+function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
+  const borderColor = hasBeenReadByUser? 'gold' : 'grey'
   const styles = StyleSheet.create({
     outerContainer: {
       marginBottom: 20,
@@ -70,8 +86,8 @@ function createStyleSheet(windowWidth, windowHeight) {
       width: windowWidth * 0.65,
       height: windowHeight * 0.7,
       backgroundColor: '#429ac7',
-      borderColor: 'black',
-      borderWidth: 2,
+      borderColor: borderColor,
+      borderWidth: 4,
       alignItems: 'center',
       padding: 10,
     },
@@ -79,8 +95,8 @@ function createStyleSheet(windowWidth, windowHeight) {
       width: windowWidth * 0.65,
       height: windowHeight * 0.7,
       resizeMode: 'stretch',
-      borderColor: 'black',
-      borderWidth: 2,
+      borderColor: borderColor,
+      borderWidth: 4,
     },
     titleContainer: {
       flex: 1,

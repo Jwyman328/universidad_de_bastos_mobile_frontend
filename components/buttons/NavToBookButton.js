@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import Icon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-ionicons'
 
 // create a component
 const NavToBook = () => {
@@ -11,24 +11,26 @@ const NavToBook = () => {
     console.log('nav');
   }
   return (
-    <TouchableOpacity style={styles.touchContainer} >
-      <View style={styles.container}>
-        <Icon
-          size={40}
-          name="arrow-right"
-          backgroundColor="#3b5998"
-          onPress={goToBook}></Icon>
-      </View>
-    </TouchableOpacity>
+    <View style={{flex: 1}} onStartShouldSetResponder={(event) => true}>
+      <TouchableOpacity style={styles.touchContainer}>
+        <View style={styles.container}>
+          <Icon
+            size={43}
+            name="arrow-forward"
+            backgroundColor="#3b5998"
+            onPress={goToBook}></Icon>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
-    touchContainer:{
-        height:50,
-        justifyContent: "center",
-    },
+  touchContainer: {
+    height: 50,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

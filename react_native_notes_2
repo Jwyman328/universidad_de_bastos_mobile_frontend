@@ -346,3 +346,37 @@ IMAGES
 
 STOPROPAGATION 
     - onStartShouldSetResponder={event => true} on a view to stop it from bubbling up
+
+
+
+
+REACT NATIVE DEEPER DIVE TO INTERNALS
+    - what does the link command do when trying to use other packages?
+    - the link command will add additional values into the ios and android files.
+        - some packages dont actually use the link command and you will manaully have to add 
+        the packages in them.
+    - some package just autolink and will add those lines for you
+    - third party packages will let you know the installation process for messing with the 
+        native ios files.
+
+    - for Ios an important folder for importing packages is the 'projectname'.xcodeproj file 
+        - the projectname part will be whatever your project is named
+
+
+    - get familiar with xcode 
+        -
+        - https://medium.com/@vimniky/how-to-use-vector-icons-in-your-react-native-project-8212ac6a8f06
+       - https://www.youtube.com/watch?v=XS2RRDGRGsc&ab_channel=All-OfYou
+        - product -> clean build folder 
+        - then select simulator 
+        - press play 
+            - this will open a node server in the terminal
+        - in xcode info.plist is a key value based file.
+
+        -build phases where is it?
+            - click on the bastos_mobile_app,
+            then click on the first file under targets 
+            - then build phases will show up
+
+        - vector icons being built twice error 
+            - https://github.com/oblador/react-native-vector-icons/issues/851
