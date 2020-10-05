@@ -1,25 +1,29 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component,useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-ionicons'
+import ModalViewPopUp from '../../screens/webview/WebViewPopUp';
 
 // create a component
-const NavToBook = () => {
+const NavToBook = ({locationLink}) => {
+  const [isShowWebView, setIsShowWebView] = useState(false);
+
   function goToBook() {
-    console.log('nav');
+    setIsShowWebView(true)
   }
   return (
     <View style={{flex: 1}} onStartShouldSetResponder={(event) => true}>
-      <TouchableOpacity style={styles.touchContainer}>
+      <TouchableOpacity onPress={goToBook} style={styles.touchContainer}>
         <View style={styles.container}>
           <Icon
             size={43}
             name="arrow-forward"
             backgroundColor="#3b5998"
-            onPress={goToBook}></Icon>
+            ></Icon>
         </View>
       </TouchableOpacity>
+      <ModalViewPopUp pageUri={locationLink} showModal={isShowWebView} setShowModal={setIsShowWebView} />
     </View>
   );
 };

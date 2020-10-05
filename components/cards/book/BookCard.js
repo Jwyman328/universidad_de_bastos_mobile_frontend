@@ -61,7 +61,7 @@ const BookCard = ({bookData}) => {
           <Text style={styles.authorText}>{author}</Text>
         </View>
         <ReadButton onPressButton={markTheBookAsRead} />
-      <NavToBook />
+      <NavToBook locationLink={bookData.locationLink}/>
       </View>
     </FlipCard>
   );
