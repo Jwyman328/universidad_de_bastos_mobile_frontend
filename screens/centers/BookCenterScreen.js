@@ -32,7 +32,7 @@ const BookCenterScreen = () => {
 
   function createBookCards() {
     const allBookCards = allBookData.map((bookData) => {
-      return <BookCard key={bookData._id} bookData={bookData}></BookCard>;
+      return <BookCard loadBookData={loadBookData} key={bookData._id} bookData={bookData}></BookCard>;
     });
     return allBookCards;
   }

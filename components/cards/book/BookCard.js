@@ -17,7 +17,7 @@ import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
 import {secondaryGradient,hasReadYellow} from '../../../styles/colors';
 
 // create a component
-const BookCard = ({bookData}) => {
+const BookCard = ({bookData,loadBookData}) => {
   const [markBookAsReadStatus, setMarkBookAsReadStatus] = useState(undefined)
 
   const imageUri = bookData.image;
@@ -36,6 +36,7 @@ const BookCard = ({bookData}) => {
   function markTheBookAsRead(){
     markBookAsRead(bookData._id,mockToken,setMarkBookAsReadStatus )
     //reload all books
+    loadBookData()
   }
 
   return (
@@ -58,7 +59,7 @@ const BookCard = ({bookData}) => {
         <View style={styles.authorContainer}>
           <Text style={styles.authorText}>{author}</Text>
         </View>
-        <ReadButton onPressButton={markTheBookAsRead} />
+        <ReadButton onPressButton={markTheBookAsRead} hasRead={hasBeenReadByUser} />
       <NavToBook locationLink={bookData.locationLink}/>
       </View>
     </FlipCard>
