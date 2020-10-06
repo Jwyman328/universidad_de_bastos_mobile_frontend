@@ -5,6 +5,7 @@ import ArticleCard from '../../components/cards/articles/ArticleCard';
 import getAllArticleData from '../../httpRequests/articleData/getAllArticleData';
 // create a component
 import GlobalDataContext from '../../data/global/globalContext';
+import {primaryGradient} from '../../styles/colors';
 
 const ArticleCenterScreen = () => {
   const [getAllArticleDataStatus, setGetAllArticleDataStatus] = useState(
@@ -35,29 +36,34 @@ const ArticleCenterScreen = () => {
     createArticleCards();
   }, []);
   return (
-    <ScrollView style={styles.scrollContainer} >
-      <View style={styles.container}>
-        <Text>ArticleCenterScreen</Text>
-        {allArticleData ? allArticleData : null}
-      </View>
-    </ScrollView>
-
+    <View style={styles.scrollContainer}>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.container}>
+          <Text>ArticleCenterScreen</Text>
+          {allArticleData ? allArticleData : null}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 // define your styles
-const styles = StyleSheet.create({
-    scrollContainer:{
-        flex: 1,
-
+function createStyles(backgroundColor) {
+  const styles = StyleSheet.create({
+    scrollContainer: {
+      flex: 1,
+      backgroundColor: backgroundColor,
     },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  },
-});
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+  return styles;
+}
+
+const styles = createStyles(primaryGradient)
 
 //make this component available to the app
 export default ArticleCenterScreen;

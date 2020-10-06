@@ -33,7 +33,7 @@ const ModalViewPopUp = ({pageUri, showModal,setShowModal}) => {
             onPress={() => {
                 setShowModal(!modalVisible);
             }}>
-            <Text style={styles.textStyle}>Back</Text>
+            <Text style={styles.textStyle}>Close</Text>
           </TouchableHighlight>
         </View>
       </View>

@@ -5,6 +5,7 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import BookCard from '../../components/cards/book/BookCard';
 import GlobalDataContext from '../../data/global/globalContext';
 import getAllBookData from '../../httpRequests/bookData/getAllBookData';
+import {primaryGradient} from '../../styles/colors';
 
 // create a component
 const BookCenterScreen = () => {
@@ -39,21 +40,26 @@ const BookCenterScreen = () => {
     loadBookData();
   }, []);
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {allBookData ? createBookCards() : null}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.scrollContainer}>
+          {allBookData ? createBookCards() : null}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
-  container: {
+  container:{
+    flex: 1,
+    backgroundColor: primaryGradient,
+  },
+  scrollContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
   },
 });
 

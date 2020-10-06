@@ -14,6 +14,7 @@ import {useWindowDimensions} from 'react-native';
 import NavToBook from '../../buttons/NavToBookButton';
 import GlobalDataContext from '../../../data/global/globalContext';
 import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
+import {secondaryGradient,hasReadYellow} from '../../../styles/colors';
 
 // create a component
 const BookCard = ({bookData}) => {
@@ -37,9 +38,6 @@ const BookCard = ({bookData}) => {
     //reload all books
   }
 
-  function goToBook(){
-    console.log('a')
-  }
   return (
     <FlipCard
       style={styles.outerContainer}
@@ -69,7 +67,7 @@ const BookCard = ({bookData}) => {
 
 // define your styles
 function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
-  const borderColor = hasBeenReadByUser? 'gold' : 'grey'
+  const borderColor = hasBeenReadByUser? hasReadYellow : 'grey'
   const styles = StyleSheet.create({
     outerContainer: {
       marginBottom: 20,
@@ -83,7 +81,7 @@ function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
     back: {
       width: windowWidth * 0.65,
       height: windowHeight * 0.7,
-      backgroundColor: '#429ac7',
+      backgroundColor: secondaryGradient,
       borderColor: borderColor,
       borderWidth: 4,
       alignItems: 'center',

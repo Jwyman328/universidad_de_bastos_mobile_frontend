@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 //import liraries
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {whiteBackground,hasReadYellow} from '../../../styles/colors';
 
 // create a component
 const VideoCard = ({videoData}) => {
@@ -15,6 +16,7 @@ const VideoCard = ({videoData}) => {
   function navigateToPage() {
     navigation.navigate('VideoPlayerScreen', {videoData: videoData});
   }
+  const styles = createStyle(videoData.hasBeenWatchedByUser)
   return (
     <TouchableOpacity style={styles.touchableContainer} onPress={navigateToPage}>
       <View style={styles.container}>
@@ -37,53 +39,52 @@ const VideoCard = ({videoData}) => {
 };
 
 // define your styles
-const styles = StyleSheet.create({
-  touchableContainer: {
-    flex: 1,
-    width:'70%%',
-    alignItems:'center'
-  },
-  container: {
-    //flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#bcd6e3',
-    height: 250, //'50%',
-    borderColor: 'blue',
-    borderWidth: 3,
-    borderStyle: 'solid',
-    borderRadius: 20,
-    width: '100%',
-    marginBottom: 30,
-  },
-  image: {
-    height: '50%',
-    borderRadius: 20,
-    //width:'100%'
-  },
-  titleContainer: {
-    height: '30%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    width:'100%',
-    position:'relative',
-  },
-  title: {
-    fontSize: 16,
-    //width:'95%'
+function createStyle(hasBeenWatchedByUser){
+  const borderColor = hasBeenWatchedByUser? hasReadYellow: 'grey'
+  const styles = StyleSheet.create({
+    touchableContainer: {
+      flex: 1,
+      width:'70%%',
+      alignItems:'center'
+    },
+    container: {
+      backgroundColor: whiteBackground,
+      height: 250, //'50%',
+      borderColor: borderColor,
+      borderWidth: 3,
+      borderStyle: 'solid',
+      borderRadius: 20,
+      width: '100%',
+      marginBottom: 30,
+    },
+    image: {
+      height: '50%',
+      borderRadius: 20,
+    },
+    titleContainer: {
+      height: '30%',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      paddingLeft: 10,
+      paddingRight: 10,
+      width:'100%',
+      position:'relative',
+    },
+    title: {
+      fontSize: 16,  
+    },
+    noteContainer: {
+      height: '20%',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      paddingLeft: 10,
+    },
+    notes: {
+      fontSize: 12,
+    },
+  });
+  return styles
+}
 
-  },
-  noteContainer: {
-    height: '20%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  notes: {
-    fontSize: 12,
-  },
-});
 
 export default VideoCard;

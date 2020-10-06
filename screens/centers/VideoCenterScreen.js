@@ -6,6 +6,7 @@ import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
 import VideoCard from '../../components/cards/video/videoCard';
 import getAllVideoData from '../../httpRequests/videoData/getallVideoData';
 import GlobalDataContext from '../../data/global/globalContext';
+import {primaryGradient} from '../../styles/colors';
 
 // create a component
 const VideoCenterScreen = () => {
@@ -38,17 +39,23 @@ const VideoCenterScreen = () => {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {allVideoData ? createVideoCards() : null}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.scrollContainer}>
+          {allVideoData ? createVideoCards() : null}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor:primaryGradient
+  },
+  scrollContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
