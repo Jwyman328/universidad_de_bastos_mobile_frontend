@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import NavToArticleButton from '../../buttons/NavToArticleButton';
+import {hasReadYellow, whiteBackground,secondaryGradient} from '../../../styles/colors';
 
 // create a component
 const ArticleCard = ({articleData}) => {
@@ -20,9 +21,9 @@ const ArticleCard = ({articleData}) => {
         <Text>{author}</Text>
         <Text>{date}</Text>
       </View>
-      <View>
+      {/* <View>
         <Text>{categories}</Text>
-      </View>
+      </View> */}
       <NavToArticleButton pageUri={articleData.url} />
     </View>
   );
@@ -31,17 +32,16 @@ const ArticleCard = ({articleData}) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: whiteBackground,
     width: '80%',
-    height: 300,
-    borderColor: 'black',
-    borderWidth: 5,
+    height: 230,
+    borderColor: hasReadYellow,
+    borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 10,
-    padding: 15,
+    padding: '5%',
     marginBottom: 20,
   },
   titleContainer: {
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#5e7eff',
+    color: secondaryGradient,
+    textAlign:"center"
   },
   articleInfo: {
     flex: 0.4,

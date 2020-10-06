@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {whiteBackground,hasReadYellow} from '../../styles/colors';
 
 // create a component
 const ReadButton = ({hasRead,onPressButton}) => {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     //flex: .6,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'gold',
+    backgroundColor: hasReadYellow,
     width: 130,
     borderRadius: 15,
     borderColor: 'black',

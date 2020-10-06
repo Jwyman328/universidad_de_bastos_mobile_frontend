@@ -7,6 +7,7 @@ import VideoCard from '../../components/cards/video/videoCard';
 import getAllVideoData from '../../httpRequests/videoData/getallVideoData';
 import GlobalDataContext from '../../data/global/globalContext';
 import {primaryGradient} from '../../styles/colors';
+import MainHeader from '../../components/headers/MainHeader';
 
 // create a component
 const VideoCenterScreen = () => {
@@ -40,8 +41,9 @@ const VideoCenterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.scrollContainer}>
+      <MainHeader></MainHeader>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}
         </View>
       </ScrollView>
@@ -55,11 +57,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:primaryGradient
   },
-  scrollContainer: {
+  scrollContainer:{
+    flex: .8,
+    //backgroundColor: '#2c3e50',
+
+  },
+  cardContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: '#2c3e50',
+    marginTop:30,
   },
 });
 

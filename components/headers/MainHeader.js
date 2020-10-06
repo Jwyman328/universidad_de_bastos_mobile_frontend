@@ -12,7 +12,7 @@ const MainHeader = () => {
   }
   return (
     <View style={styles.mainHeaderContainer}>
-      <TouchableHighlight onPress={navigateToHomePage} >
+      <TouchableHighlight style={styles.touchContainer} onPress={navigateToHomePage} >
           <View  style={styles.imageContainer} >
             <Image style={styles.image} source={xoanDeLugoImage} />
           </View>
@@ -25,20 +25,24 @@ const MainHeader = () => {
 // define your styles
 const styles = StyleSheet.create({
   mainHeaderContainer: {
-    height: '23%',
+    height: '20%',
     minHeight: 130,
     width: '100%',
     backgroundColor: '#3483eb',
-    position: 'absolute',
+    position: 'relative',
     top: 0,
     left: 0,
     //flex:1,
-    //  justifyContent: 'center',
-    //  alignItems: 'center',
+     justifyContent: 'center',
+     alignItems: 'center',
+  },
+  touchContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   imageContainer:{
-    height:'100%',
+    height:'80%',
     //flex:1,
     width:'100%',
     justifyContent: 'center',

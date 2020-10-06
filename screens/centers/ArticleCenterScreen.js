@@ -6,6 +6,7 @@ import getAllArticleData from '../../httpRequests/articleData/getAllArticleData'
 // create a component
 import GlobalDataContext from '../../data/global/globalContext';
 import {primaryGradient} from '../../styles/colors';
+import MainHeader from '../../components/headers/MainHeader';
 
 const ArticleCenterScreen = () => {
   const [getAllArticleDataStatus, setGetAllArticleDataStatus] = useState(
@@ -37,9 +38,9 @@ const ArticleCenterScreen = () => {
   }, []);
   return (
     <View style={styles.scrollContainer}>
+      <MainHeader></MainHeader>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          <Text>ArticleCenterScreen</Text>
           {allArticleData ? allArticleData : null}
         </View>
       </ScrollView>
@@ -58,6 +59,7 @@ function createStyles(backgroundColor) {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop:30,
     },
   });
   return styles;

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {WebView} from 'react-native-webview';
 import ModalView from '../../screens/webview/WebViewPopUp';
+import {whiteBackground,hasReadYellow} from '../../styles/colors';
 
 // create a component
 const NavToArticleButton = ({pageUri}) => {
@@ -37,7 +38,7 @@ const NavToArticleButton = ({pageUri}) => {
 function createStyleSheet(screenHeight, screenWidth) {
   const styles = StyleSheet.create({
     container: {
-      flex: 0.3,
+      flex: 0.23,
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
@@ -46,9 +47,11 @@ function createStyleSheet(screenHeight, screenWidth) {
       justifyContent: 'center',
       alignItems: 'center',
       width: '60%',
-      backgroundColor: '#ccd1eb',
+      backgroundColor: hasReadYellow,
       height: '90%',
       borderRadius: 15,
+      borderColor:'black',
+      borderWidth:1,
     },
     title: {
       fontSize: 20,
