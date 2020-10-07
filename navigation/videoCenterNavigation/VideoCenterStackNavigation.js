@@ -1,8 +1,8 @@
 //import liraries
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import VideoCenterScreen from '../screens/centers/VideoCenterScreen';
-import VideoPlayerScreen from '../screens/centers/VideoPlayerScreen';
+import VideoCenterScreen from '../../screens/centers/videoCenter/VideoCenterScreen';
+import VideoPlayerScreen from '../../screens/centers/videoCenter/VideoPlayerScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();

@@ -3,7 +3,7 @@ import React, {Component,useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-ionicons'
-import ModalViewPopUp from '../../screens/webview/WebViewPopUp';
+import ModalViewPopUp from '../../screens/modals/webview/WebViewPopUp';
 
 // create a component
 const NavToBook = ({locationLink}) => {

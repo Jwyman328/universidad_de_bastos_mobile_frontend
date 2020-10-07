@@ -6,9 +6,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ArticleCenterScreen from '../screens/centers/ArticleCenterScreen';
 import BookCenterScreen from '../screens/centers/BookCenterScreen';
 import HomepageScreen from '../screens/auth/HomepageScreen';
-import VideoCenterScreen from '../screens/centers/VideoCenterScreen';
-import VideoCenterStackNavigation from './VideoCenterStackNavigation';
+import VideoCenterScreen from '../screens/centers/videoCenter/VideoCenterScreen';
+import VideoCenterStackNavigation from './videoCenterNavigation/VideoCenterStackNavigation';
 import Icon from 'react-native-ionicons'
+import VideoCenterSortDrawerNavigation from './videoCenterNavigation/VideoCenterSortDrawerNavigation';
 
 
 const Tab = createBottomTabNavigator();
@@ -32,7 +33,7 @@ const MainCentersNavigation = () => {
       /> */}
       <Tab.Screen
         name="Video Center"
-        component={VideoCenterStackNavigation}
+        component={VideoCenterSortDrawerNavigation}  //VideoCenterStackNavigation
         options={{
           tabBarLabel: 'Video Center',
           tabBarIcon: () => VideoIcon,

@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SignUpScreen from '../screens/auth/SignUpScreen';
 //import HomepageScreen from '../screens/auth/HomepageScreen';
 import MainCentersNavigation from './MainCentersNavigation';
+import { getHeaderTitle } from './headerHelpers/getHeaderTitle';
 
 const Stack = createStackNavigator();
 
@@ -17,17 +18,23 @@ const NavigationComponent = () => {
         screenOptions={{
           headerShown: false,
         }}>
+
         <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{title: 'Login'}}
         />
+
         <Stack.Screen name="Signup" component={SignUpScreen} options={{}} />
+
         <Stack.Screen
           name="Home"
           component={MainCentersNavigation}
-          options={{title: 'Universidad de Bastos'}}
+          options={({ route }) => ({
+            headerTitle: getHeaderTitle(route),
+          })}
         />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {WebView} from 'react-native-webview';
-import ModalView from '../../screens/webview/WebViewPopUp';
+import ModalView from '../../screens/modals/webview/WebViewPopUp';
 import {whiteBackground,hasReadYellow} from '../../styles/colors';
 
 // create a component

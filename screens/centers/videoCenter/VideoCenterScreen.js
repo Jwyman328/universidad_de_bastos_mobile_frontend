@@ -3,11 +3,12 @@ import {useNavigation} from '@react-navigation/native';
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
-import VideoCard from '../../components/cards/video/videoCard';
-import getAllVideoData from '../../httpRequests/videoData/getallVideoData';
-import GlobalDataContext from '../../data/global/globalContext';
-import {primaryGradient} from '../../styles/colors';
-import MainHeader from '../../components/headers/MainHeader';
+import VideoCard from '../../../components/cards/video/videoCard';
+import getAllVideoData from '../../../httpRequests/videoData/getallVideoData';
+import GlobalDataContext from '../../../data/global/globalContext';
+import {primaryGradient} from '../../../styles/colors';
+import MainHeader from '../../../components/headers/MainHeader';
+import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 
 // create a component
 const VideoCenterScreen = () => {
@@ -41,6 +42,7 @@ const VideoCenterScreen = () => {
 
   return (
     <View style={styles.container}>
+      <CenterSortHeader />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}

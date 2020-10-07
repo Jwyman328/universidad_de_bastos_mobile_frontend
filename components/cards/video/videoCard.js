@@ -16,6 +16,7 @@ const VideoCard = ({videoData}) => {
   function navigateToPage() {
     navigation.navigate('VideoPlayerScreen', {videoData: videoData});
   }
+  
   const styles = createStyle(videoData.hasBeenWatchedByUser)
   return (
     <TouchableOpacity style={styles.touchableContainer} onPress={navigateToPage}>

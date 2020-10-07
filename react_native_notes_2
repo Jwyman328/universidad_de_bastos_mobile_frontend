@@ -151,6 +151,14 @@ NAVIGATION DESIGN IN NATIVE
         - react navigation 4 and 5 are very different for custimizing the navigators 
 
 
+    NAVIGATION HEADER OF A NESTED NAVIGATION 
+        - https://reactnavigation.org/docs/screen-options-resolution/#setting-parent-screen-options-based-on-child-navigators-state
+    
+    CUSTOM HEADER COMPONENT 
+        - https://reactnavigation.org/docs/headers/    
+            - section of the page is  Replacing the title with a custom component
+
+
 
 
 
