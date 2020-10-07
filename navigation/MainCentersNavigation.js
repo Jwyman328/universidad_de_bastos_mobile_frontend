@@ -22,14 +22,14 @@ const MainCentersNavigation = () => {
 
   return (
     <Tab.Navigator>
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={HomepageScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: () => HomeIcon,
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Video Center"
         component={VideoCenterStackNavigation}
