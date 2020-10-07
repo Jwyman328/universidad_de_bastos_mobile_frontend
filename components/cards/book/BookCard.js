@@ -15,10 +15,13 @@ import NavToBook from '../../buttons/NavToBookButton';
 import GlobalDataContext from '../../../data/global/globalContext';
 import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
 import {secondaryGradient,hasReadYellow} from '../../../styles/colors';
+import markBookAsUnRead from '../../../httpRequests/bookData/markBookAsUnRead';
 
 // create a component
 const BookCard = ({bookData,loadBookData}) => {
   const [markBookAsReadStatus, setMarkBookAsReadStatus] = useState(undefined)
+  const [markBookAsUnReadStatus, setMarkBookAsUnReadStatus] = useState(undefined)
+
 
   const imageUri = bookData.image;
   const title = bookData.title;
@@ -33,9 +36,22 @@ const BookCard = ({bookData,loadBookData}) => {
   const mockToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
   
+  function handleReadUnReadButtonClick(){
+    if(hasBeenReadByUser){
+      markTheBookAsUnRead()
+    }else{
+      markTheBookAsRead()
+    }
+  }
+
   function markTheBookAsRead(){
     markBookAsRead(bookData._id,mockToken,setMarkBookAsReadStatus )
     //reload all books
+    loadBookData()
+  }
+
+  function markTheBookAsUnRead(){
+    markBookAsUnRead(bookData._id,mockToken, setMarkBookAsUnReadStatus)
     loadBookData()
   }
 
@@ -59,7 +75,7 @@ const BookCard = ({bookData,loadBookData}) => {
         <View style={styles.authorContainer}>
           <Text style={styles.authorText}>{author}</Text>
         </View>
-        <ReadButton onPressButton={markTheBookAsRead} hasRead={hasBeenReadByUser} />
+        <ReadButton onPressButton={handleReadUnReadButtonClick} hasRead={hasBeenReadByUser} />
       <NavToBook locationLink={bookData.locationLink}/>
       </View>
     </FlipCard>

@@ -43,7 +43,6 @@ const ModalViewPopUp = ({pageUri, showModal,setShowModal}) => {
 
 // define your styles
 function createStyleSheet(height, width) {
-  console.log(height, width);
   const styles = StyleSheet.create({
     centeredView: {
       height: height,

@@ -23,7 +23,6 @@ const BookCenterScreen = () => {
         setGetAllBookDataStatus,
         mockToken,
       );
-      console.log(allBookData, 'abd');
       setAllBookData(allBookData);
     } catch (err) {
       console.log(err, 'err');
