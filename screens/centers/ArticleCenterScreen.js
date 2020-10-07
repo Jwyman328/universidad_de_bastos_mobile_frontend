@@ -38,7 +38,6 @@ const ArticleCenterScreen = () => {
   }, []);
   return (
     <View style={styles.scrollContainer}>
-      <MainHeader></MainHeader>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           {allArticleData ? allArticleData : null}

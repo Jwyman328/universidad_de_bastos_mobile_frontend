@@ -41,7 +41,6 @@ const VideoCenterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <MainHeader></MainHeader>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}

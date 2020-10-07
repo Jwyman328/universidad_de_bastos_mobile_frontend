@@ -41,7 +41,6 @@ const BookCenterScreen = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <MainHeader></MainHeader>
       <ScrollView>
         <View style={styles.scrollContainer}>
           {allBookData ? createBookCards() : null}
