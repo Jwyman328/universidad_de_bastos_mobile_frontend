@@ -13,7 +13,7 @@ import { primaryBlue } from '../../styles/colors';
 
 
 // create a component
-const CenterSortHeader = () => {
+const CenterSortHeader = ({iconName,routeScreen}) => {
   const screenWidth = Dimensions.get('screen').width;
   const screenHeight = Dimensions.get('window').height;
   const styles = createStyles(screenHeight, screenWidth);
@@ -21,14 +21,14 @@ const CenterSortHeader = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const navigation = useNavigation();
   function openSortPage() {
-    navigation.navigate('VideoCenterSortSettings');
+    navigation.navigate(routeScreen);
   }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.touchContinaer} onPress={openSortPage}>
         <View style={styles.iconContainer}>
-          <Icon size={40} name={'cog'} />
+          <Icon size={40} name={iconName} />
         </View>
       </TouchableOpacity>
     </View>

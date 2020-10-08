@@ -42,7 +42,7 @@ const VideoCenterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CenterSortHeader />
+      <CenterSortHeader routeScreen='VideoCenterSortSettings'  iconName='cog'/>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}
