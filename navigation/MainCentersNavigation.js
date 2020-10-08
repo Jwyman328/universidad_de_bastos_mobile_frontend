@@ -4,12 +4,12 @@ import {View, Text, StyleSheet} from 'react-native';
 import {NavigationContainer, TabActions} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ArticleCenterScreen from '../screens/centers/ArticleCenterScreen';
-import BookCenterScreen from '../screens/centers/BookCenterScreen';
 import HomepageScreen from '../screens/auth/HomepageScreen';
 import VideoCenterScreen from '../screens/centers/videoCenter/VideoCenterScreen';
 import VideoCenterStackNavigation from './videoCenterNavigation/VideoCenterStackNavigation';
 import Icon from 'react-native-ionicons'
 import VideoCenterSortDrawerNavigation from './videoCenterNavigation/VideoCenterSortDrawerNavigation';
+import BookCenterSortDrawerNavigation from './bookCenterNavigation/BookCenterSortDrawerNavigation';
 
 
 const Tab = createBottomTabNavigator();
@@ -41,7 +41,7 @@ const MainCentersNavigation = () => {
       />
       <Tab.Screen
         name="Book Center"
-        component={BookCenterScreen}
+        component={BookCenterSortDrawerNavigation}
         options={{
           tabBarLabel: 'Book Center',
           tabBarIcon: () => BookIcon,

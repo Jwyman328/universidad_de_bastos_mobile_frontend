@@ -3,12 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
-import BookCard from '../../components/cards/book/BookCard';
-import MainHeader from '../../components/headers/MainHeader';
-import GlobalDataContext from '../../data/global/globalContext';
-import getAllBookData from '../../httpRequests/bookData/getAllBookData';
-import {primaryGradient} from '../../styles/colors';
-MainHeader
+import BookCard from '../../../components/cards/book/BookCard';
+import CenterSortHeader from '../../../components/headers/CenterSortHeader';
+import MainHeader from '../../../components/headers/MainHeader';
+import GlobalDataContext from '../../../data/global/globalContext';
+import getAllBookData from '../../../httpRequests/bookData/getAllBookData';
+import {primaryGradient} from '../../../styles/colors';
+
 // create a component
 const BookCenterScreen = () => {
   const globalContext = useContext(GlobalDataContext);
@@ -42,6 +43,7 @@ const BookCenterScreen = () => {
   }, []);
   return (
     <View style={styles.container}>
+      <CenterSortHeader routeScreen={'BookCenterSort'} iconName="cog" />
       <ScrollView>
         <View style={styles.scrollContainer}>
           {allBookData ? createBookCards() : null}

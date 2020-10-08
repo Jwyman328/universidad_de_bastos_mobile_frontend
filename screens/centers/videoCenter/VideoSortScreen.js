@@ -5,6 +5,7 @@ import {View, Text, StyleSheet, Button} from 'react-native';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import {hasReadYellow, whiteBackground} from '../../../styles/colors';
+import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
 
 // create a component
 const VideoSortScreen = () => {
@@ -24,11 +25,11 @@ const VideoSortScreen = () => {
   }
 
   return (
-    <View  style={styles.container} >
+    <View  style={sortFilterStyles.container} >
       <CenterSortHeader routeScreen={'VideoCenter'} iconName="videocam" />
-      <View style={styles.contentContainer}>
+      <View style={sortFilterStyles.contentContainer}>
         <View>
-          <Text style={styles.title}>Sort and Filter Videos</Text>
+          <Text style={sortFilterStyles.title}>Sort and Filter Videos</Text>
         </View>
         {/* <Button
         onPress={() => navigation.navigate('VideoCenter')}
@@ -36,9 +37,9 @@ const VideoSortScreen = () => {
       /> */}
         {/* <Text style={styles.subTitle}>Filter</Text> */}
 
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortTitle}>Institución</Text>
-          <View style={styles.groupOptions}>
+        <View style={sortFilterStyles.sortGroup}>
+          <Text style={sortFilterStyles.sortTitle}>Institución</Text>
+          <View style={sortFilterStyles.groupOptions}>
             <SelectOptionButton
               isSelected={checkIsSelected(selectedInstitution, 'Todos')}
               setIsSelected={setInstitution}
@@ -65,9 +66,9 @@ const VideoSortScreen = () => {
           </View>
         </View>
 
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortTitle}>Tipo</Text>
-          <View style={styles.groupOptions}>
+        <View style={sortFilterStyles.sortGroup}>
+          <Text style={sortFilterStyles.sortTitle}>Tipo</Text>
+          <View style={sortFilterStyles.groupOptions}>
             <SelectOptionButton
               isSelected={checkIsSelected(selectedType, 'Todos')}
               setIsSelected={setType}
@@ -86,9 +87,9 @@ const VideoSortScreen = () => {
           </View>
         </View>
 
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortTitle}>Mirado</Text>
-          <View style={styles.groupOptions}>
+        <View style={sortFilterStyles.sortGroup}>
+          <Text style={sortFilterStyles.sortTitle}>Mirado</Text>
+          <View style={sortFilterStyles.groupOptions}>
             <SelectOptionButton
               isSelected={checkIsSelected(selectedWatched, 'Todos')}
               setIsSelected={setWatched}
@@ -112,9 +113,9 @@ const VideoSortScreen = () => {
         <View>
           {/* <Text style={styles.subTitle}>Sort</Text> */}
 
-          <View style={styles.sortGroup}>
-            <Text style={styles.sortTitle}>Fecha</Text>
-            <View style={styles.groupOptions}>
+          <View style={sortFilterStyles.sortGroup}>
+            <Text style={sortFilterStyles.sortTitle}>Fecha</Text>
+            <View style={sortFilterStyles.groupOptions}>
               <SelectOptionButton
                 isSelected={checkIsSelected(selectedSortBy, 'Todos')}
                 setIsSelected={setSortBy}
@@ -140,44 +141,7 @@ const VideoSortScreen = () => {
 
 // define your styles
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor: whiteBackground,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
-    contentContainer: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-
-  },
-  title: {
-    fontSize: 20,
-  },
-  subTitle: {
-    fontSize: 18,
-  },
-
-  sortGroup: {
-    alignItems: 'center',
-    width: '100%',
-    height: 100,
-    justifyContent: 'space-evenly',
-  },
-  sortTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-
-
-  },
-  groupOptions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: '100%',
-
-  },
+    
 });
 
 //make this component available to the app

@@ -8,18 +8,18 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-ionicons'
 
-  export function VideoCenterDrawerScreen(props) {
+  export function BookCenterDrawerScreen(props) {
     const navigation = useNavigation()
     return (
       <DrawerContentScrollView {...props}>
         <DrawerItem
-        label="Video Center"
-        onPress={() => navigation.navigate('VideoCenter')}
-        icon={()=> <Icon size={20}  name={'videocam'} />}
+        label="Book Center"
+        onPress={() => navigation.navigate('BookCenter')}
+        icon={()=> <Icon size={20}  name={'book'} />}
       />
        <DrawerItem
-        label="Sort Videos"
-        onPress={() => navigation.navigate('VideoCenterSortSettings')}
+        label="Sort Books"
+        onPress={() => navigation.navigate('BookCenterSort')}
         icon={()=> <Icon size={20}  name={'cog'}/> }
       />
       </DrawerContentScrollView>

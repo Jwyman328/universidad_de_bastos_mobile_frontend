@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import VideoCenterStackNavigation from './VideoCenterStackNavigation';
 import VideoSortScreen from '../../screens/centers/videoCenter/VideoSortScreen';
 import {drawerStyles} from './styles/drawerStyle';
-import {CustomDrawerContent} from './VideoCenterDrawerScreen';
+import {VideoCenterDrawerScreen} from './VideoCenterDrawerScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -14,7 +14,7 @@ export default function VideoCenterSortDrawerNavigation() {
     <Drawer.Navigator
       initialRouteName="VideoCenter"
       drawerStyle={drawerStyles.drawerStyle}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      drawerContent={(props) => <VideoCenterDrawerScreen {...props} />}>
       <Drawer.Screen
         name="VideoCenter"
         component={VideoCenterStackNavigation}
