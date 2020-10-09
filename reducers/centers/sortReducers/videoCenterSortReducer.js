@@ -9,7 +9,7 @@ const initialSortFilterState = {
     'insitution':'Todos',
     'tipo':'Todos',
     'mirado':'Todos',
-    'fecha':'Todos'
+    'fecha':'Nuevo'
   }
 
 export function videoSortReducer(state, action) {

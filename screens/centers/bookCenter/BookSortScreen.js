@@ -58,8 +58,8 @@ const BookSortScreen = () => {
         </View>
 
         <View style={sortFilterStyles.sortGroup}>
-          <Text style={sortFilterStyles.sortTitle}>Categoria</Text>
-          <View style={sortFilterStyles.groupOptions}>
+          <Text style={{...sortFilterStyles.sortTitle, ...styles.title}}>Categoria</Text>
+          <View style={{...sortFilterStyles.groupOptions, ...styles.wrap}}>
             <SelectOptionButton
               isSelected={checkIsSelected(selectedCategoria, 'Todos')}
               setIsSelected={setCategoria}
@@ -120,7 +120,13 @@ const BookSortScreen = () => {
 
 // define your styles
 const styles = StyleSheet.create({
- 
+    wrap:{
+      flexWrap:'wrap',
+
+    },
+    title:{
+      marginBottom:30,
+    }
 });
 
 //make this component available to the app

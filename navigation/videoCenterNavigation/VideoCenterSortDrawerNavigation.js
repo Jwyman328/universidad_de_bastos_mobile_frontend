@@ -15,7 +15,7 @@ export default function VideoCenterSortDrawerNavigation() {
     institution: 'Todos',
     tipo: 'Todos',
     mirado: 'Todos',
-    fecha: 'Todos',
+    fecha: 'Nuevo',
   };
 
   const [sortFilterState, dispatchSortFilter] = useReducer(

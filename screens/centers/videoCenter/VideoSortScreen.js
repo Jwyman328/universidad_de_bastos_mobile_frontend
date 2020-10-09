@@ -138,11 +138,6 @@ const VideoSortScreen = () => {
             <Text style={sortFilterStyles.sortTitle}>Fecha</Text>
             <View style={sortFilterStyles.groupOptions}>
               <SelectOptionButton
-                isSelected={checkIsSelected(selectedSortBy, 'Todos')}
-                setIsSelected={setSortBy}
-                option="Todos"
-              />
-              <SelectOptionButton
                 isSelected={checkIsSelected(selectedSortBy, 'Nuevo')}
                 setIsSelected={setSortBy}
                 option="Nuevo"

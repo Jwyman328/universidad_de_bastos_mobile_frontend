@@ -1,18 +1,28 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useContext, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
+import ArticleCenterContext from '../../../data/centers/articlesCenter/articleCenterContext';
+import {SET_FECHA} from '../../../reducers/centers/sortReducers/articleCenterSortReducer';
+import {sortFilterStyles} from '../../../styles/sortFilterStyles/sortFilterStyles';
 
 // create a component
 const ArticleSortScreen = () => {
   const navigation = useNavigation();
 
-  const [selectedRead, setRead] = useState('Todos');
-  const [selectedCategoria, setCategoria] = useState('Todos');
-  const [selectedSortBy, setSortBy] = useState('Todos');
+  const aticleCenterDataAndReducer = useContext(
+    ArticleCenterContext
+  );
+  const {articleCenterState, articleCenterDispatch} = aticleCenterDataAndReducer
+  
+  const {fecha} = articleCenterState;
+  const selectedSortBy = fecha;
+
+  function setSortBy(option) {
+    articleCenterDispatch({type: SET_FECHA, payload:{fecha: option}});
+  }
 
   function checkIsSelected(selected, option) {
     if (selected === option) {
@@ -39,11 +49,6 @@ const ArticleSortScreen = () => {
           <Text style={sortFilterStyles.sortTitle}>Fecha</Text>
           <View style={sortFilterStyles.groupOptions}>
             <SelectOptionButton
-              isSelected={checkIsSelected(selectedSortBy, 'Todos')}
-              setIsSelected={setSortBy}
-              option="Todos"
-            />
-            <SelectOptionButton
               isSelected={checkIsSelected(selectedSortBy, 'Nuevo')}
               setIsSelected={setSortBy}
               option="Nuevo"
@@ -61,9 +66,7 @@ const ArticleSortScreen = () => {
 };
 
 // define your styles
-const styles = StyleSheet.create({
- 
-});
+const styles = StyleSheet.create({});
 
 //make this component available to the app
 export default ArticleSortScreen;

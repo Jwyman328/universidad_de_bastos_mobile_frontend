@@ -95,6 +95,15 @@ const VideoCenterScreen = () => {
     }
   }
 
+  function sortByDate(videoData){
+    const videosSortedByData = videoData.sort((a, b) => a.year - b.year);
+
+    if(fecha==='Nuevo'){
+      videosSortedByData.reverse()
+    }
+    return videosSortedByData
+  }
+
   function sortVideoData(allVideos) {
     const sortedInstitutionVideos = allVideos.filter(video=>
        filterInstitution(video)
@@ -110,7 +119,8 @@ const VideoCenterScreen = () => {
 
   function createVideoCards() {
     const filteredVideos = sortVideoData(allVideoData)
-    const allVideoCards = filteredVideos.map((videoData) => {
+    const sortedVideos = sortByDate(filteredVideos)
+    const allVideoCards = sortedVideos.map((videoData) => {
       return <VideoCard key={videoData._id} videoData={videoData}></VideoCard>;
     });
     return allVideoCards;
