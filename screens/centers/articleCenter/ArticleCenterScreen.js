@@ -1,12 +1,13 @@
 //import liraries
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import ArticleCard from '../../components/cards/articles/ArticleCard';
-import getAllArticleData from '../../httpRequests/articleData/getAllArticleData';
+import ArticleCard from '../../../components/cards/articles/ArticleCard';
+import getAllArticleData from '../../../httpRequests/articleData/getAllArticleData';
 // create a component
-import GlobalDataContext from '../../data/global/globalContext';
-import {primaryGradient} from '../../styles/colors';
-import MainHeader from '../../components/headers/MainHeader';
+import GlobalDataContext from '../../../data/global/globalContext';
+import {primaryGradient} from '../../../styles/colors';
+import MainHeader from '../../../components/headers/MainHeader';
+import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 
 const ArticleCenterScreen = () => {
   const [getAllArticleDataStatus, setGetAllArticleDataStatus] = useState(
@@ -38,6 +39,7 @@ const ArticleCenterScreen = () => {
   }, []);
   return (
     <View style={styles.scrollContainer}>
+      <CenterSortHeader routeScreen={'ArticleCenterSort'} iconName="cog"/>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           {allArticleData ? allArticleData : null}

@@ -1,15 +1,13 @@
 //import liraries
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {NavigationContainer, TabActions} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ArticleCenterScreen from '../screens/centers/ArticleCenterScreen';
 import HomepageScreen from '../screens/auth/HomepageScreen';
-import VideoCenterScreen from '../screens/centers/videoCenter/VideoCenterScreen';
-import VideoCenterStackNavigation from './videoCenterNavigation/VideoCenterStackNavigation';
+
 import Icon from 'react-native-ionicons'
 import VideoCenterSortDrawerNavigation from './videoCenterNavigation/VideoCenterSortDrawerNavigation';
 import BookCenterSortDrawerNavigation from './bookCenterNavigation/BookCenterSortDrawerNavigation';
+import ArticleCenterSortDrawerNavigation from './articleCenterNavigation/ArticleCenterSortDrawerNavitation';
 
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +45,7 @@ const MainCentersNavigation = () => {
           tabBarIcon: () => BookIcon,
         }}
       />
-      <Tab.Screen name="Article Center" component={ArticleCenterScreen}
+      <Tab.Screen name="Article Center" component={ArticleCenterSortDrawerNavigation}
        options={{
         tabBarLabel: 'Article Center',
         tabBarIcon: () => ArticleIcon,

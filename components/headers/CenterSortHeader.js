@@ -28,7 +28,7 @@ const CenterSortHeader = ({iconName,routeScreen}) => {
     <View style={styles.container}>
       <TouchableOpacity style={styles.touchContinaer} onPress={openSortPage}>
         <View style={styles.iconContainer}>
-          <Icon size={40} name={iconName} />
+          <Icon style={styles.icon} size={40} name={iconName} />
         </View>
       </TouchableOpacity>
     </View>
@@ -39,25 +39,28 @@ const CenterSortHeader = ({iconName,routeScreen}) => {
 function createStyles(height, width) {
   const styles = StyleSheet.create({
     container: {
-      height: height * 0.1,
+      height: height * 0.11,
       width: width,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#3483eb',
       padding: 30,
     },
-    iconContainer: {
-      position: 'absolute',
-      top: 0,
-      //backgroundColor: 'red',
-      right: 0,
-      // width: 20,
-      // height:20
-    },
     touchContinaer: {
-      flex: 1,
-      width: '100%',
+      marginTop:10,
+      height: height * 0.10,
+      width: '90%',
     },
+    iconContainer: {
+      height:'100%',
+      width:'100%'
+    },
+    icon:{
+      position: 'absolute',
+      right:0,
+      bottom:10,
+    }
+
   });
 
   return styles;
