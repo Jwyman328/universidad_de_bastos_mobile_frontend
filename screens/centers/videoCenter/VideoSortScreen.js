@@ -1,20 +1,41 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useContext} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
+import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterContext';
+import { SET_FECHA, SET_INSTITUTION, SET_MIRADO, SET_TIPO } from '../../../reducers/centers/sortReducers/videoCenterSortReducer';
 import {hasReadYellow, whiteBackground} from '../../../styles/colors';
 import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
 
 // create a component
 const VideoSortScreen = () => {
   const navigation = useNavigation();
+  const {videoCenterState, videoCenterDispatch} = useContext(
+    VideoCenterContext,
+  );
+  const { institution,tipo,mirado,fecha} = videoCenterState
+  
+  const selectedInstitution = institution;
+  const setInstitution = (value) => {
+    videoCenterDispatch({type:SET_INSTITUTION,payload:{institution:value}})
+  }
 
-  const [selectedInstitution, setInstitution] = useState('Todos');
-  const [selectedType, setType] = useState('Todos');
-  const [selectedWatched, setWatched] = useState('Todos');
-  const [selectedSortBy, setSortBy] = useState('Todos');
+  const selectedType= tipo;
+  const setType = (value) => {
+    videoCenterDispatch({type:SET_TIPO,payload:{tipo:value}})
+  }
+
+  const selectedWatched= mirado;
+  const setWatched= (value) => {
+    videoCenterDispatch({type:SET_MIRADO,payload:{mirado:value}})
+  }
+
+  const selectedSortBy= fecha;
+  const setSortBy= (value) => {
+    videoCenterDispatch({type:SET_FECHA,payload:{fecha:value}})
+  }
 
   function checkIsSelected(selected, option) {
     if (selected === option) {
