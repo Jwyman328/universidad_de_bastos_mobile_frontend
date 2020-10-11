@@ -45,7 +45,7 @@ function createStyle(hasBeenWatchedByUser){
   const styles = StyleSheet.create({
     touchableContainer: {
       flex: 1,
-      width:'70%%',
+      width:'70%',
       alignItems:'center'
     },
     container: {

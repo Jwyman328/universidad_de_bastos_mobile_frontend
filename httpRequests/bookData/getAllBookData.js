@@ -4,6 +4,7 @@ import {getBackendBaseRoute} from '../../getEnvVars/getBackendBaseRoute'
 const getAllBookData = async (setRequestStatus, token) => {
   try {
     const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV)
+    console.log('what is the route',REACT_APP_BACKEND_BASE_ROUTE )
     setRequestStatus('PENDING');
     const getAllBookDataResponse = await fetch(
       `${REACT_APP_BACKEND_BASE_ROUTE}/books/`,
