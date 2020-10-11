@@ -28,7 +28,6 @@ const ArticleCenterScreen = () => {
   function sortArticlesByDate(articleData) {
     const articleDataSorted = articleData.sort((a, b) => a.date - b.date);
 
-    console.log(fecha, 'fech fech')
     if(fecha==='Nuevo'){
       articleDataSorted.reverse()
     }

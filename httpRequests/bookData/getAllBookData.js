@@ -1,12 +1,12 @@
 import React from 'react';
+import {getBackendBaseRoute} from '../../getEnvVars/getBackendBaseRoute'
 
-//getToken
-//https://universidad-de-bastos.herokuapp.com/videos/
 const getAllBookData = async (setRequestStatus, token) => {
   try {
+    const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV)
     setRequestStatus('PENDING');
     const getAllBookDataResponse = await fetch(
-      'http://localhost:5000/books/',
+      `${REACT_APP_BACKEND_BASE_ROUTE}/books/`,
       {
         method: 'GET',
         headers: {

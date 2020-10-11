@@ -1,10 +1,13 @@
 import React from 'react';
+import { getBackendBaseRoute } from '../../getEnvVars/getBackendBaseRoute';
 
 const markBookAsUnRead = async (bookId,token, setRequestStatus) => {
     try{
+        const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV)
+
         setRequestStatus('PENDING');
         const markBookAsReadUnResponse =  await fetch(
-            `http://localhost:5000/books/read/${bookId}`,
+            `${REACT_APP_BACKEND_BASE_ROUTE}/books/read/${bookId}`,
             {
               method: 'DELETE',
               headers: {
