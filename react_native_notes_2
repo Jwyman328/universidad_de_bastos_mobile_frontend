@@ -396,3 +396,76 @@ MODAL
     - react native has a built in modal component 
     - https://reactnative.dev/docs/modal
     - contains a visible property for setting if visible or not 
+
+
+
+
+
+
+OPTIMIZING REACT NATIVE APPS 
+- https://www.codementor.io/@jigaryadav/how-to-improve-the-performance-of-react-native-application-quwlcfns4
+- use flatlist instead of other list ttype.
+- images!
+    - use WebP images
+    - or use png images
+    - caching images for ios. 
+    - use the native animation driver.
+
+-https://callstack.com/blog/the-ultimate-guide-to-react-native-optimization/
+- pay attention to ui re-renders
+- react native builds itself, then compares itself to the current system 
+and then will rerender if it thinks there is a difference.
+- when and how to repaint htings on th e screen is react native responsibility
+- a component will rerender if its parent has rerendered, or if its props have changed.
+- reduce state operations and use pure and memoized components when needed.
+
+- good resource for react native optimizatin 
+    - https://twitter.com/nparashuram
+
+- redux actually has some updating benefits by only updating components throught the useSelect 
+    - when that specific state updates.
+
+- useContext without proper memoization leads to worse performance.
+- pure components or a memo wrapper will solve the majority of your isues 
+    because the majority of performacne issues are a state mgmt issue.
+
+WHAT ARE PURE COMPONENTS ?
+    - pure components are components that do not rerender when 
+    the state, or prop change is the same value as the previous state or prop.
+    - there is a comparison done and no differnece means no rerender. (https://medium.com/technofunnel/working-with-react-pure-components-166ded26ae48)
+    - we can use React.PureComponent for this 
+    - WITH HOOKS use React.memo()
+    - never introduce React.memo wrapper unless you test that it actually saves you on performance 
+
+
+
+DEBUGGING REACT NATIVE 
+    - for android how to open up simulator menu 
+        - in the terminal press command d or maybe just press d without command 
+        - then click debug 
+    - on android press command M to open the menu
+    _ REACT NATIVE DEBUGGER 
+        - this is a sepearte application fro more advanced debugging features 
+            - download and read about it here https://github.com/jhen0409/react-native-debugger
+            - open the react native debugger application and press control t, then press confirm.
+                - now the debugger is linked to the react native app, basically doing what chrome was doing before.
+                - you then hit react app menu, and then hit debug and it will open up a react native debugger 
+                    application console.
+                - it includes redux debugging tools as well.
+                -you can use the search to search for components by name
+        - you can see the props and state.
+        - as well you can see each individual component for example if i have a vidoCard 
+            and i render it ten times i can see all ten videoCards and can insepct them all
+            - as well under the main component you have the parts that make up that component 
+            and they include the styles, you can adjust these styles to see changes immediatly.
+
+
+REACT NATIVE PROFILING
+    - https://reactnative.dev/docs/profiling
+    - the profiler will give you information on the js thread process.
+    -  access it with Perf Monitor from the Debug menu.
+    - for android you ahve to learn how to use systrace.
+    - or you could use Chrome profiler while debugging
+        - wont giv you exact results because the code isnt running in chrome but it will 
+            give you good estimations.
+        - you do this by using hte performance tab in the chrome debug console
