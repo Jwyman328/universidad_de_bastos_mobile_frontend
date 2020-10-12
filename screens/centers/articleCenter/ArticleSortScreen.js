@@ -34,7 +34,7 @@ const ArticleSortScreen = () => {
 
   return (
     <View style={sortFilterStyles.container}>
-      <CenterSortHeader routeScreen={'ArticleCenter'} iconName="document" />
+      <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenter'} iconName="document" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
           <Text style={sortFilterStyles.title}>Sort Articles</Text>

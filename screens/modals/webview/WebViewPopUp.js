@@ -59,7 +59,7 @@ function createStyleSheet(height, width) {
       borderRadius: 20,
       padding: 10,
       elevation: 2,
-      height: 50,
+      height: 80,
     },
     textStyle: {
       color: 'white',

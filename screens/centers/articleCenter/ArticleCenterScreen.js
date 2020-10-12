@@ -54,7 +54,7 @@ const ArticleCenterScreen = () => {
   }, [fecha]);
   return (
     <View style={styles.scrollContainer}>
-      <CenterSortHeader routeScreen={'ArticleCenterSort'} iconName="cog" />
+      <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenterSort'} iconName="cog" />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           {allArticleData ? allArticleData : null}

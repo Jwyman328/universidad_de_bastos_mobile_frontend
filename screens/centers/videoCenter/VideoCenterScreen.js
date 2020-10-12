@@ -128,7 +128,7 @@ const VideoCenterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CenterSortHeader routeScreen="VideoCenterSortSettings" iconName="cog" />
+      <CenterSortHeader title={'Videos'} routeScreen="VideoCenterSortSettings" iconName="cog" />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}

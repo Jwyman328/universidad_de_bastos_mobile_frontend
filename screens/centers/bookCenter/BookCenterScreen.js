@@ -43,7 +43,7 @@ const BookCenterScreen = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <CenterSortHeader routeScreen={'BookCenterSort'} iconName="cog" />
+      <CenterSortHeader title={'Libros'} routeScreen={'BookCenterSort'} iconName="cog" />
       <ScrollView>
         <View style={styles.scrollContainer}>
           {allBookData ? createBookCards() : null}

@@ -25,7 +25,7 @@ const BookSortScreen = () => {
 
   return (
     <View style={sortFilterStyles.container}>
-      <CenterSortHeader routeScreen={'BookCenter'} iconName="book" />
+      <CenterSortHeader title={'Libros'} routeScreen={'BookCenter'} iconName="book" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
           <Text style={sortFilterStyles.title}>Sort and Filter Books</Text>

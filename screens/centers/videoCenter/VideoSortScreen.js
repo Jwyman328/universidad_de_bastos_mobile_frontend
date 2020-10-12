@@ -47,7 +47,7 @@ const VideoSortScreen = () => {
 
   return (
     <View  style={sortFilterStyles.container} >
-      <CenterSortHeader routeScreen={'VideoCenter'} iconName="videocam" />
+      <CenterSortHeader title={'Videos'} routeScreen={'VideoCenter'} iconName="videocam" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
           <Text style={sortFilterStyles.title}>Sort and Filter Videos</Text>
