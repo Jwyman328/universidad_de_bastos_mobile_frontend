@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   videoContainer: {
     width: '95%',
     height: 300,
-    backgroundColor: 'red',
   },
 });
 
