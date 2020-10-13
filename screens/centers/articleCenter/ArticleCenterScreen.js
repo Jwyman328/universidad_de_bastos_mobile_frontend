@@ -17,13 +17,13 @@ const ArticleCenterScreen = () => {
   const [allArticleData, setAllArticleData] = useState();
 
   const globalContext = useContext(GlobalDataContext);
+  const token = globalContext.token.value
+
   const articleContext = useContext(ArticleCenterContext);
   const {
     articleCenterState: {fecha},
   } = articleContext;
 
-  const mockToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
 
   function sortArticlesByDate(articleData) {
     const articleDataSorted = articleData.sort((a, b) => a.date - b.date);
@@ -37,8 +37,8 @@ const ArticleCenterScreen = () => {
   async function createArticleCards() {
     const articleCardsData = await getAllArticleData(
       setGetAllArticleDataStatus,
-      mockToken,
-    ); //globalContext.token.value
+      token,
+    ); 
 
     const articlesSorted = sortArticlesByDate(articleCardsData)
     const allArticleCards = articlesSorted.map((articleCardData) => {

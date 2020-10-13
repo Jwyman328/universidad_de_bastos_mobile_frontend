@@ -5,7 +5,8 @@ import NavigationComponent from './navigation/NavigationComponent';
 
 
 const GlobalDataComponent = () => {
-  const [token,setToken] = useState(undefined)
+  const [token,setToken] = useState(undefined) 
+  
   const [loginRequestStatus,setLoginRequestStatus] = useState('hello world')
   const globalData = {
       token: {value:token, setValue:setToken},

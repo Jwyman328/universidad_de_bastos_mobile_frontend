@@ -30,8 +30,7 @@ const VideoCenterScreen = () => {
   );
   const { institution,tipo,mirado,fecha} = videoCenterState
 
-  const mockToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+  const token = globalContext.token.value
 
   useEffect(() => {
     loadVideoData();
@@ -40,8 +39,8 @@ const VideoCenterScreen = () => {
   async function loadVideoData() {
     const videoData = await getAllVideoData(
       setGetVideosRequestStatus,
-      mockToken,
-    ); //globalContext.token.value
+      token,
+    ); 
     setAllVideoData(videoData);
   }
 

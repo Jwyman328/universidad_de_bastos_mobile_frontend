@@ -15,15 +15,14 @@ const BookCenterScreen = () => {
   const globalContext = useContext(GlobalDataContext);
   const [getAllBookDataStatus, setGetAllBookDataStatus] = useState(undefined);
   const [allBookData, setAllBookData] = useState(undefined);
-
-  const mockToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+  
+  const token = globalContext.token.value
 
   async function loadBookData() {
     try {
       const allBookData = await getAllBookData(
         setGetAllBookDataStatus,
-        mockToken,
+        token,
       );
       setAllBookData(allBookData);
     } catch (err) {

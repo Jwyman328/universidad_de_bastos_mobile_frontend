@@ -33,9 +33,8 @@ const BookCard = ({bookData,loadBookData}) => {
   const styles = createStyleSheet(windowWidth, windowWidth, hasBeenReadByUser);
 
   const globalContext = useContext(GlobalDataContext)
-  const mockToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
-  
+  const token = globalContext.token.value
+
   function handleReadUnReadButtonClick(){
     if(hasBeenReadByUser){
       markTheBookAsUnRead()
@@ -45,13 +44,13 @@ const BookCard = ({bookData,loadBookData}) => {
   }
 
   function markTheBookAsRead(){
-    markBookAsRead(bookData._id,mockToken,setMarkBookAsReadStatus )
+    markBookAsRead(bookData._id,token,setMarkBookAsReadStatus )
     //reload all books
     loadBookData()
   }
 
   function markTheBookAsUnRead(){
-    markBookAsUnRead(bookData._id,mockToken, setMarkBookAsUnReadStatus)
+    markBookAsUnRead(bookData._id,token, setMarkBookAsUnReadStatus)
     loadBookData()
   }
 

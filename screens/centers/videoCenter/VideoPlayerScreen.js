@@ -13,13 +13,13 @@ const VideoPlayerScreen = ({
     params: {videoData},
   },
 }) => {
-    const mockToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+
     const globalContext = useContext(GlobalDataContext)
+    const token = globalContext.token.value
     const [markVideoAsWatchedStatus, setMarkVideoAsWatchedStatus] = useState('')
 
     async function handlePress(){
-       const markVideo = await markVideoAsWatched(videoData.videoUrl,mockToken,setMarkVideoAsWatchedStatus)
+       const markVideo = await markVideoAsWatched(videoData.videoUrl,token,setMarkVideoAsWatchedStatus)
     }
   return (
     <View style={styles.container}>
