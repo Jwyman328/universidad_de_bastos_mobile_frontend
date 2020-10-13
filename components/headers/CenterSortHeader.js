@@ -69,7 +69,8 @@ function createStyles(height, width) {
     titleContainer:{
       width:"100%",
       alignItems:'center',
-      justifyContent:'center'
+      justifyContent:'center',
+      height:height * 0.11
     },
     title: {
       color: 'white',

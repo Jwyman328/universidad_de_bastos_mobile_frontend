@@ -120,6 +120,7 @@ function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
       color: 'white',
       fontSize: 20,
       textTransform: 'capitalize',
+      textAlign:'center'
     },
     authorContainer: {
       flex: 1,

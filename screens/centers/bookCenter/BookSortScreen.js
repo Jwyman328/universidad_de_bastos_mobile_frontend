@@ -121,6 +121,7 @@ const BookSortScreen = () => {
 // define your styles
 const styles = StyleSheet.create({
     wrap:{
+      justifyContent:'center',
       flexWrap:'wrap',
 
     },

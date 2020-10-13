@@ -14,7 +14,7 @@ const SelectOptionButton = ({option, isSelected, setIsSelected}) => {
   return (
     <TouchableOpacity onPress={setSelected}>
       <View style={styles.selectButton}>
-        <Text>{option}</Text>
+        <Text  style={styles.selectButtonText}>{option}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -35,6 +35,9 @@ function createStyles(isSelected) {
       alignItems: 'center',
       padding: 3,
     },
+    selectButtonText:{
+      textAlign:'center'
+    }
   });
 
   return styles;
