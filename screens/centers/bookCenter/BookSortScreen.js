@@ -28,7 +28,7 @@ const BookSortScreen = () => {
       <CenterSortHeader title={'Libros'} routeScreen={'BookCenter'} iconName="book" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
-          <Text style={sortFilterStyles.title}>Sort and Filter Books</Text>
+          <Text style={sortFilterStyles.title}>Filtrar Libros</Text>
         </View>
         {/* <Button
         onPress={() => navigation.navigate('VideoCenter')}

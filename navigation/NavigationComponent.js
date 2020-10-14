@@ -22,7 +22,7 @@ const NavigationComponent = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{title: 'Login'}}
+          options={{title: 'Iniciar sesión'}}
         />
 
         <Stack.Screen name="Signup" component={SignUpScreen} options={{}} />

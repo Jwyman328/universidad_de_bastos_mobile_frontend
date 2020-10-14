@@ -39,7 +39,7 @@ const SignupCard = () => {
   const setToken = globalData.token.setValue
 
   const title = 'Universidad de Bastos';
-  const cardTypeTitle = 'Signup';
+  const cardTypeTitle = 'Regístrate';
 
   const navigation = useNavigation();
 
@@ -120,19 +120,19 @@ const SignupCard = () => {
       <View style={authCardStyles.userInputContainer}>
         <TextInput
           placeholderTextColor="white"
-          placeholder="username"
+          placeholder="usuario"
           style={authCardStyles.userInput}
           onChangeText={(username) => setUserName(username)}></TextInput>
         <TextInput
           secureTextEntry={true}
           placeholderTextColor="white"
-          placeholder="password"
+          placeholder="contraseña"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
         <TextInput
           secureTextEntry={true}
           placeholderTextColor="white"
-          placeholder="retype password"
+          placeholder="repite la contraseña"
           style={authCardStyles.userInput}
           onChangeText={(passwordRetyped) =>
             setPasswordRetyped(passwordRetyped)
@@ -150,7 +150,7 @@ const SignupCard = () => {
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToLoginScreen}
-          title="Login"></SubmitButton>
+          title="Iniciar sesión"></SubmitButton>
       </View>
     </View>
   );

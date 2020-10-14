@@ -37,7 +37,7 @@ const ArticleSortScreen = () => {
       <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenter'} iconName="document" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
-          <Text style={sortFilterStyles.title}>Sort Articles</Text>
+          <Text style={sortFilterStyles.title}>Filtrar Artículos</Text>
         </View>
         {/* <Button
         onPress={() => navigation.navigate('VideoCenter')}

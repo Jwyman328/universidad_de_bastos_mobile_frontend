@@ -18,7 +18,7 @@ const LoginCard = () => {
   const setLoginRequestStatus = globalContext.loginRequestStatus.setValue
 
   const title = 'Universidad de Bastos';
-  const cardTypeTitle = 'Login';
+  const cardTypeTitle = 'Iniciar sesión';
 
   const navigation = useNavigation();
 
@@ -71,13 +71,13 @@ const LoginCard = () => {
      {shouldShowLoadingSpinner()? undefined :  <View style={authCardStyles.userInputContainer}>
         <TextInput
           placeholderTextColor="white"
-          placeholder="username"
+          placeholder="usuario"
           style={authCardStyles.userInput}
           onChangeText={(username) => setUserName(username)}></TextInput>
         <TextInput
           secureTextEntry={true}
           placeholderTextColor="white"
-          placeholder="password"
+          placeholder="contraseña"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
       </View>}
@@ -94,7 +94,7 @@ const LoginCard = () => {
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToSignupScreen}
-          title="Signup">
+          title="Regístrate">
 
           </SubmitButton>
       </View> }

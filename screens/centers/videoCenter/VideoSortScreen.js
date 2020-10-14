@@ -50,7 +50,7 @@ const VideoSortScreen = () => {
       <CenterSortHeader title={'Videos'} routeScreen={'VideoCenter'} iconName="videocam" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
-          <Text style={sortFilterStyles.title}>Sort and Filter Videos</Text>
+          <Text style={sortFilterStyles.title}>Filtrar Videos</Text>
         </View>
         {/* <Button
         onPress={() => navigation.navigate('VideoCenter')}

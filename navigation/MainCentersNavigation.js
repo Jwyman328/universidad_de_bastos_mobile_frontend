@@ -33,7 +33,7 @@ const MainCentersNavigation = () => {
         name="Video Center"
         component={VideoCenterSortDrawerNavigation}  //VideoCenterStackNavigation
         options={{
-          tabBarLabel: 'Video Center',
+          tabBarLabel: 'Videos',
           tabBarIcon: () => VideoIcon,
         }}
       />
@@ -41,13 +41,13 @@ const MainCentersNavigation = () => {
         name="Book Center"
         component={BookCenterSortDrawerNavigation}
         options={{
-          tabBarLabel: 'Book Center',
+          tabBarLabel: 'Libros',
           tabBarIcon: () => BookIcon,
         }}
       />
       <Tab.Screen name="Article Center" component={ArticleCenterSortDrawerNavigation}
        options={{
-        tabBarLabel: 'Article Center',
+        tabBarLabel: 'Artículos',
         tabBarIcon: () => ArticleIcon,
       }} />
     </Tab.Navigator>

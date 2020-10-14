@@ -14,12 +14,12 @@ export function ArticleCenterDrawerScreen(props) {
 
       <DrawerContentScrollView {...props}>
         <DrawerItem
-          label="Article Center"
+          label="Artículos"
           onPress={() => navigation.navigate('ArticleCenter')}
           icon={() => <Icon size={20} name={'document'} />}
         />
         <DrawerItem
-          label="Sort Books"
+          label="Filtrar artículos"
           onPress={() => navigation.navigate('ArticleCenterSort')}
           icon={() => <Icon size={20} name={'cog'} />}
         />
