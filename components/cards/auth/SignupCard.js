@@ -1,13 +1,17 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
+import GlobalDataContext from '../../../data/global/globalContext';
+import signupUser from '../../../httpRequests/auth/signup';
 import {
   signUpCardFormReducer,
   SET_USERNAME,
   SET_PASSWORD,
   SET_PASSWORD_RETYPED,
   SIGNUP_USER,
+  SET_USER_TOKEN,
+  FAILED_SIGNUP,
   initialSignupCardReducerValues,
 } from '../../../reducers/forms/signUpCardFormReducer';
 import SubmitButton from '../../buttons/SubmitButton';
@@ -30,6 +34,9 @@ const SignupCard = () => {
     signupSuccessful,
     signUpErrorMessages,
   } = signUpFormReducerValues;
+
+  const globalData = useContext(GlobalDataContext)
+  const setToken = globalData.token.setValue
 
   const title = 'Universidad de Bastos';
   const cardTypeTitle = 'Signup';
@@ -59,11 +66,13 @@ const SignupCard = () => {
     });
   }
 
-  function signUpUser() {
+  async function signUpUser() {
     dispatch({type: SIGNUP_USER});
+
   }
 
   function displayErrorMessageComponents() {
+    
     const errorMessages = signUpErrorMessages.map((errorMessageTextContent) => {
       return (
         <ErrorMessage
@@ -71,16 +80,32 @@ const SignupCard = () => {
           errorMessage={errorMessageTextContent}></ErrorMessage>
       );
     });
+    
     if (errorMessages.length > 0) {
       return <MultiMessageContainer>{errorMessages}</MultiMessageContainer>;
     }
   }
 
   useEffect(() => {
-    if (signupSuccessful) {
+    if (signupSuccessful === true) {
       navigateToHomeScreen();
     }
-  }, [signupSuccessful]);
+    if (signupSuccessful === 'NO_INPUT_ERRORS'){
+      setUserToken()
+    }
+   
+
+  }, [signupSuccessful, signUpErrorMessages]);
+
+  async function setUserToken(){
+    const token = await signupUser(username,password)
+    if (token !== 'ERROR'){
+      dispatch({type: SET_USER_TOKEN});
+      setToken(token)
+    }else{
+      dispatch({type:FAILED_SIGNUP})
+    }
+  }
 
   return (
     <View style={authCardStyles.container}>

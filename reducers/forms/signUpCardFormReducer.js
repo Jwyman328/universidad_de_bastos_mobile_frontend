@@ -1,9 +1,12 @@
 import React from 'react';
+import signupUser from '../../httpRequests/auth/signup';
 
 export const SET_USERNAME = 'SET_USERNAME';
 export const SET_PASSWORD = 'SET_PASSWORD';
 export const SET_PASSWORD_RETYPED = 'SET_PASSWORD_RETYPED';
 export const SIGNUP_USER = 'SIGNUP_USER'
+export const SET_USER_TOKEN = 'SET_USER_TOKEN'
+export const FAILED_SIGNUP = 'FAILED_SIGNUP'
 
 export const initialSignupCardReducerValues = {
     username:'',
@@ -13,7 +16,7 @@ export const initialSignupCardReducerValues = {
     signUpErrorMessages:[],
 }
 
-export function signUpCardFormReducer(state, action) {
+export  function signUpCardFormReducer(state, action) {
   switch (action.type) {
     case SET_USERNAME:
       const username = {username: action.payload.username};
@@ -43,14 +46,25 @@ export function signUpCardFormReducer(state, action) {
         }
 
         if (currentErrorMessages.length === 0){
-            const signupSuccessful = {signupSuccessful:true, signUpErrorMessages:currentErrorMessages}
-
+            const signupSuccessful = {signupSuccessful:'NO_INPUT_ERRORS', signUpErrorMessages:currentErrorMessages}
+           
             return {...state, ...signupSuccessful}
         }else{
             const signupSuccessful = {signupSuccessful:false}
             return {...state, ...signupSuccessful, signUpErrorMessages:currentErrorMessages}
         }
+
+    case SET_USER_TOKEN:
+      const signupSuccessfulLoginUser = {signupSuccessful:true}
+     
+      return {...state, ...signupSuccessfulLoginUser}
+
+    case FAILED_SIGNUP:
+      const allErrorMsgs = [...state.signUpErrorMessages, 'User name is already taken, choose another']
+      const signupFailure = {signupSuccessful:false}
+      return {...state, ...signupFailure, signUpErrorMessages:allErrorMsgs}
   }
+
   return state;
 }
 
