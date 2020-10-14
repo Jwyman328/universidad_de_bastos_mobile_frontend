@@ -94,19 +94,19 @@ const SignupCard = () => {
 
       <View style={authCardStyles.userInputContainer}>
         <TextInput
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           placeholder="username"
           style={authCardStyles.userInput}
           onChangeText={(username) => setUserName(username)}></TextInput>
         <TextInput
           secureTextEntry={true}
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           placeholder="password"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
         <TextInput
           secureTextEntry={true}
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           placeholder="retype password"
           style={authCardStyles.userInput}
           onChangeText={(passwordRetyped) =>
