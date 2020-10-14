@@ -35,7 +35,6 @@ const LoginCard = () => {
   const navigateToHomeScreen = async () => {
     //send a post request to check if it is logging in
     try{
-
       const postResponse = await loginUser(username, password, setLoginRequestStatus)
       const responseJson = await postResponse.json()
 
@@ -43,6 +42,8 @@ const LoginCard = () => {
       
       if (userToken){
         // create context api? add token to it and username 
+        setUserName('')
+        setPassword('')
         setToken(userToken)
         navigation.navigate('Home')
       }
