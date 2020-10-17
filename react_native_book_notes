@@ -1,0 +1,299 @@
+optimizing the app with a low budget is difficult but not impossible for react native.
+
+
+pg 6 
+INTRODUCTION TO REACT NATIVE OPTIMIZATION 
+- in react native you create components that are describing how your ui should look like 
+- and then react native converts that to native code.
+- instead of writting code that deals with native apis, you write code that deals with 
+react native and then react native deals with the new code.
+- after react converts your code to use the native apis, your code is as if it is written 
+in the native language.
+
+-in order to create fast applications you need to think the react native way.
+
+UNDERSTAND IMPLEMENTATION DETAILS 
+- UI RERENDERS
+    - reduce rerenders and save battery and performance
+
+
+1. PAY ATTENTION TO RERENDERS 
+    - optimize the number of state operations, remember memoized nad pure components 
+    - extra rerender cycles causes slow apps. puts strain on the aplication when it is not needed. 
+    - a component rerenders if its parent rerenders or its props are different.
+        - therefore a component can rerender even if it does not change.
+        - this is often acceptable because it would cost more to compare props to see if it should rerender instead of jsut rerendering 
+
+    -WHEN YOU SHOULD OPTIMIZE 
+        - UI FLICKER, FPS decrease 
+-WHAT IS FPS 
+    - https://reactnative.dev/docs/performance#:~:text=A%20compelling%20reason%20for%20using,and%20feel%20to%20your%20apps.
+    - frames per second.
+        - movies  are a lie they are jsut static images moving very quickly to make it look like 
+        there is movement.
+        - each image is refered to as a frame, so how many images per a second is shown.
+        - we want 60 fps 
+        - ios displays 60 fps 
+        - if you can not complete the render in 60fps the phone will drop a screen aka a frame 
+        - in the perf tools you have two different fps, one for js one for UI 
+        -  business logic will run on the JS thread shown with js.
+        - if anything takees longer than 100ms then the user will feel it. 
+        - UI frame rate it the native thread 
+        - when you navigate between screen the js fps takes a huge hit
+
+
+PG 12 
+CONTROLLED VS UNCONTROLLED COMPONENTS 
+- controlled with textinput 
+- if a component has a useState and onChagneText sets the useState you are 
+running a onChangeText ufnction then a setState function then the component rerenders.
+
+
+-GLOBAL STATE RERENDERS 
+    - redux handles optimizations of state, it does not slow down the application 
+        - it is not global state that causes rerenders.
+        - redux connect function will on rerender components when a subset changes.
+        - useContext is not a good replacement for redux, it is at first but then will cause huge drawbacks as you scale up 
+
+
+2. DEDICATED COMPONENTS FOR CERTAIN LAYOUTS 
+    - text, view, texTInput are primitive components. 
+    - there are specialized components that reaqct native provides that are built on top of primitive ocmponents.
+    - always use specialized components, like flatlist for lists.
+    - these components were deigned to handle additional problems not jsut to help with layout but 
+        to improve memory/performance etc.
+    - flat list has to measure the next batch of components when they are being put on the screen,
+        so this will take time.
+    - we can use getiTemHeight to define height item upfront to set a number of elements each time 
+        you scroll down.
+
+
+3. THINK TWICE BEFORE YOU PICK A THIRD PARTY LIBRARY 
+    - less code means faster opening time 
+    - big factor on size of code is your third party libraries.
+    - native code is stored in the filesystem but react native is in avascript code which 
+        has to go through a process before it is native and then opened.
+    - instead of loading a full library see if you can load a section of the library,
+        aka like lodash has split into multiple small libraries.
+
+
+4. ALWAYS USE LIBRARIES FOR MOBILE  pg 30
+    - web libraries that are not optimized for mobile, should not be used 
+        they will slow you down.
+    - web you dont have to worry about batteries of power,
+        with mobile you do. 
+    - IOS constantly monitors background memory and cpu consumption 
+        if the app sucks up memory and cpu it will reduce how often your app renders in the background 
+        in order to save battery. 
+    - web sdks and packages dont optimize for mobiles problems they optimize for web problems 
+        so find the mobile sdks to use because they will offer the benefits you need. 
+
+
+
+5. find the balance between native and javascript.
+    - there are times when you need to write native code, 
+    - the comunication between js and native aka the communication through the bridge 
+        is async, meaning that the js may send across multiple actions 
+        to the native code that are stuck in a queue as js continues to wroko n other calls.
+    PAGE 36 GREAT DIAGRAM 
+    - the flow goes from native -> js -> native 
+    1. native event happens (native)
+    2. collect data and notify js process begins
+    3. code gets sent to bridge to be converted (bridge)
+    4. js code is executed (js)
+    5. js code calls native events (js)
+    6. bridge process js call of native event serializing it to native 
+    7. process native commands 
+    8. update UI (if needed) 
+
+    -if the bridge has a backed up queue then the application will be unresponsive becuase you will 
+    do an event and that event won t get processed quickly enough to respond.
+
+    - HOW DOES THE BRIDGE WORK?
+        - it transfers code to json so that the js and native can communicate.
+
+
+        STYLES AND THE BRIDGE 
+            - Stylesheet.create is more optimal than inline styles because 
+                stylesheet goes across the bridge once and does not get sent over with a rerender.
+                where as inline styles do get sent with a rerender. 
+                - this is why inline styles are used with reactive styles
+                because they are sent acros wiht rerender and therefore will be updated when their 
+                variable is updated. this is why stylesheets with variables are not rerendered on change rerender.
+            - how does it do this? by caching your styles.
+
+
+
+6. ANIMATED AT 60FPS no matter what. 
+    - pg 42
+    - use native solutions to smooth gestures and animations to get 60 fps 
+    - js animations occupy the bridge and slow down the application. 
+    - js animations block the bridge so no other work can be down 
+    THERE IS NO BUILT IN PRIORITY QUEUE FOR THE BRIDGE 
+        - this means you could lose things across the bridge?!?!
+        - built in apis always run at 60 fps especially ios but for 
+        - smooht interactions and animations might be one of the only ways to win over customers.
+            - think of robinhood. fantastic.
+
+        - if possible use native interactions.
+            - second best is React Native Reanimated library
+            - users want to control animations with a gesture.
+            - they want there touches and swipes on the screen to perform 
+                movements for them
+        
+        WHAT IS A GESTURE?
+            - a gesture lets users interact with screen elements with touch.
+            - it is the most important part and makes the user feel interactive with the app. 
+
+        REACT NATIVE GESTURE HANDLER 
+            - great library for handling gestures 
+            - gesture handler combined with reanimated produces powerful effects.
+            - reanimated is not written great but it offers great preformance.
+            - react reanimte and react native gesture try and use only native and very little js 
+                but sometimes you need a little bit of js. 
+             react navigation uses react reanimated and natvie gresture libraries.
+
+        INTERACTIONMANAGER 
+            - this lets you run code only after animations have completed, 
+                so that no flicker happens and there are no frames per second that are dropped.
+                it will run the animation then run the ui render.
+            
+
+        Dont take smooth interfaces for granted they may make or break your application.
+        
+
+
+
+Improve performance with latest react native features. 
+    - always run the altest react native versions to get the latest features.
+    - if you want to upgrade it will become very painful to upgrade when you finally do.
+    - it is a lot easier to upgrade if you are comfortable iwth the native code/enviornments 
+        (gradle, xcode etc.)
+
+    - third party packages must be upgraded to the new versions of RN before you can 
+        upgrade your project.
+
+    - if you dont upgrade and the competition does then you could be losing out on new improements and features.
+
+    TOOLS FOR HELPING WITH UPGRADES 
+        - react-native-upgrade-helper.
+
+
+    - always read the noted changes.
+    - apply upgrades step by step one at a time 
+    - react native third party packages often depend on native code 
+        and therefore are more difficult to upgrade.
+
+    - there is no quick fix with upgrading it takes attention and patience.
+
+    - upgrades with new versions of the operating systems.
+        - when ios or andorid upgrades you might have breaking changes.
+
+
+
+DEBUG FASTER WITH FLIPPER 
+    - dont use chrome to debug and profile.
+    - debugging problems are difficult with react native because a bug can either be 
+        in the js or in the native code.
+    - problem with the chrome debugger is that the code runs in the v8 egine 
+        instead of the ios or android engines.
+    - you can not use the profiler to accuratly profile your performance since it uses 
+        websockets to communicate between the emulators and chrome debugger.
+    - using the debugging inspector on the emulators is a bitch. its too small a screen.
+        bad developer experience.
+
+
+    TURN ON FLIPPER AND START DEBUGGING WITH IT 
+        - flipper is a debugging tool for all mobile languages 
+            - also for react native too.
+            - no redux though so that is a major problem
+            - recently added redux plugin though from a third party.
+        - comes with network insepctor.
+        - allwos you to monitor native crashes as well not jsut js ones.
+        - flipper has plugins for many different needs like vscode style.
+
+
+
+DEPENDENCY MGMT with auto linking.
+    - most js packages jsut include js code, but react native packages include 
+        much more than just js.
+    - often native  code for android and ios are included
+
+    - autolinking solves a lot of previous problems.
+    - your package.json file is checked and the necessary files are downloaded 
+        for android and ios, gradle and xcode files.
+
+
+APPLICATION LOAD FLOW 
+    1. native render 
+    2. JS render 
+    3. JS init + require 
+    4. native init.
+
+
+    1 and 2 are about starting the VM in order to run the js code.
+    3 + 4 is about your components and getting those up and on the screen as well as runnign business logic.
+
+    - react native can load up jsut as fast as native if you make the right tweaks.
+
+    - FB built hermes a javascript engine built wiht react native in mind.
+     - it is currently only available on android.
+     - its main goal is to make application laod faster. 
+
+
+OPTIMIZE ANDROID APPLICATION 
+    - reduce the size of hte application.
+    - reduce react native bundle size.
+
+    the build consists of 
+    - foursets of binaries compiled for different cpu arquitectures.
+    - directory with resource like iamges, fonts, etc.
+    - js bundle with busniess logic and react components 
+    - other files.
+
+    react native offers optimization but they are disabled by default 
+    - bigger bundles means more time to download the app from the store 
+    and time to load it up
+
+
+    - a lot of android devices are low end, only 20% are high end 
+        - so android has a big market of devices that dont have computing 
+            power for large applications.
+
+
+
+
+
+
+DEVELOPMENT ENVIORNMENT 
+
+- react native gives you over the air updates!!!
+- this means you can update your app without going through the app store submission.
+
+1. run tests for key pieces of your app. 
+    - checking that everythigns works takes a lot of time, 
+         having importants tests will minimze that time.
+
+Manual testing does not point directly to code, 
+    - this makes it much harder to find where the bugs exactly occur.
+        - this is why code tests are much better than human tests.'
+
+    - avoid testing implementations details.
+
+
+- most mobile appls don need 100% code coverage.
+    - you hsould test the critical pieces.
+
+    - test the key pieces of the application but first you must identify those key pieces.
+
+    - most of your business code lives in js so you should 
+        be able to easily test it.
+
+
+JS TESTING 
+    - a smoke test what is it?
+        -  test to see if your applications even opens on first run 
+        - you can test this with e2e tests.
+        - use e22 tests to test the most important features like signing in and out, 
+            and other verfication needs.
+            - detox is a great framework for react native e2e tests.
