@@ -14,7 +14,6 @@ import {primaryGradient} from '../../../styles/colors';
 
 // create a component
 const BookCenterScreen = () => {
-
   const [bookCards,setBookCards] = useState(undefined)
 
   const dispatch = useDispatch();
@@ -26,7 +25,6 @@ const BookCenterScreen = () => {
   }
 
   function createBookCards() {
-    console.log(allBookData, 'abd')
     const allBookCards = allBookData.map((bookData) => {
       return (
         <BookCard
@@ -43,8 +41,6 @@ const BookCenterScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    
-    console.log(allBookData,'here in use')
     if (allBookData){
       const bookCards = createBookCards()
       setBookCards(bookCards)

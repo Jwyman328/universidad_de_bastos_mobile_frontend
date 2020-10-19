@@ -10,38 +10,37 @@ import React, {
 import {View, Text, StyleSheet} from 'react-native';
 import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
 import VideoCard from '../../../components/cards/video/videoCard';
-import getAllVideoData from '../../../httpRequests/videoData/getallVideoData';
-import GlobalDataContext from '../../../data/global/globalContext';
 import {primaryGradient} from '../../../styles/colors';
-import MainHeader from '../../../components/headers/MainHeader';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterContext';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchVideos from '../../../redux/thunks/httpRequests/fetchVideos';
+import selectAllVideos from '../../../redux/selectors/videos/selectAllVideos';
 
 // create a component
 const VideoCenterScreen = () => {
-  const [getVideosRequestStatus, setGetVideosRequestStatus] = useState(
-    undefined,
-  );
-  const [allVideoData, setAllVideoData] = useState();
 
-  const globalContext = useContext(GlobalDataContext);
+  const [allVideoData, setAllVideoData] = useState(undefined);
+
   const {videoCenterState, videoCenterDispatch} = useContext(
     VideoCenterContext,
   );
+
   const { institution,tipo,mirado,fecha} = videoCenterState
 
-  const token = globalContext.token.value
+  const dispatch = useDispatch()
+  const allVideos = useSelector(selectAllVideos)
 
   useEffect(() => {
     loadVideoData();
-  }, []);
+  }, [dispatch]);
+
+  useEffect(()=>{
+    setAllVideoData(allVideos);
+  },[allVideos])
 
   async function loadVideoData() {
-    const videoData = await getAllVideoData(
-      setGetVideosRequestStatus,
-      token,
-    ); 
-    setAllVideoData(videoData);
+    dispatch(fetchVideos())
   }
 
   function filterInstitution(video){

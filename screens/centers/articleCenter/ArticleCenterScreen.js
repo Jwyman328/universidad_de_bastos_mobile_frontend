@@ -2,62 +2,66 @@
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import ArticleCard from '../../../components/cards/articles/ArticleCard';
-import getAllArticleData from '../../../httpRequests/articleData/getAllArticleData';
 // create a component
-import GlobalDataContext from '../../../data/global/globalContext';
 import {primaryGradient} from '../../../styles/colors';
-import MainHeader from '../../../components/headers/MainHeader';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import ArticleCenterContext from '../../../data/centers/articlesCenter/articleCenterContext';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchArticles from '../../../redux/thunks/httpRequests/fetchArticles';
+import selectAllArticles from '../../../redux/selectors/articles/selectAllArticles';
 
 const ArticleCenterScreen = () => {
-  const [getAllArticleDataStatus, setGetAllArticleDataStatus] = useState(
-    undefined,
-  );
-  const [allArticleData, setAllArticleData] = useState();
-
-  const globalContext = useContext(GlobalDataContext);
-  const token = globalContext.token.value
+  const [allArticleCards, setAllArticleCards] = useState();
 
   const articleContext = useContext(ArticleCenterContext);
+
   const {
     articleCenterState: {fecha},
   } = articleContext;
 
+  const dispatch = useDispatch()
 
   function sortArticlesByDate(articleData) {
     const articleDataSorted = articleData.sort((a, b) => a.date - b.date);
-
     if(fecha==='Nuevo'){
       articleDataSorted.reverse()
     }
     return articleDataSorted
   }
 
-  async function createArticleCards() {
-    const articleCardsData = await getAllArticleData(
-      setGetAllArticleDataStatus,
-      token,
-    ); 
+  const allArticles = useSelector(selectAllArticles) //
 
-    const articlesSorted = sortArticlesByDate(articleCardsData)
+   function createArticleCards() {
+    const articlesSorted = sortArticlesByDate(allArticles)
     const allArticleCards = articlesSorted.map((articleCardData) => {
       return (
         <ArticleCard key={articleCardData._id} articleData={articleCardData} />
       );
-    });
-    setAllArticleData(allArticleCards);
+    })
+    setAllArticleCards(allArticleCards);
   }
 
   useEffect(() => {
-    createArticleCards();
-  }, [fecha]);
+    if (allArticles){
+      createArticleCards();
+    }
+  }, [fecha, allArticles]);
+
+  useEffect(() =>{
+    loadArticles()
+  },[dispatch])
+
+  const loadArticles = () => {
+    dispatch(fetchArticles())
+  }
+
+
   return (
     <View style={styles.scrollContainer}>
       <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenterSort'} iconName="cog" />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          {allArticleData ? allArticleData : null}
+          {allArticleCards ? allArticleCards : null}
         </View>
       </ScrollView>
     </View>
