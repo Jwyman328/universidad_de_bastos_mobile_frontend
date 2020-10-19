@@ -1,0 +1,8 @@
+
+export const ADD_BOOKS = 'ADD_BOOKS'
+
+export const SET_GET_BOOK_REQUEST_STATUS = 'SET_GET_BOOK_REQUEST_STATUS'
+
+export const MARK_BOOK_STATUS = 'MARK_BOOK_STATUS'
+
+

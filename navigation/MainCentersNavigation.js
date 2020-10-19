@@ -4,12 +4,11 @@ import {View, Text, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomepageScreen from '../screens/auth/HomepageScreen';
 
-import Icon from 'react-native-ionicons'
+import Icon from 'react-native-ionicons';
 import VideoCenterSortDrawerNavigation from './videoCenterNavigation/VideoCenterSortDrawerNavigation';
 import BookCenterSortDrawerNavigation from './bookCenterNavigation/BookCenterSortDrawerNavigation';
 import ArticleCenterSortDrawerNavigation from './articleCenterNavigation/ArticleCenterSortDrawerNavitation';
 import UserProfileScreen from '../screens/profile/UserProfileScreen';
-
 
 const Tab = createBottomTabNavigator();
 
@@ -23,14 +22,6 @@ const MainCentersNavigation = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Video Center"
-        component={VideoCenterSortDrawerNavigation}  //VideoCenterStackNavigation
-        options={{
-          tabBarLabel: 'Videos',
-          tabBarIcon: () => VideoIcon,
-        }}
-      />
-      <Tab.Screen
         name="Book Center"
         component={BookCenterSortDrawerNavigation}
         options={{
@@ -38,11 +29,23 @@ const MainCentersNavigation = () => {
           tabBarIcon: () => BookIcon,
         }}
       />
-      <Tab.Screen name="Article Center" component={ArticleCenterSortDrawerNavigation}
-       options={{
-        tabBarLabel: 'Artículos',
-        tabBarIcon: () => ArticleIcon,
-      }} />
+      <Tab.Screen
+        name="Video Center"
+        component={VideoCenterSortDrawerNavigation} //VideoCenterStackNavigation
+        options={{
+          tabBarLabel: 'Videos',
+          tabBarIcon: () => VideoIcon,
+        }}
+      />
+
+      <Tab.Screen
+        name="Article Center"
+        component={ArticleCenterSortDrawerNavigation}
+        options={{
+          tabBarLabel: 'Artículos',
+          tabBarIcon: () => ArticleIcon,
+        }}
+      />
       <Tab.Screen
         name="Profile"
         component={UserProfileScreen}
@@ -52,7 +55,6 @@ const MainCentersNavigation = () => {
         }}
       />
     </Tab.Navigator>
-    
   );
 };
 
