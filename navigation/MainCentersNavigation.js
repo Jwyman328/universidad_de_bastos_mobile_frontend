@@ -22,19 +22,19 @@ const MainCentersNavigation = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Book Center"
-        component={BookCenterSortDrawerNavigation}
-        options={{
-          tabBarLabel: 'Libros',
-          tabBarIcon: () => BookIcon,
-        }}
-      />
-      <Tab.Screen
         name="Video Center"
         component={VideoCenterSortDrawerNavigation} //VideoCenterStackNavigation
         options={{
           tabBarLabel: 'Videos',
           tabBarIcon: () => VideoIcon,
+        }}
+      />
+      <Tab.Screen
+        name="Book Center"
+        component={BookCenterSortDrawerNavigation}
+        options={{
+          tabBarLabel: 'Libros',
+          tabBarIcon: () => BookIcon,
         }}
       />
 

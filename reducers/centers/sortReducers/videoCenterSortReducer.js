@@ -6,7 +6,7 @@ export const SET_FECHA = 'SET_FECHA';
 export const SET_MIRADO = 'SET_MIRADO'
 
 const initialSortFilterState = {
-    'insitution':'Todos',
+    'institution':'Todos',
     'tipo':'Todos',
     'mirado':'Todos',
     'fecha':'Nuevo'

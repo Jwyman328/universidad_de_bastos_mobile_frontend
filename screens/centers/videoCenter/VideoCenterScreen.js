@@ -16,6 +16,7 @@ import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterCon
 import { useDispatch, useSelector } from 'react-redux';
 import fetchVideos from '../../../redux/thunks/httpRequests/fetchVideos';
 import selectAllVideos from '../../../redux/selectors/videos/selectAllVideos';
+import { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, selectVideoWatchedSort } from '../../../redux/selectors/videos/selectVideoSortTypeSelects';
 
 // create a component
 const VideoCenterScreen = () => {
@@ -26,7 +27,11 @@ const VideoCenterScreen = () => {
     VideoCenterContext,
   );
 
-  const { institution,tipo,mirado,fecha} = videoCenterState
+  //const { institution,tipo,mirado,fecha} = videoCenterState
+  const institution = useSelector(selectVideoInsitutionSort)
+  const tipo = useSelector(selectVideoTypeSort)
+  const mirado = useSelector(selectVideoWatchedSort)
+  const fecha = useSelector(selectVideoDataSort)
 
   const dispatch = useDispatch()
   const allVideos = useSelector(selectAllVideos)

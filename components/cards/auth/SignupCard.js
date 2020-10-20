@@ -3,7 +3,6 @@ import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import GlobalDataContext from '../../../data/global/globalContext';
-//import signupUser from '../../../httpRequests/auth/signup';
 import {
   signUpCardFormReducer,
   SET_USERNAME,

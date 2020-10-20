@@ -1,3 +1,7 @@
 
 export const ADD_VIDEOS = 'ADD_VIDEOS'
 export const SET_GET_VIDEOS_REQUEST_STATUS = 'SET_GET_VIDEOS_REQUEST_STATUS'
+export const SET_INSTITUTION = 'SET_INSTITUTION';
+export const SET_TIPO = 'SET_TIPO';
+export const SET_FECHA = 'SET_FECHA';
+export const SET_MIRADO = 'SET_MIRADO'

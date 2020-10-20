@@ -1,18 +1,45 @@
-import { ADD_VIDEOS, SET_GET_VIDEOS_REQUEST_STATUS } from "../types/videos";
-
+import {
+  ADD_VIDEOS,
+  SET_GET_VIDEOS_REQUEST_STATUS,
+  SET_INSTITUTION,
+  SET_TIPO,
+  SET_FECHA,
+  SET_MIRADO,
+} from '../types/videos';
 
 const initialState = {
   allVideos: undefined,
-  videoRequestStatus:undefined,
+  videoRequestStatus: undefined,
+  institution: 'Todos',
+  tipo: 'Todos',
+  mirado: 'Todos',
+  fecha: 'Nuevo',
 };
 
 function videoReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_VIDEOS:
-      return {...state, allVideos:action.payload};
-  
+      return {...state, allVideos: action.payload};
+
     case SET_GET_VIDEOS_REQUEST_STATUS:
-      return {...state, videoRequestStatus:action.payload};
+      return {...state, videoRequestStatus: action.payload};
+
+    case SET_INSTITUTION:
+      const institution = {institution: action.payload.institution};
+      return {...state, ...institution};
+
+    case SET_TIPO:
+      const tipo = {tipo: action.payload.tipo};
+      return {...state, ...tipo};
+
+    case SET_FECHA:
+      const fecha = {fecha: action.payload.fecha};
+      return {...state, ...fecha};
+
+    case SET_MIRADO:
+      const mirado = {mirado: action.payload.mirado};
+      return {...state, ...mirado};
+
     default:
       return state;
   }
