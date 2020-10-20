@@ -1,9 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useCallback, useState} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
+import setBookSortDate from '../../../redux/actions/books/setBookSortDate';
+import setBookSortRead from '../../../redux/actions/books/setBookSortRead';
+import setBookSortCategoria from '../../../redux/actions/books/setBooksSortCategoria';
+import { selectSortCategoria, selectSortDate, selectSortRead } from '../../../redux/selectors/books/selectSortBooks';
 import {hasReadYellow, whiteBackground} from '../../../styles/colors';
 import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
 
@@ -11,9 +16,30 @@ import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterSty
 const BookSortScreen = () => {
   const navigation = useNavigation();
 
-  const [selectedRead, setRead] = useState('Todos');
-  const [selectedCategoria, setCategoria] = useState('Todos');
-  const [selectedSortBy, setSortBy] = useState('Todos');
+  const dispatch = useDispatch()
+
+  //const [selectedRead, setRead] = useState('Todos');
+  //const [selectedCategoria, setCategoria] = useState('Todos');
+  //const [selectedSortBy, setSortBy] = useState('Todos');
+
+  const setRead = useCallback((option)=>{dispatch(setBookSortRead(option))},
+  [dispatch]
+  )
+
+  const setSortBy = useCallback((option) => {
+    dispatch(setBookSortDate(option))
+  }, [dispatch]
+  ) 
+
+  const setCategoria = useCallback((option) => {
+    dispatch(setBookSortCategoria(option))
+  }, [dispatch]
+  )
+
+  const selectedRead = useSelector(selectSortRead)
+  const selectedCategoria = useSelector(selectSortCategoria)
+  const selectedSortBy = useSelector(selectSortDate)
+
 
   function checkIsSelected(selected, option) {
     if (selected === option) {
@@ -22,6 +48,8 @@ const BookSortScreen = () => {
       return false;
     }
   }
+
+
 
   return (
     <View style={sortFilterStyles.container}>
