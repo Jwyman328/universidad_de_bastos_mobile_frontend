@@ -12,7 +12,6 @@ import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
 import VideoCard from '../../../components/cards/video/videoCard';
 import {primaryGradient} from '../../../styles/colors';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterContext';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchVideos from '../../../redux/thunks/httpRequests/fetchVideos';
 import selectAllVideos from '../../../redux/selectors/videos/selectAllVideos';
@@ -22,10 +21,6 @@ import { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, se
 const VideoCenterScreen = () => {
 
   const [allVideoData, setAllVideoData] = useState(undefined);
-
-  const {videoCenterState, videoCenterDispatch} = useContext(
-    VideoCenterContext,
-  );
 
   //const { institution,tipo,mirado,fecha} = videoCenterState
   const institution = useSelector(selectVideoInsitutionSort)

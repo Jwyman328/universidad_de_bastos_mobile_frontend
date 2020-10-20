@@ -5,7 +5,6 @@ import {View, Text, StyleSheet, Button} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterContext';
 import { SET_FECHA, SET_INSTITUTION, SET_MIRADO, SET_TIPO } from '../../../reducers/centers/sortReducers/videoCenterSortReducer';
 import { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, selectVideoWatchedSort } from '../../../redux/selectors/videos/selectVideoSortTypeSelects';
 import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
@@ -14,10 +13,6 @@ import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterSty
 const VideoSortScreen = () => {
   const navigation = useNavigation();
 
-  const {videoCenterState, videoCenterDispatch} = useContext(
-    VideoCenterContext,
-  );
-  
   const institution = useSelector(selectVideoInsitutionSort)
   const tipo = useSelector(selectVideoTypeSort)
   const mirado = useSelector(selectVideoWatchedSort)
