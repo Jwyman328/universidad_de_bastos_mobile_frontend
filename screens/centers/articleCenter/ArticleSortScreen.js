@@ -2,26 +2,27 @@ import {useNavigation} from '@react-navigation/native';
 //import liraries
 import React, {Component, useContext, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import ArticleCenterContext from '../../../data/centers/articlesCenter/articleCenterContext';
 import {SET_FECHA} from '../../../reducers/centers/sortReducers/articleCenterSortReducer';
+import setArticleDateSort from '../../../redux/actions/articles/setArticleDateSort';
+import selectArticleSortFecha from '../../../redux/selectors/articles/selectArticleSortFecha';
 import {sortFilterStyles} from '../../../styles/sortFilterStyles/sortFilterStyles';
 
 // create a component
 const ArticleSortScreen = () => {
   const navigation = useNavigation();
 
-  const aticleCenterDataAndReducer = useContext(
-    ArticleCenterContext
-  );
-  const {articleCenterState, articleCenterDispatch} = aticleCenterDataAndReducer
-  
-  const {fecha} = articleCenterState;
+  const dispatch = useDispatch()
+
+  const fecha = useSelector(selectArticleSortFecha)
   const selectedSortBy = fecha;
 
+
   function setSortBy(option) {
-    articleCenterDispatch({type: SET_FECHA, payload:{fecha: option}});
+    dispatch(setArticleDateSort(option))
   }
 
   function checkIsSelected(selected, option) {

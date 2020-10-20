@@ -1,9 +1,10 @@
-import { ADD_ARTICLES, SET_GET_ARTICLES_REQUEST_STATUS } from "../types/articles";
+import { ADD_ARTICLES, SET_GET_ARTICLES_REQUEST_STATUS, SET_FECHA } from "../types/articles";
 
 
 const initialState = {
   allArticles: undefined,
   getArticlesRequestStatus:undefined,
+  fecha: 'Nuevo'
 };
 
 function articleReducer(state = initialState, action) {
@@ -13,6 +14,9 @@ function articleReducer(state = initialState, action) {
   
     case SET_GET_ARTICLES_REQUEST_STATUS:
       return {...state, getArticlesRequestStatus:action.payload};
+
+    case SET_FECHA:
+      return {...state, fecha:action.payload.fecha };
     default:
       return state;
   }

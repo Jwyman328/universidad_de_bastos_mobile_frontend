@@ -5,24 +5,22 @@ import ArticleCard from '../../../components/cards/articles/ArticleCard';
 // create a component
 import {primaryGradient} from '../../../styles/colors';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import ArticleCenterContext from '../../../data/centers/articlesCenter/articleCenterContext';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchArticles from '../../../redux/thunks/httpRequests/fetchArticles';
 import selectAllArticles from '../../../redux/selectors/articles/selectAllArticles';
+import selectArticleSortFecha from '../../../redux/selectors/articles/selectArticleSortFecha';
 
 const ArticleCenterScreen = () => {
   const [allArticleCards, setAllArticleCards] = useState();
 
-  const articleContext = useContext(ArticleCenterContext);
 
-  const {
-    articleCenterState: {fecha},
-  } = articleContext;
+  const fecha = useSelector(selectArticleSortFecha)
+
 
   const dispatch = useDispatch()
 
   function sortArticlesByDate(articleData) {
-    const articleDataSorted = articleData.sort((a, b) => a.date - b.date);
+    const articleDataSorted = articleData.sort((a, b) => new Date(a.date) - new Date(b.date));
     if(fecha==='Nuevo'){
       articleDataSorted.reverse()
     }
