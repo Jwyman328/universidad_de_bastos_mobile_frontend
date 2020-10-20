@@ -3,19 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import GlobalDataContext from '../../data/global/globalContext';
 
 // create a component
 const UserProfileScreen = () => {
 
     const navigation = useNavigation()
-    const globalContext =  useContext(GlobalDataContext)
 
     function logout(){
-        globalContext.token.setValue(undefined)
-
-        console.log(globalContext, 'gc')
-
+        //set all data to null
         navigation.navigate('Login')
     }
 

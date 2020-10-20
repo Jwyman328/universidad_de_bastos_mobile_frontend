@@ -12,8 +12,7 @@ export const initialSignupCardReducerValues = {
     username:'',
     password:'',
     passwordRetyped:'',
-    signupSuccessful:false,
-    signUpErrorMessages:[],
+
 }
 
 export  function signUpCardFormReducer(state, action) {
@@ -30,41 +29,9 @@ export  function signUpCardFormReducer(state, action) {
       const passwordRetyped = {passwordRetyped: action.payload.passwordRetyped};
       return {...state, ...passwordRetyped};
 
-    case SIGNUP_USER:
-        const currentErrorMessages = []
-
-        if (state.username?.length < 7){
-            currentErrorMessages.push('username atleast 8 letters')
-        }
-
-        if (state.password?.length < 7){
-            currentErrorMessages.push('password atleast 8 letters')
-        }
-
-        if (state.password !== state.passwordRetyped){
-            currentErrorMessages.push('password and retyped password do not match')
-        }
-
-        if (currentErrorMessages.length === 0){
-            const signupSuccessful = {signupSuccessful:'NO_INPUT_ERRORS', signUpErrorMessages:currentErrorMessages}
-           
-            return {...state, ...signupSuccessful}
-        }else{
-            const signupSuccessful = {signupSuccessful:false}
-            return {...state, ...signupSuccessful, signUpErrorMessages:currentErrorMessages}
-        }
-
-    case SET_USER_TOKEN:
-      const signupSuccessfulLoginUser = {signupSuccessful:true}
-     
-      return {...state, ...signupSuccessfulLoginUser}
-
-    case FAILED_SIGNUP:
-      const allErrorMsgs = [...state.signUpErrorMessages, 'User name is already taken, choose another']
-      const signupFailure = {signupSuccessful:false}
-      return {...state, ...signupFailure, signUpErrorMessages:allErrorMsgs}
+    default:
+      return state;
   }
-
-  return state;
+  
 }
 

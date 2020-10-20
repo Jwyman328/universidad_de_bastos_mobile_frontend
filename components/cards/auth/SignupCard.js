@@ -3,15 +3,13 @@ import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import GlobalDataContext from '../../../data/global/globalContext';
-import signupUser from '../../../httpRequests/auth/signup';
+//import signupUser from '../../../httpRequests/auth/signup';
 import {
   signUpCardFormReducer,
   SET_USERNAME,
   SET_PASSWORD,
   SET_PASSWORD_RETYPED,
   SIGNUP_USER,
-  SET_USER_TOKEN,
-  FAILED_SIGNUP,
   initialSignupCardReducerValues,
 } from '../../../reducers/forms/signUpCardFormReducer';
 import SubmitButton from '../../buttons/SubmitButton';
@@ -19,7 +17,11 @@ import TextButtonSeparator from '../../buttons/TextButtonSeparator';
 import ErrorMessage from '../../messages/ErrorMessage';
 import MultiMessageContainer from '../../messages/MultiMessageContainer';
 import authCardStyles from './styles';
-
+import signUpUser from '../../../redux/thunks/httpRequests/signUpUser';
+import {useDispatch, useSelector} from 'react-redux';
+import {getToken} from '../../../redux/selectors/user/getToken';
+import selectSignUpSuccessful from '../../../redux/selectors/user/selectSignUpSuccessful';
+import selectSignUpErrorMessages from '../../../redux/selectors/user/selectSignUpErrorMessages';
 
 const SignupCard = () => {
   const [signUpFormReducerValues, dispatch] = useReducer(
@@ -27,16 +29,12 @@ const SignupCard = () => {
     initialSignupCardReducerValues,
   );
 
-  const {
-    username,
-    password,
-    passwordRetyped,
-    signupSuccessful,
-    signUpErrorMessages,
-  } = signUpFormReducerValues;
+  const {username, password, passwordRetyped} = signUpFormReducerValues;
 
-  const globalData = useContext(GlobalDataContext)
-  const setToken = globalData.token.setValue
+  const reduxDispatch = useDispatch();
+  const token = useSelector(getToken);
+  const signupSuccessful = useSelector(selectSignUpSuccessful);
+  const signUpErrorMessages = useSelector(selectSignUpErrorMessages);
 
   const title = 'Universidad de Bastos';
   const cardTypeTitle = 'Regístrate';
@@ -66,13 +64,18 @@ const SignupCard = () => {
     });
   }
 
-  async function signUpUser() {
-    dispatch({type: SIGNUP_USER});
-
+  function attemptSignUpUser() {
+    reduxDispatch({
+      type: SIGNUP_USER,
+      payload: {
+        username: username,
+        password: password,
+        passwordRetyped: passwordRetyped,
+      },
+    });
   }
 
   function displayErrorMessageComponents() {
-    
     const errorMessages = signUpErrorMessages.map((errorMessageTextContent) => {
       return (
         <ErrorMessage
@@ -80,31 +83,23 @@ const SignupCard = () => {
           errorMessage={errorMessageTextContent}></ErrorMessage>
       );
     });
-    
+
     if (errorMessages.length > 0) {
       return <MultiMessageContainer>{errorMessages}</MultiMessageContainer>;
     }
   }
 
   useEffect(() => {
-    if (signupSuccessful === true) {
+    if (token) {
       navigateToHomeScreen();
     }
-    if (signupSuccessful === 'NO_INPUT_ERRORS'){
-      setUserToken()
+    if (signupSuccessful === 'NO_INPUT_ERRORS') {
+      setUserToken();
     }
-   
+  }, [signupSuccessful, token]);
 
-  }, [signupSuccessful, signUpErrorMessages]);
-
-  async function setUserToken(){
-    const token = await signupUser(username,password)
-    if (token !== 'ERROR'){
-      dispatch({type: SET_USER_TOKEN});
-      setToken(token)
-    }else{
-      dispatch({type:FAILED_SIGNUP})
-    }
+  function setUserToken() {
+    reduxDispatch(signUpUser(username, password));
   }
 
   return (
@@ -142,11 +137,11 @@ const SignupCard = () => {
       <View style={authCardStyles.submitButtonContainer}>
         <SubmitButton
           buttonColor="#03b1fc"
-          handleClick={signUpUser}
+          handleClick={attemptSignUpUser}
           title={cardTypeTitle}></SubmitButton>
 
         <TextButtonSeparator></TextButtonSeparator>
-        
+
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToLoginScreen}

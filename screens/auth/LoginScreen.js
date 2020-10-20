@@ -8,7 +8,6 @@ import {
   Button,
 } from 'react-native';
 import LoginCard from '../../components/cards/auth/LoginCard';
-import GlobalDataContext from '../../data/global/globalContext';
 import authScreenStyles from './styles/authScreenStyles';
  
 
