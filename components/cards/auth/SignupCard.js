@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useContext, useEffect, useReducer, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import GlobalDataContext from '../../../data/global/globalContext';
@@ -44,9 +44,12 @@ const SignupCard = () => {
     navigation.navigate('Home');
   };
 
-  const navigateToLoginScreen = () => {
-    navigation.navigate('Login');
-  };
+  const navigateToLoginScreen = useCallback(
+    () => {
+      navigation.navigate('Login');
+    },
+    [navigation]
+  ) 
 
   function setUserName(username) {
     dispatch({type: SET_USERNAME, payload: {username: username}});
@@ -95,7 +98,7 @@ const SignupCard = () => {
     if (signupSuccessful === 'NO_INPUT_ERRORS') {
       setUserToken();
     }
-  }, [signupSuccessful, token]);
+  }, [signupSuccessful, token, reduxDispatch]);
 
   function setUserToken() {
     reduxDispatch(signUpUser(username, password));

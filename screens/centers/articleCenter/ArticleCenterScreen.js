@@ -7,30 +7,16 @@ import {primaryGradient} from '../../../styles/colors';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchArticles from '../../../redux/thunks/httpRequests/fetchArticles';
-import selectAllArticles from '../../../redux/selectors/articles/selectAllArticles';
-import selectArticleSortFecha from '../../../redux/selectors/articles/selectArticleSortFecha';
+import selectSortedArticles from '../../../redux/selectors/articles/selectSortedArticles';
 
 const ArticleCenterScreen = () => {
   const [allArticleCards, setAllArticleCards] = useState();
 
-
-  const fecha = useSelector(selectArticleSortFecha)
-
-
   const dispatch = useDispatch()
 
-  function sortArticlesByDate(articleData) {
-    const articleDataSorted = articleData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    if(fecha==='Nuevo'){
-      articleDataSorted.reverse()
-    }
-    return articleDataSorted
-  }
-
-  const allArticles = useSelector(selectAllArticles) //
+  const articlesSorted = useSelector(selectSortedArticles)
 
    function createArticleCards() {
-    const articlesSorted = sortArticlesByDate(allArticles)
     const allArticleCards = articlesSorted.map((articleCardData) => {
       return (
         <ArticleCard key={articleCardData._id} articleData={articleCardData} />
@@ -40,10 +26,10 @@ const ArticleCenterScreen = () => {
   }
 
   useEffect(() => {
-    if (allArticles){
+    if (articlesSorted){
       createArticleCards();
     }
-  }, [fecha, allArticles]);
+  }, [articlesSorted]);
 
   useEffect(() =>{
     loadArticles()
