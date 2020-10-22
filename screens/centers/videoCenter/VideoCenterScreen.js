@@ -15,110 +15,32 @@ import CenterSortHeader from '../../../components/headers/CenterSortHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchVideos from '../../../redux/thunks/httpRequests/fetchVideos';
 import selectAllVideos from '../../../redux/selectors/videos/selectAllVideos';
-import { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, selectVideoWatchedSort } from '../../../redux/selectors/videos/selectVideoSortTypeSelects';
+import selectSortedVideos, { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, selectVideoWatchedSort } from '../../../redux/selectors/videos/selectVideoSortTypeSelects';
 
 // create a component
 const VideoCenterScreen = () => {
 
   const [allVideoData, setAllVideoData] = useState(undefined);
 
-  //const { institution,tipo,mirado,fecha} = videoCenterState
-  const institution = useSelector(selectVideoInsitutionSort)
-  const tipo = useSelector(selectVideoTypeSort)
-  const mirado = useSelector(selectVideoWatchedSort)
-  const fecha = useSelector(selectVideoDataSort)
-
   const dispatch = useDispatch()
-  const allVideos = useSelector(selectAllVideos)
+
+  const sortedVdieos = useSelector(selectSortedVideos)
 
   useEffect(() => {
     loadVideoData();
   }, [dispatch]);
 
   useEffect(()=>{
-    setAllVideoData(allVideos);
-  },[allVideos])
+    debugger
+    setAllVideoData(sortedVdieos);
+  },[sortedVdieos])
 
   async function loadVideoData() {
     dispatch(fetchVideos())
   }
 
-  function filterInstitution(video){
-
-    if(institution==='Todos'){
-      return true
-    }
-
-    if(institution==='UFM' && video.categories.includes('UFM')){
-        return true
-    }
-
-    if(institution === 'Xoan De Lugo' && video.categories.includes('xoanDeLugo')){
-        return true
-    }
-
-    if(institution === 'Juan De Mariana' && video.categories.includes('juanDeMariana')){
-      return true
-  }
-    return false 
-  }
-
-  function filterType(video){
-    if(tipo==='Todos'){
-      return true
-    }
-
-    if(tipo==='Entrevista' && video.categories.includes('interview')){
-        return true
-    }
-
-    if(tipo === 'Conferencia' && video.categories.includes('conference')){
-        return true
-    }
-
-    return false 
-  }
-
-  function filterWatched(video){
-    const hasVideoBeenWatched = video.hasBeenWatchedByUser? 'Mirado': "No Mirado"
-
-    if(mirado==='Todos'){
-      return true
-    }
-
-    if(mirado===hasVideoBeenWatched){
-        return true
-    }else{
-      return false
-    }
-  }
-
-  function sortByDate(videoData){
-    const videosSortedByData = videoData.sort((a, b) => a.year - b.year);
-
-    if(fecha==='Nuevo'){
-      videosSortedByData.reverse()
-    }
-    return videosSortedByData
-  }
-
-  function sortVideoData(allVideos) {
-    const sortedInstitutionVideos = allVideos.filter(video=>
-       filterInstitution(video)
-    )
-    const sortTypeVideos = sortedInstitutionVideos.filter(video=>
-      filterType(video)
-      )
-    const sortWatchedVideos = sortTypeVideos.filter(video=>
-      filterWatched(video)
-    )
-    return sortWatchedVideos
-  }
-
   function createVideoCards() {
-    const filteredVideos = sortVideoData(allVideoData)
-    const sortedVideos = sortByDate(filteredVideos)
-    const allVideoCards = sortedVideos.map((videoData) => {
+    const allVideoCards = allVideoData.map((videoData) => {
       return <VideoCard key={videoData._id} videoData={videoData}></VideoCard>;
     });
     return allVideoCards;
