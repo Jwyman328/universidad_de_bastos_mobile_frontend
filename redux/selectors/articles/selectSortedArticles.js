@@ -6,13 +6,17 @@ import selectArticlesSortFecha from './selectArticleSortFecha'
 
   const sortArticlesByDate = (articleData, fecha) => {
     if (articleData && fecha){
-        const articleDataSorted = articleData.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const articleDataSortedByOldest = articleData.sort((a, b) => new Date(a.date) - new Date(b.date));
         if(fecha==='Nuevo'){
-          articleDataSorted.reverse()
+          const articlesByNewest = articleDataSortedByOldest.reverse()
+
+          return  articlesByNewest
+
+        }else{
+            return [...articleDataSortedByOldest]
         }
-        return articleDataSorted
     }else{
-        return []
+        return undefined
     }
   
   }
