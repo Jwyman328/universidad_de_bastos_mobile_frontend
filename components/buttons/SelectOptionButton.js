@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, memo} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {hasReadYellow} from '../../styles/colors';
@@ -44,4 +44,4 @@ function createStyles(isSelected) {
 }
 
 //make this component available to the app
-export default SelectOptionButton;
+export default memo(SelectOptionButton);

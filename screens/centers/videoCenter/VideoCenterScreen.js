@@ -7,7 +7,7 @@ import React, {
   useState,
   useReducer,
 } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {ScrollView, TouchableHighlight} from 'react-native-gesture-handler';
 import VideoCard from '../../../components/cards/video/videoCard';
 import {primaryGradient} from '../../../styles/colors';
@@ -38,21 +38,28 @@ const VideoCenterScreen = () => {
     dispatch(fetchVideos())
   }
 
-  function createVideoCards() {
-    const allVideoCards = allVideoData.map((videoData) => {
-      return <VideoCard key={videoData._id} videoData={videoData}></VideoCard>;
-    });
-    return allVideoCards;
+  function createVideoCards({item}) {
+
+    return <VideoCard  videoData={item}></VideoCard>;
+
   }
 
   return (
     <View style={styles.container}>
       <CenterSortHeader title={'Videos'} routeScreen="VideoCenterSortSettings" iconName="cog" />
-      <ScrollView style={styles.scrollContainer}>
+      {/* <ScrollView style={styles.scrollContainer}>
         <View style={styles.cardContainer}>
           {allVideoData ? createVideoCards() : null}
         </View>
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+      style={styles.scrollContainer}
+      contentContainerStyle={styles.cardContainer}
+      data={allVideoData} 
+      renderItem = {createVideoCards}
+      keyExtractor={item => item._id}
+      />
+
     </View>
   );
 };
@@ -62,15 +69,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: primaryGradient,
-  },
-  scrollContainer: {
-    flex: 0.8,
-    //backgroundColor: '#2c3e50',
-  },
-  cardContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width:'100%'
+  },
+  scrollContainer: {
+    // flex: 0.8,
+    //backgroundColor: '#2c3e50',
+    width:'100%'
+
+
+  },
+  cardContainer: {
+    //flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:'100%',
+
     marginTop: 30,
   },
 });

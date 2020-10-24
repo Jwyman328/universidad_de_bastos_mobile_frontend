@@ -48,13 +48,13 @@ const VideoSortScreen = () => {
   )
  
 
-  function checkIsSelected(selected, option) {
+  const checkIsSelected = useCallback((selected, option) => {
     if (selected === option) {
       return true;
     } else {
       return false;
     }
-  }
+  },[])
 
   return (
     <View  style={sortFilterStyles.container} >
