@@ -56,7 +56,7 @@ also could use FlatList,
     scrolllview will render everything on the page when the page laods.
     - use contentContainerStyle to style a scrollview 
     - use flexgrow:1 if you want to be able to scroll and have it lock 
-    when you scrll down on components
+        when you scrll down on components
     - so on the scrollview you must use two different style properties one for setting styles 
     and one for setting the layout the styles are the regular style prop 
     and the layout of the elements insde of it is the contentContainerStyle
@@ -396,9 +396,6 @@ MODAL
     - react native has a built in modal component 
     - https://reactnative.dev/docs/modal
     - contains a visible property for setting if visible or not 
-
-
-
 
 
 

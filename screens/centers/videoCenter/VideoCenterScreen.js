@@ -31,7 +31,6 @@ const VideoCenterScreen = () => {
   }, [dispatch]);
 
   useEffect(()=>{
-    debugger
     setAllVideoData(sortedVdieos);
   },[sortedVdieos])
 

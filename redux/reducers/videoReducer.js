@@ -5,6 +5,7 @@ import {
   SET_TIPO,
   SET_FECHA,
   SET_MIRADO,
+  MARK_VIDEO_AS_WATCHED,
 } from '../types/videos';
 
 const initialState = {
@@ -39,6 +40,19 @@ function videoReducer(state = initialState, action) {
     case SET_MIRADO:
       const mirado = {mirado: action.payload.mirado};
       return {...state, ...mirado};
+
+    case MARK_VIDEO_AS_WATCHED:
+      const newVideoArray = state.allVideos?.map((video) => {
+        if (video._id === action.payload) {
+          const videoCopied = {...video};
+          videoCopied.hasBeenWatchedByUser = true;
+          return videoCopied;
+        } else {
+          return video;
+        }
+      });
+
+      return {...state, allVideos:newVideoArray};
 
     default:
       return state;

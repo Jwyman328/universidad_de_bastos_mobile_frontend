@@ -58,7 +58,7 @@ const LoginCard = () => {
 
   return (
     <View style={authCardStyles.container}>
-
+      
       <Text style={authCardStyles.title}>{title.toUpperCase()}</Text>
 
       <View style={authCardStyles.cardTypeTitleContainer}>

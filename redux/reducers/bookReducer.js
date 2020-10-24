@@ -24,7 +24,6 @@ function bookReducer(state = initialState, action) {
         }
         return book;
       });
-      console.log('book changes', allBooks);
       return {...state, allBooks: allBooks};
 
     case SET_GET_BOOK_REQUEST_STATUS:

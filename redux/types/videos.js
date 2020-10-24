@@ -5,3 +5,4 @@ export const SET_INSTITUTION = 'SET_INSTITUTION';
 export const SET_TIPO = 'SET_TIPO';
 export const SET_FECHA = 'SET_FECHA';
 export const SET_MIRADO = 'SET_MIRADO'
+export const MARK_VIDEO_AS_WATCHED = 'MARK_VIDEO_AS_READ'

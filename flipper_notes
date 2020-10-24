@@ -1,0 +1,40 @@
+flipper_notes
+https://www.youtube.com/watch?v=WltZTn3ODW4&ab_channel=ReactEurope
+
+
+- development time is super important, 
+- tiger tank vs. sherman tank 
+    - yes tiger tank is better but it takes 30 times longer to build on 
+        and it is only 5 times better. so in the end it is a worse investment 
+- react native fast refresh allows you to see your development changes faster.
+
+SHERMAN TANKS WERE EASIER TO FIX 
+    - sherman tanks were much simpler this means that they could fix them easier.
+    - shermans had supporting tools that made it easy to swap out parts
+
+FLIPPER 
+    - mobile engineers at fb use it.
+
+    - you have your device connections to the simulator or emulator 
+    - as well you have connection to the metro bundler (React native)
+
+    - originally built for native development so it can look for underlining native application
+    - in the layout extension you can look at the native elements taht are used to create the UI application
+    - you can inspectthe network requests too which are a native feature.
+
+    - preferences extension you can set the application preferences, 
+        - langueage 
+
+Using Flipper to analysis the application 
+    - FLIPPER LOGS 
+    - if you do a console .log the flipper logs are way better and superflexible. you can filter values.
+    -  you can  filter by error, or debugs, or some value 
+
+
+HERMES DEBUGGER 
+    - must use Android and using android is ideal because the hermes is the actual js engine that android uses.
+    - https://reactnative.dev/docs/hermes
+
+    project.ext.react = [
+    enableHermes: true,  // clean and rebuild if changing
+]
