@@ -3,14 +3,19 @@ import { useNavigation } from '@react-navigation/native';
 import React, { Component, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import logOutUser from '../../redux/actions/user/logOutUser';
 
 // create a component
 const UserProfileScreen = () => {
+
+    const dispatch = useDispatch()
 
     const navigation = useNavigation()
 
     function logout(){
         //set all data to null
+        dispatch(logOutUser())
         navigation.navigate('Login')
     }
 
