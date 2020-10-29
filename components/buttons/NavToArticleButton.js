@@ -46,7 +46,7 @@ function createStyleSheet(screenHeight, screenWidth) {
     buttonContainer: {
       justifyContent: 'center',
       alignItems: 'center',
-      width: '60%',
+      width: screenWidth * .3,
       backgroundColor: hasReadYellow,
       height: '90%',
       borderRadius: 15,

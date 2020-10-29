@@ -1,6 +1,6 @@
 //import liraries
 import React, {Component, useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import ArticleCard from '../../../components/cards/articles/ArticleCard';
 // create a component
 import {primaryGradient} from '../../../styles/colors';
@@ -16,20 +16,18 @@ const ArticleCenterScreen = () => {
 
   const articlesSorted = useSelector(selectSortedArticles)
 
-   function createArticleCards() {
-    const allArticleCards = articlesSorted.map((articleCardData) => {
+   function createArticleCards({item}) {
+    //const allArticleCards = articlesSorted.map((articleCardData) => {
       return (
-        <ArticleCard key={articleCardData._id} articleData={articleCardData} />
+        <ArticleCard key={item._id} articleData={item} />
       );
-    })
-    setAllArticleCards(allArticleCards);
-  }
-
-  useEffect(() => {
-    if (articlesSorted){
-      createArticleCards();
     }
-  }, [articlesSorted]);
+
+  // useEffect(() => {
+  //   if (articlesSorted){
+  //     createArticleCards();
+  //   }
+  // }, [articlesSorted]);
 
   useEffect(() =>{
     loadArticles()
@@ -43,11 +41,19 @@ const ArticleCenterScreen = () => {
   return (
     <View style={styles.scrollContainer}>
       <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenterSort'} iconName="cog" />
-      <ScrollView style={styles.scrollContainer}>
+      {/* <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           {allArticleCards ? allArticleCards : null}
         </View>
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        style={styles.scrollContainer}
+        contentContainerStyle={styles.cardContainer}
+
+      data={articlesSorted}
+      renderItem={createArticleCards}
+      keyExtractor={(item)=> item._id}
+       />
     </View>
   );
 };
@@ -65,6 +71,11 @@ function createStyles(backgroundColor) {
       alignItems: 'center',
       marginTop: 30,
     },
+
+    cardContainer:{
+      alignItems:'center',
+      marginTop:30,
+    }
   });
   return styles;
 }

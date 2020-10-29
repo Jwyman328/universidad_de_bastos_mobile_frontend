@@ -11,41 +11,46 @@ import fetchBooks from '../../../redux/thunks/httpRequests/fetchBooks';
 
 import {primaryGradient} from '../../../styles/colors';
 
-
 // create a component
 const BookCenterScreen = () => {
-  const [bookCards,setBookCards] = useState(undefined)
+  const [bookCards, setBookCards] = useState(undefined);
 
   const dispatch = useDispatch();
 
-  const allBookData = useSelector(getBooks) 
- 
+  const allBookData = useSelector(getBooks);
+
   function loadBookData() {
-    dispatch(fetchBooks())
+    dispatch(fetchBooks());
   }
 
-  function createBookCards() {
-    const allBookCards = allBookData.map((bookData) => {
-      return (
-        <BookCard
-          loadBookData={loadBookData}
-          key={bookData._id}
-          bookData={bookData}></BookCard>
-      );
-    });
-    return allBookCards;
+  function createBookCards({item}) {
+    // const allBookCards = allBookData.map((bookData) => {
+    //   return (
+    //     <BookCard
+    //       loadBookData={loadBookData}
+    //       key={bookData._id}
+    //       bookData={bookData}></BookCard>
+    //   );
+    // });
+    // return allBookCards;
+    return (
+      <BookCard
+        loadBookData={loadBookData}
+        key={item._id}
+        bookData={item}></BookCard>
+    );
   }
 
   useEffect(() => {
     loadBookData();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (allBookData){
-      const bookCards = createBookCards()
-      setBookCards(bookCards)
-    }
-  },[allBookData]);
+  // useEffect(() => {
+  //   if (allBookData) {
+  //     const bookCards = createBookCards();
+  //     setBookCards(bookCards);
+  //   }
+  // }, [allBookData]);
 
   return (
     <View style={styles.container}>
@@ -54,11 +59,18 @@ const BookCenterScreen = () => {
         routeScreen={'BookCenterSort'}
         iconName="cog"
       />
-      <ScrollView>
+      {/* <ScrollView>
         <View style={styles.scrollContainer}>
-          {bookCards ? bookCards : null}
+          {allBookData ? bookCards : null}
         </View>
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+            style={styles.scrollContainer}
+           contentContainerStyle={styles.cardContainer}
+        renderItem={createBookCards}
+        data={allBookData}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
@@ -70,9 +82,10 @@ const styles = StyleSheet.create({
     backgroundColor: primaryGradient,
   },
   scrollContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width:'100%'
+  },
+  cardContainer: {
+
     marginTop: 30,
   },
 });

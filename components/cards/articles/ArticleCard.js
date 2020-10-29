@@ -1,6 +1,6 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import NavToArticleButton from '../../buttons/NavToArticleButton';
 import {hasReadYellow, whiteBackground,secondaryGradient} from '../../../styles/colors';
 
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: whiteBackground,
-    width: '80%',
+    width: Dimensions.get('window').width * .8,
     height: 230,
     borderColor: hasReadYellow,
     borderWidth: 2,
