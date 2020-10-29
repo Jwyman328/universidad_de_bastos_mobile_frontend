@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useContext, useState} from 'react';
+import React, {Component, useContext, useState, memo} from 'react';
 import {
   View,
   Text,
@@ -13,15 +13,17 @@ import ReadButton from '../../buttons/ReadButton';
 import {useWindowDimensions} from 'react-native';
 import NavToBook from '../../buttons/NavToBookButton';
 import GlobalDataContext from '../../../data/global/globalContext';
-import markBookAsRead from '../../../httpRequests/bookData/markBookAsRead';
 import {secondaryGradient,hasReadYellow} from '../../../styles/colors';
-import markBookAsUnRead from '../../../httpRequests/bookData/markBookAsUnRead';
+import markBookAsUnRead from '../../../redux/thunks/httpRequests/markBookAsUnRead';
+import markBookAsRead from '../../../redux/thunks/httpRequests/markBookAsRead';
+import { useDispatch } from 'react-redux';
 
 // create a component
 const BookCard = ({bookData,loadBookData}) => {
   const [markBookAsReadStatus, setMarkBookAsReadStatus] = useState(undefined)
   const [markBookAsUnReadStatus, setMarkBookAsUnReadStatus] = useState(undefined)
 
+  const dispatch = useDispatch()
 
   const imageUri = bookData.image;
   const title = bookData.title;
@@ -32,27 +34,14 @@ const BookCard = ({bookData,loadBookData}) => {
 
   const styles = createStyleSheet(windowWidth, windowWidth, hasBeenReadByUser);
 
-  const globalContext = useContext(GlobalDataContext)
-  const token = globalContext.token.value
-
   function handleReadUnReadButtonClick(){
     if(hasBeenReadByUser){
-      markTheBookAsUnRead()
+      dispatch(markBookAsUnRead(bookData._id))
     }else{
-      markTheBookAsRead()
+      dispatch( markBookAsRead(bookData._id))
     }
   }
 
-  function markTheBookAsRead(){
-    markBookAsRead(bookData._id,token,setMarkBookAsReadStatus )
-    //reload all books
-    loadBookData()
-  }
-
-  function markTheBookAsUnRead(){
-    markBookAsUnRead(bookData._id,token, setMarkBookAsUnReadStatus)
-    loadBookData()
-  }
 
   return (
     <FlipCard
@@ -65,6 +54,7 @@ const BookCard = ({bookData,loadBookData}) => {
         <Image style={styles.image} source={{uri: imageUri}} />
       </View>
       {/* Back Side */}
+      <View style={styles.backContainer}>
       <View style={styles.back}>
         <View style={styles.titleContainer}>
           <Text numberOfLines={3} style={styles.titleText}>
@@ -77,6 +67,8 @@ const BookCard = ({bookData,loadBookData}) => {
         <ReadButton onPressButton={handleReadUnReadButtonClick} hasRead={hasBeenReadByUser} />
       <NavToBook locationLink={bookData.locationLink}/>
       </View>
+        </View> 
+      
     </FlipCard>
   );
 };
@@ -93,6 +85,10 @@ function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
       alignItems: 'center',
       flexDirection: 'row',
       flexWrap: 'wrap',
+
+    },
+    backContainer:{
+      alignItems: 'center',
     },
     back: {
       width: windowWidth * 0.65,
@@ -136,4 +132,4 @@ function createStyleSheet(windowWidth, windowHeight,hasBeenReadByUser) {
 }
 
 //make this component available to the app
-export default BookCard;
+export default memo(BookCard);

@@ -1,4 +1,4 @@
-import { ADD_BOOKS, MARK_BOOK_STATUS,SET_GET_BOOK_REQUEST_STATUS,SET_SORT_CATEGORIA, SET_SORT_READ,SET_SORT_DATE } from "../types/books";
+import { ADD_BOOKS, MARK_BOOK_STATUS,SET_GET_BOOK_REQUEST_STATUS,SET_SORT_CATEGORIA, SET_SORT_READ,SET_SORT_DATE, SET_BOOK_READ_STATUS } from "../types/books";
 
 
 
@@ -37,6 +37,15 @@ function bookReducer(state = initialState, action) {
 
     case SET_SORT_DATE:
       return {...state, date:action.payload }
+
+    case SET_BOOK_READ_STATUS:
+      let newBooks = state.allBooks.map((book)=>{
+        if (book._id === action.payload.bookId){
+          book.hasBeenReadByUser = action.payload.isRead
+        }
+        return book
+      })
+      return {...state,allBooks:newBooks}
 
     default:
       return state;
