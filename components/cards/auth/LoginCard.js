@@ -37,10 +37,9 @@ const LoginCard = () => {
    () => dispatch(loginUser(username, password)),
  [dispatch,username,password])
 
-  const navigateToHomeScreen = async () => {
+  const clearLoginInputs = async () => {
     setUserName('');
     setPassword('');
-    navigation.navigate('Home');
   };
 
   const navigateToSignupScreen = useCallback(
@@ -52,7 +51,7 @@ const LoginCard = () => {
 
   useEffect(()=>{
     if (token){
-      navigateToHomeScreen()
+      clearLoginInputs()
     }
   },[token])
 

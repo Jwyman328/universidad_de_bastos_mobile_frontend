@@ -8,7 +8,6 @@ function loginUser(username,password) {
     return async (dispatch, getState) => {
         try{
             const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV, Platform.OS)
-
             dispatch(setLoginRequestStatus('PENDING'));
 
             const loginUserResponse =  await fetch(
@@ -29,7 +28,7 @@ function loginUser(username,password) {
             const token = loginUserResponseJson.token
             dispatch(setLoginData(username,token)) 
         }catch (err) {
-            setLoginRequestStatus('ERROR');
+            dispatch(setLoginRequestStatus('ERROR'));
             console.log('we have an err', err)
         }
       

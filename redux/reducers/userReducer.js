@@ -3,7 +3,7 @@ import { SET_LOGIN_REQUEST_STATUS, SET_USER_DATA, SET_LOGIN_DATA, SIGNUP_USER,FA
 
 const initialState = {
     username:'',
-    token:'', 
+    token:undefined, 
     loginRequestStatus:undefined,  // PENDING | SUCCESS | ERROR
     signupSuccessful:false,
     signUpErrorMessages:[],
