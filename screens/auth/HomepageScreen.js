@@ -6,12 +6,10 @@ import GlobalDataContext from '../../data/global/globalContext';
 
 // create a component
 const HomepageScreen = () => {
-    const globalContext = useContext(GlobalDataContext)
-    const token = globalContext.token.value
     return (
         <View style={styles.container}>
             <MainHeader></MainHeader>
-            <Text>{token}</Text>
+            <Text>{hello}</Text>
         </View>
     );
 };

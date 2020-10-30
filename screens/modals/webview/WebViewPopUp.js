@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   View,
   Dimensions,
+  Platform,
 } from 'react-native';
 // create a component
 import {WebView} from 'react-native-webview';
@@ -43,6 +44,7 @@ const ModalViewPopUp = ({pageUri, showModal,setShowModal}) => {
 
 // define your styles
 function createStyleSheet(height, width) {
+  const buttonHeight = Platform.OS === 'ios' ? height * .08 : height * .13
   const styles = StyleSheet.create({
     centeredView: {
       height: height,
@@ -59,7 +61,7 @@ function createStyleSheet(height, width) {
       borderRadius: 20,
       padding: 10,
       elevation: 2,
-      height: 80,
+      height: buttonHeight,
     },
     textStyle: {
       color: 'white',

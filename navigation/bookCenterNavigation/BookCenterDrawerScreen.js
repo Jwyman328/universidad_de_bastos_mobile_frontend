@@ -13,12 +13,12 @@ import Icon from 'react-native-ionicons'
     return (
       <DrawerContentScrollView {...props}>
         <DrawerItem
-        label="Book Center"
+        label="Los Libros"
         onPress={() => navigation.navigate('BookCenter')}
         icon={()=> <Icon size={20}  name={'book'} />}
       />
        <DrawerItem
-        label="Sort Books"
+        label="Filtrar libros"
         onPress={() => navigation.navigate('BookCenterSort')}
         icon={()=> <Icon size={20}  name={'cog'}/> }
       />

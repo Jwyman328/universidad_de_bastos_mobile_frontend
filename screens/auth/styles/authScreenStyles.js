@@ -15,12 +15,13 @@ const authScreenStyles =StyleSheet.create({
     },
     cardContainer: {
       flex: .8,
+      maxHeight:600,
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
     },
     navigateButtonContainer: {
-      flex: .5,
+      flex: .3,
       alignItems: 'center',
       justifyContent: 'center',
   

@@ -1,69 +1,92 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 //import liraries
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
 import BookCard from '../../../components/cards/book/BookCard';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import MainHeader from '../../../components/headers/MainHeader';
-import GlobalDataContext from '../../../data/global/globalContext';
-import getAllBookData from '../../../httpRequests/bookData/getAllBookData';
+import getBooks from '../../../redux/selectors/books/getBooks';
+import fetchBooks from '../../../redux/thunks/httpRequests/fetchBooks';
+
 import {primaryGradient} from '../../../styles/colors';
 
 // create a component
 const BookCenterScreen = () => {
-  const globalContext = useContext(GlobalDataContext);
-  const [getAllBookDataStatus, setGetAllBookDataStatus] = useState(undefined);
-  const [allBookData, setAllBookData] = useState(undefined);
+  const [bookCards, setBookCards] = useState(undefined);
 
-  const mockToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+  const dispatch = useDispatch();
 
-  async function loadBookData() {
-    try {
-      const allBookData = await getAllBookData(
-        setGetAllBookDataStatus,
-        mockToken,
-      );
-      setAllBookData(allBookData);
-    } catch (err) {
-      console.log(err, 'err');
-    }
+  const allBookData = useSelector(getBooks);
+
+  function loadBookData() {
+    dispatch(fetchBooks());
   }
 
-  function createBookCards() {
-    const allBookCards = allBookData.map((bookData) => {
-      return <BookCard loadBookData={loadBookData} key={bookData._id} bookData={bookData}></BookCard>;
-    });
-    return allBookCards;
+  function createBookCards({item}) {
+    // const allBookCards = allBookData.map((bookData) => {
+    //   return (
+    //     <BookCard
+    //       loadBookData={loadBookData}
+    //       key={bookData._id}
+    //       bookData={bookData}></BookCard>
+    //   );
+    // });
+    // return allBookCards;
+    return (
+      <BookCard
+        loadBookData={loadBookData}
+        key={item._id}
+        bookData={item}></BookCard>
+    );
   }
 
   useEffect(() => {
     loadBookData();
-  }, []);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (allBookData) {
+  //     const bookCards = createBookCards();
+  //     setBookCards(bookCards);
+  //   }
+  // }, [allBookData]);
+
   return (
     <View style={styles.container}>
-      <CenterSortHeader title={'Libros'} routeScreen={'BookCenterSort'} iconName="cog" />
-      <ScrollView>
+      <CenterSortHeader
+        title={'Libros'}
+        routeScreen={'BookCenterSort'}
+        iconName="cog"
+      />
+      {/* <ScrollView>
         <View style={styles.scrollContainer}>
-          {allBookData ? createBookCards() : null}
+          {allBookData ? bookCards : null}
         </View>
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+            style={styles.scrollContainer}
+           contentContainerStyle={styles.cardContainer}
+        renderItem={createBookCards}
+        data={allBookData}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: primaryGradient,
   },
   scrollContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop:30,
+    width:'100%'
+  },
+  cardContainer: {
+
+    marginTop: 30,
   },
 });
 

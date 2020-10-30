@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, {Component, memo} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity, Dimensions} from 'react-native';
 import {whiteBackground,hasReadYellow} from '../../../styles/colors';
 
 // create a component
@@ -44,9 +44,9 @@ function createStyle(hasBeenWatchedByUser){
   const borderColor = hasBeenWatchedByUser? hasReadYellow: 'grey'
   const styles = StyleSheet.create({
     touchableContainer: {
-      flex: 1,
-      width:'70%',
-      alignItems:'center'
+      width: Dimensions.get('window').width * .8,
+      alignItems:'center',
+
     },
     container: {
       backgroundColor: whiteBackground,
@@ -88,4 +88,4 @@ function createStyle(hasBeenWatchedByUser){
 }
 
 
-export default VideoCard;
+export default memo(VideoCard);

@@ -1,9 +1,10 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { getBackendBaseRoute } from '../../getEnvVars/getBackendBaseRoute';
 
 const getAllVideoData = async (setRequestStatus, token) => {
   try {
-    const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV)
+    const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV, Platform.OS)
 
     setRequestStatus('PENDING');
     const getAllVideoDataResponse = await fetch(

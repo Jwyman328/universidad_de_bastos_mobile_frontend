@@ -1,65 +1,59 @@
 //import liraries
 import React, {Component, useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import ArticleCard from '../../../components/cards/articles/ArticleCard';
-import getAllArticleData from '../../../httpRequests/articleData/getAllArticleData';
 // create a component
-import GlobalDataContext from '../../../data/global/globalContext';
 import {primaryGradient} from '../../../styles/colors';
-import MainHeader from '../../../components/headers/MainHeader';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import ArticleCenterContext from '../../../data/centers/articlesCenter/articleCenterContext';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchArticles from '../../../redux/thunks/httpRequests/fetchArticles';
+import selectSortedArticles from '../../../redux/selectors/articles/selectSortedArticles';
 
 const ArticleCenterScreen = () => {
-  const [getAllArticleDataStatus, setGetAllArticleDataStatus] = useState(
-    undefined,
-  );
-  const [allArticleData, setAllArticleData] = useState();
+  const [allArticleCards, setAllArticleCards] = useState();
 
-  const globalContext = useContext(GlobalDataContext);
-  const articleContext = useContext(ArticleCenterContext);
-  const {
-    articleCenterState: {fecha},
-  } = articleContext;
+  const dispatch = useDispatch()
 
-  const mockToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTYzMDM4ODR9.f_NK_DVOXH4Ukc2-skqm2Ck3ejDrGh7e1TE4K9GE640';
+  const articlesSorted = useSelector(selectSortedArticles)
 
-  function sortArticlesByDate(articleData) {
-    const articleDataSorted = articleData.sort((a, b) => a.date - b.date);
-
-    if(fecha==='Nuevo'){
-      articleDataSorted.reverse()
-    }
-    return articleDataSorted
-  }
-
-  async function createArticleCards() {
-    const articleCardsData = await getAllArticleData(
-      setGetAllArticleDataStatus,
-      mockToken,
-    ); //globalContext.token.value
-
-    const articlesSorted = sortArticlesByDate(articleCardsData)
-    const allArticleCards = articlesSorted.map((articleCardData) => {
+   function createArticleCards({item}) {
+    //const allArticleCards = articlesSorted.map((articleCardData) => {
       return (
-        <ArticleCard key={articleCardData._id} articleData={articleCardData} />
+        <ArticleCard key={item._id} articleData={item} />
       );
-    });
-    setAllArticleData(allArticleCards);
+    }
+
+  // useEffect(() => {
+  //   if (articlesSorted){
+  //     createArticleCards();
+  //   }
+  // }, [articlesSorted]);
+
+  useEffect(() =>{
+    loadArticles()
+  },[dispatch])
+
+  const loadArticles = () => {
+    dispatch(fetchArticles())
   }
 
-  useEffect(() => {
-    createArticleCards();
-  }, [fecha]);
+
   return (
     <View style={styles.scrollContainer}>
       <CenterSortHeader title={'Articulos'} routeScreen={'ArticleCenterSort'} iconName="cog" />
-      <ScrollView style={styles.scrollContainer}>
+      {/* <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          {allArticleData ? allArticleData : null}
+          {allArticleCards ? allArticleCards : null}
         </View>
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        style={styles.scrollContainer}
+        contentContainerStyle={styles.cardContainer}
+
+      data={articlesSorted}
+      renderItem={createArticleCards}
+      keyExtractor={(item)=> item._id}
+       />
     </View>
   );
 };
@@ -77,6 +71,11 @@ function createStyles(backgroundColor) {
       alignItems: 'center',
       marginTop: 30,
     },
+
+    cardContainer:{
+      alignItems:'center',
+      marginTop:30,
+    }
   });
   return styles;
 }

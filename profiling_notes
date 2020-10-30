@@ -1,0 +1,175 @@
+when using the profiling tools we can see how long each one took to render 
+
+the small graph showing bars, like a bar graph is showing the time each individual render of a component took to render
+    - this is a great way to look at the bars that are highest and why they rendered so slowly
+
+SAVE PROFILE 
+    - you have the ability to save a profile so that you can compare it to a previous one.
+
+
+
+
+REACT PERFORMACNE NOTES 
+https://www.youtube.com/watch?v=NkbO-Vhqbl0&ab_channel=WixEngineeringTechTalks
+    How does native iOS make views appear on screens?
+- it has a native api that you interact with like UImanager.createView()
+- Or eventEmitter.recievesTouches()
+- the messages between the two layers are async, there is a queue that handles them as they arrive.
+- If the queue is full you will get a delay in trying to doing something and having it done 
+- if the bridge is blocked then native actions can still obviously happen the only thing that can’t happen are js based actions because the bridge that communicates from native to js and then to native is stalled. But if the scroll is using native then it can scroll freely as long as no js code is being used.
+- Native will send a lot of touch events to the js side and the js side will send a lot of new view parameters to the native side
+- the more the js bridge is spammed the more cpu and battery is uses
+- The native thread is busy because it has to create functions to do on the screen in the native side and then it is creating functions to send to the js bridge. Both threads are very busy
+- So native thread can go into over drive because it has to work twice as hard aka has to do stuff in native and has to throw stuff on the js bridge
+
+
+NEW FIBER REACT NATIVE ARCHITECTURE
+https://www.youtube.com/watch?v=5sQw8C36Xa4&ab_channel=ReactConferencesbyGitNation
+- Javascript also has a way to talk with native modules not going over the bridge, some native modules are ready to handle getting called by js. This is a double module system where the js function calls the native java or c++ function
+-  In the future there will be no bridge it will be all calling of those functions from js to c++ or java. Will be able to do this with react native fabric
+
+
+YouTube that drew showed me
+- React native has three parts 
+- Init -> native modules -> jvm
+
+    HOW TO GET INFO ON REACT NATIVE START UP PROCESS?
+    - use react marker constants 
+    https://github.com/facebook/react-native/blob/master/ReactAndroid/src/main/java/com/facebook/react/bridge/ReactMarkerConstants.java
+
+- WHAT IS INIT ?
+    - initializing native 
+    - first kicks off react native, starts javascript, 
+        - so create and save the react instance in a react instance manager.
+        - it basically means create the react native bridge 
+    - the bridge will go away with react native fabric
+
+- NATIVE MODULES 
+    - all native modules are built meaning that anything native that will be used is 
+        being created, even though some of these wont be used untill later in yoour application 
+        - say you use the cyrpto native module, well you might only need that for verifying credit card info 
+         when a user buys something, but you are loading it at the beggining of the app.
+    - this start up process could be changed where you only load the native modules when you need them.
+
+
+-JSVM 
+    - js engine in here?
+    - jsvm is started in the native side.
+
+- he says profiling is borken on ios and android!?!
+ - says profiling works in safari and not chrome!?!
+
+
+JAVASCRIPT, AKA PART 2
+     - INIT 
+        - new feature called RAM bundling, allows you to define pre load modules and then just in time js modules to load.
+            - bascially is like lazy loading for react native.
+
+    -COMPONENTS 
+        - profiling the components is different than profiling the js start up.
+        - how to profile components?
+            - you can use trace which is something you wrap a component in to check.
+            - this is a good way to understand which components are exspensive and should be RAM loaded aka lazy loaded react nativve style.
+        - react dev tools profiling allows you to see what components are exspense and which are not 
+             in a flame chart.
+        - this type of component profiling is react specific where as the other init way is js specific.
+
+    NETWORK 
+        - how to optimize the network aspect of react native 
+        - try to do the network requests only after all the components have mounted 
+            this way you only haave to do a diff algo of the network request change that have been made 
+            instead of waiting untill network requests are done before you mount your components.
+
+
+
+PRACTICAL PERFORMANCE IN REACT NATIVE 
+    - https://www.youtube.com/watch?v=jTdi9oTM22c&ab_channel=ReactConferencesbyGitNation
+    - how to make apps performant 
+
+    MAIN PROBLEMS 
+        - slwo start up time 
+        - slow time to first interactoin 
+        - animations are slow or jagged.
+        - slow response to user actions 
+
+    TWO THREADS 
+        - js thread 
+            - used for running react.
+        - UI THREAD 
+            - used for rendering things on the screen 
+        - and the react native bridge connects them.
+            - the part that allwos communication between the two 
+ 
+    - we must decde out of these three parts UI thread, react native tread, and the bridge what is slowing us down?
+
+
+    WHEN WE HAVE A STATE CHANGE WHAT HAPPENS ?
+        - render component state has changed in 
+        - render all child components 
+        - updated virtual dom
+        - compare virtual dom and cached dom 
+        - note changes between the two 
+        - create cached dom?
+        - make changes on the UI 
+        - create cached dom?
+
+        - this process of state update is a lot and if you update a lot of state 
+            this will be very slow for old devices.
+
+    - react natvie debugger profiler allows you to record anything that happens in your javascript
+
+
+
+
+
+    REACT PROFILER  
+        https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#:~:text=The%20DevTools%20profiler%20groups%20performance,to%20select%20a%20different%20commit.
+        - the profiler will collect information each time the application rerenders.
+
+        BROWSING COMMITS 
+            - react does work in two phases 
+            - RENDER PHASE, and it compares the render changes to the dom.
+            - COMMIT phase - react makes changes in the UI. 
+            - the height of a commit bar is how long that commit took to render.
+
+        FLAME CHART 
+            - represents the state of your application for a particular commit 
+            - reach bar is a react component 
+            - the color and size of the bar represents how long it took to render its 
+                self and its children. you can go downward to see its children rerender.
+            - looking at a components render you can see how much time its render method took and how much time a componetns render method took. 
+
+            - looks at props and state and stepping between the commits may tell you why a component rendered. seeing the state changes.
+            -each commit has its own flame graph
+
+        RANKED CHART VIEW 
+            - ranked chart view represents a single commit 
+                - each commit it willl show you which component was the longest to render.
+            - a components render time also includes its childs render time, 
+                so the longest render component may not be the problem but one of its children may.
+
+
+
+
+        - https://www.youtube.com/watch?v=yXJOkfYXCJQ&ab_channel=WhattheJavaScript
+        - the number next to the small graph means the number of commits that react took 
+            to get that information 
+        - a grey component means that the component did not rerender!
+        - in react native dev tools toggiling between the profiler tab and the components tab 
+            -  the profiler tab will tell you when the commit happened 
+            - the component tab will show you the state and props for a specific clicked on component
+                - in the component tab you can click on <> and it wil show you directly thta components code.
+
+        - the commits will give you a sense of  time in your application and you can navigate through it 
+            for a component to see what changed throughout it.
+
+        RANKED VIEW 
+            - a ranked view will rank the components that took the most time to rerender.
+
+        WHAT IS A COMMIT 
+            - a commit is when react applies a change.
+
+
+
+
+Profile the production build https://kentcdodds.com/blog/profile-a-react-app-for-performance

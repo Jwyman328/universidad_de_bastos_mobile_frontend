@@ -13,12 +13,12 @@ import Icon from 'react-native-ionicons'
     return (
       <DrawerContentScrollView {...props}>
         <DrawerItem
-        label="Video Center"
+        label="Los Videos"
         onPress={() => navigation.navigate('VideoCenter')}
         icon={()=> <Icon size={20}  name={'videocam'} />}
       />
        <DrawerItem
-        label="Sort Videos"
+        label="Filtrar Videos"
         onPress={() => navigation.navigate('VideoCenterSortSettings')}
         icon={()=> <Icon size={20}  name={'cog'}/> }
       />

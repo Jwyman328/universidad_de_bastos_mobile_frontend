@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, memo} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {hasReadYellow} from '../../styles/colors';
@@ -14,7 +14,7 @@ const SelectOptionButton = ({option, isSelected, setIsSelected}) => {
   return (
     <TouchableOpacity onPress={setSelected}>
       <View style={styles.selectButton}>
-        <Text>{option}</Text>
+        <Text  style={styles.selectButtonText}>{option}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -35,10 +35,13 @@ function createStyles(isSelected) {
       alignItems: 'center',
       padding: 3,
     },
+    selectButtonText:{
+      textAlign:'center'
+    }
   });
 
   return styles;
 }
 
 //make this component available to the app
-export default SelectOptionButton;
+export default memo(SelectOptionButton);

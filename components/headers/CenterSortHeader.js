@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, memo} from 'react';
 import {
   View,
   Text,
@@ -69,7 +69,8 @@ function createStyles(height, width) {
     titleContainer:{
       width:"100%",
       alignItems:'center',
-      justifyContent:'center'
+      justifyContent:'center',
+      height:height * 0.11
     },
     title: {
       color: 'white',
@@ -81,4 +82,4 @@ function createStyles(height, width) {
 }
 
 //make this component available to the app
-export default CenterSortHeader;
+export default memo(CenterSortHeader);
