@@ -5,7 +5,7 @@ import userReducer from './userReducer'
 import videoReducer from './videoReducer'
 
 import { persistStore, persistReducer } from "redux-persist";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage'
 
 const persistConfig = {
   key: "root",
