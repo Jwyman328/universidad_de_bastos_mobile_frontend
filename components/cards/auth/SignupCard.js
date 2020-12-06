@@ -1,7 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useReducer, useState} from 'react';
 
 import {StyleSheet, View, Text, TextInput} from 'react-native';
+import GlobalDataContext from '../../../data/global/globalContext';
 import {
   signUpCardFormReducer,
   SET_USERNAME,
@@ -15,7 +16,11 @@ import TextButtonSeparator from '../../buttons/TextButtonSeparator';
 import ErrorMessage from '../../messages/ErrorMessage';
 import MultiMessageContainer from '../../messages/MultiMessageContainer';
 import authCardStyles from './styles';
-
+import signUpUser from '../../../redux/thunks/httpRequests/signUpUser';
+import {useDispatch, useSelector} from 'react-redux';
+import {getToken} from '../../../redux/selectors/user/getToken';
+import selectSignUpSuccessful from '../../../redux/selectors/user/selectSignUpSuccessful';
+import selectSignUpErrorMessages from '../../../redux/selectors/user/selectSignUpErrorMessages';
 
 const SignupCard = () => {
   const [signUpFormReducerValues, dispatch] = useReducer(
@@ -23,16 +28,15 @@ const SignupCard = () => {
     initialSignupCardReducerValues,
   );
 
-  const {
-    username,
-    password,
-    passwordRetyped,
-    signupSuccessful,
-    signUpErrorMessages,
-  } = signUpFormReducerValues;
+  const {username, password, passwordRetyped} = signUpFormReducerValues;
+
+  const reduxDispatch = useDispatch();
+  const token = useSelector(getToken);
+  const signupSuccessful = useSelector(selectSignUpSuccessful);
+  const signUpErrorMessages = useSelector(selectSignUpErrorMessages);
 
   const title = 'Universidad de Bastos';
-  const cardTypeTitle = 'Signup';
+  const cardTypeTitle = 'Regístrate';
 
   const navigation = useNavigation();
 
@@ -40,9 +44,12 @@ const SignupCard = () => {
     navigation.navigate('Home');
   };
 
-  const navigateToLoginScreen = () => {
-    navigation.navigate('Login');
-  };
+  const navigateToLoginScreen = useCallback(
+    () => {
+      navigation.navigate('Login');
+    },
+    [navigation]
+  ) 
 
   function setUserName(username) {
     dispatch({type: SET_USERNAME, payload: {username: username}});
@@ -59,8 +66,15 @@ const SignupCard = () => {
     });
   }
 
-  function signUpUser() {
-    dispatch({type: SIGNUP_USER});
+  function attemptSignUpUser() {
+    reduxDispatch({
+      type: SIGNUP_USER,
+      payload: {
+        username: username,
+        password: password,
+        passwordRetyped: passwordRetyped,
+      },
+    });
   }
 
   function displayErrorMessageComponents() {
@@ -71,16 +85,24 @@ const SignupCard = () => {
           errorMessage={errorMessageTextContent}></ErrorMessage>
       );
     });
+
     if (errorMessages.length > 0) {
       return <MultiMessageContainer>{errorMessages}</MultiMessageContainer>;
     }
   }
 
   useEffect(() => {
-    if (signupSuccessful) {
+    if (token) {
       navigateToHomeScreen();
     }
-  }, [signupSuccessful]);
+    if (signupSuccessful === 'NO_INPUT_ERRORS') {
+      setUserToken();
+    }
+  }, [signupSuccessful, token, reduxDispatch]);
+
+  function setUserToken() {
+    reduxDispatch(signUpUser(username, password));
+  }
 
   return (
     <View style={authCardStyles.container}>
@@ -94,20 +116,20 @@ const SignupCard = () => {
 
       <View style={authCardStyles.userInputContainer}>
         <TextInput
-          placeholderTextColor="black"
-          placeholder="username"
+          placeholderTextColor="white"
+          placeholder="usuario"
           style={authCardStyles.userInput}
           onChangeText={(username) => setUserName(username)}></TextInput>
         <TextInput
           secureTextEntry={true}
-          placeholderTextColor="black"
-          placeholder="password"
+          placeholderTextColor="white"
+          placeholder="contraseña"
           style={authCardStyles.userInput}
           onChangeText={(password) => setPassword(password)}></TextInput>
         <TextInput
           secureTextEntry={true}
-          placeholderTextColor="black"
-          placeholder="retype password"
+          placeholderTextColor="white"
+          placeholder="repite la contraseña"
           style={authCardStyles.userInput}
           onChangeText={(passwordRetyped) =>
             setPasswordRetyped(passwordRetyped)
@@ -117,15 +139,15 @@ const SignupCard = () => {
       <View style={authCardStyles.submitButtonContainer}>
         <SubmitButton
           buttonColor="#03b1fc"
-          handleClick={signUpUser}
+          handleClick={attemptSignUpUser}
           title={cardTypeTitle}></SubmitButton>
 
         <TextButtonSeparator></TextButtonSeparator>
-        
+
         <SubmitButton
           buttonColor="#99d0e8"
           handleClick={navigateToLoginScreen}
-          title="Login"></SubmitButton>
+          title="Iniciar sesión"></SubmitButton>
       </View>
     </View>
   );

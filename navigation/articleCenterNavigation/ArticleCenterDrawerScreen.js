@@ -3,7 +3,6 @@ import React, {useContext, useReducer} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-ionicons';
-import ArticleCenterContext from '../../data/centers/articlesCenter/articleCenterContext';
 
 export function ArticleCenterDrawerScreen(props) {
   
@@ -14,12 +13,12 @@ export function ArticleCenterDrawerScreen(props) {
 
       <DrawerContentScrollView {...props}>
         <DrawerItem
-          label="Article Center"
+          label="Artículos"
           onPress={() => navigation.navigate('ArticleCenter')}
           icon={() => <Icon size={20} name={'document'} />}
         />
         <DrawerItem
-          label="Sort Books"
+          label="Filtrar artículos"
           onPress={() => navigation.navigate('ArticleCenterSort')}
           icon={() => <Icon size={20} name={'cog'} />}
         />

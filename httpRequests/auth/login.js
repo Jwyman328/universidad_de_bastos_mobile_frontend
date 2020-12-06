@@ -1,11 +1,14 @@
 import React from 'react';
-//'http://localhost:5000
-//https://universidad-de-bastos.herokuapp.com/auth/login
+import { Platform } from 'react-native';
+import { getBackendBaseRoute } from '../../getEnvVars/getBackendBaseRoute';
+
 const loginUser = async (username, password, setRequestStatus) => {
     try{
+        const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV, Platform.OS)
+
         setRequestStatus('PENDING');
         const loginUserResponse =  await fetch(
-            'http://localhost:5000/auth/login',
+            `${REACT_APP_BACKEND_BASE_ROUTE}/auth/login`,
             {
               method: 'POST',
               headers: {

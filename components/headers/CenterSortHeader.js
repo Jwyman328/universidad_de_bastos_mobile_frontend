@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, memo} from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-ionicons';
-import { primaryBlue } from '../../styles/colors';
-
+import {primaryBlue} from '../../styles/colors';
 
 // create a component
-const CenterSortHeader = ({iconName,routeScreen}) => {
+const CenterSortHeader = ({iconName, routeScreen, title}) => {
   const screenWidth = Dimensions.get('screen').width;
   const screenHeight = Dimensions.get('window').height;
   const styles = createStyles(screenHeight, screenWidth);
@@ -26,6 +25,10 @@ const CenterSortHeader = ({iconName,routeScreen}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+
       <TouchableOpacity style={styles.touchContinaer} onPress={openSortPage}>
         <View style={styles.iconContainer}>
           <Icon style={styles.icon} size={40} name={iconName} />
@@ -41,30 +44,42 @@ function createStyles(height, width) {
     container: {
       height: height * 0.11,
       width: width,
-      justifyContent: 'center',
+      flexDirection:'row',
+      justifyContent:'flex-start',
       alignItems: 'center',
       backgroundColor: '#3483eb',
       padding: 30,
     },
     touchContinaer: {
-      marginTop:10,
-      height: height * 0.10,
+      top:0,
+      right: 10,
+      height: height * 0.1,
       width: '90%',
+      position:'absolute'
     },
     iconContainer: {
-      height:'100%',
-      width:'100%'
+      height: '100%',
+      width: '100%',
     },
-    icon:{
+    icon: {
       position: 'absolute',
-      right:0,
-      bottom:10,
-    }
-
+      right: 0,
+      bottom: 10,
+    },
+    titleContainer:{
+      width:"100%",
+      alignItems:'center',
+      justifyContent:'center',
+      height:height * 0.11
+    },
+    title: {
+      color: 'white',
+      fontSize: 20,
+    },
   });
 
   return styles;
 }
 
 //make this component available to the app
-export default CenterSortHeader;
+export default memo(CenterSortHeader);

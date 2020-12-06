@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import GlobalDataContext from './data/global/globalContext';
 import NavigationComponent from './navigation/NavigationComponent';
+import {Provider} from 'react-redux';
+//import store from './store';
 
+import {getStore, getPersistor} from './store';
+import {PersistGate} from 'redux-persist/integration/react';
+import LoadingScreen from './screens/loading/loadingScreen';
 
 const GlobalDataComponent = () => {
-  const [token,setToken] = useState(undefined)
-  const [loginRequestStatus,setLoginRequestStatus] = useState('hello world')
-  const globalData = {
-      token: {value:token, setValue:setToken},
-      loginRequestStatus : {value:loginRequestStatus, setValue:setLoginRequestStatus }
-  }
+  const myStore = getStore();
+  const myPersistor = getPersistor();
 
   return (
-    <GlobalDataContext.Provider value={globalData}>
+    <Provider store={myStore}>
+      <PersistGate persistor={myPersistor} loading={<LoadingScreen />}  >
         <NavigationComponent></NavigationComponent>
-    </GlobalDataContext.Provider>
-
+      </PersistGate>
+    </Provider>
   );
 };
 

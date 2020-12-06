@@ -1,10 +1,13 @@
 import React from 'react';
+import { Platform } from 'react-native';
+import { getBackendBaseRoute } from '../../getEnvVars/getBackendBaseRoute';
 
 const markBookAsRead = async (bookId,token, setRequestStatus) => {
     try{
+        const REACT_APP_BACKEND_BASE_ROUTE = getBackendBaseRoute(process.env.NODE_ENV, Platform.OS)
         setRequestStatus('PENDING');
         const markBookAsReadResponse =  await fetch(
-            'http://localhost:5000/books/read/',
+            `${REACT_APP_BACKEND_BASE_ROUTE}/books/read/`,
             {
               method: 'POST',
               headers: {

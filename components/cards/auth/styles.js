@@ -1,20 +1,20 @@
 import React from 'react';
 
 import {StyleSheet} from 'react-native';
+import { teal } from '../../../styles/colors';
 
 const authCardStyles = StyleSheet.create({
     container: {
-      backgroundColor: '#1339c2',
+      backgroundColor: teal,
       width: '80%',
       flex: 1,
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: 'black',
       alignItems: 'center',
       justifyContent: 'space-evenly',
       position: 'relative',
       padding: '5%',
-
-      //paddingBottom: 50,
+      minHeight:550,
     },
     title: {
       fontSize: 30,
@@ -51,19 +51,22 @@ const authCardStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,
-      //backgroundColor: 'purple',
+
+
     },
     userInput: {
-      color: 'black',
+      color: 'white',
       width: '100%',
       minWidth: 200,
-      backgroundColor: 'white',
+      //backgroundColor: 'white',
       flex: 1,
-      minHeight:30,
+      minHeight:45,
       // minHeight: 10,
       // maxHeight: 35,
       marginTop: '5%',
       paddingLeft: 5,
+      borderBottomColor:'white',
+      borderBottomWidth:1,
     },
     submitButtonContainer: {
       flex: 1.5,

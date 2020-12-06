@@ -1,56 +1,67 @@
 import {useNavigation} from '@react-navigation/native';
 //import liraries
-import React, {Component, useState, useContext} from 'react';
+import React, {Component, useState, useContext, useCallback} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import SelectOptionButton from '../../../components/buttons/SelectOptionButton';
 import CenterSortHeader from '../../../components/headers/CenterSortHeader';
-import VideoCenterContext from '../../../data/centers/videoCenter/videoCenterContext';
 import { SET_FECHA, SET_INSTITUTION, SET_MIRADO, SET_TIPO } from '../../../reducers/centers/sortReducers/videoCenterSortReducer';
-import {hasReadYellow, whiteBackground} from '../../../styles/colors';
+import { selectVideoDataSort, selectVideoInsitutionSort, selectVideoTypeSort, selectVideoWatchedSort } from '../../../redux/selectors/videos/selectVideoSortTypeSelects';
 import { sortFilterStyles } from '../../../styles/sortFilterStyles/sortFilterStyles';
 
 // create a component
 const VideoSortScreen = () => {
   const navigation = useNavigation();
-  const {videoCenterState, videoCenterDispatch} = useContext(
-    VideoCenterContext,
-  );
-  const { institution,tipo,mirado,fecha} = videoCenterState
+
+  const institution = useSelector(selectVideoInsitutionSort)
+  const tipo = useSelector(selectVideoTypeSort)
+  const mirado = useSelector(selectVideoWatchedSort)
+  const fecha = useSelector(selectVideoDataSort)
+
+  const dispatch = useDispatch()
   
   const selectedInstitution = institution;
-  const setInstitution = (value) => {
-    videoCenterDispatch({type:SET_INSTITUTION,payload:{institution:value}})
-  }
 
-  const selectedType= tipo;
-  const setType = (value) => {
-    videoCenterDispatch({type:SET_TIPO,payload:{tipo:value}})
-  }
+  const setInstitution = useCallback(
+    (value) => {dispatch({type:SET_INSTITUTION,payload:{institution:value}})},
+    [dispatch]
+  ) 
+
+  const selectedType = tipo;
+  const setType = useCallback(
+    (value) => {dispatch({type:SET_TIPO,payload:{tipo:value}})},
+    [dispatch]
+  ) 
 
   const selectedWatched= mirado;
-  const setWatched= (value) => {
-    videoCenterDispatch({type:SET_MIRADO,payload:{mirado:value}})
-  }
+  const setWatched= useCallback(
+    (value) => {dispatch({type:SET_MIRADO,payload:{mirado:value}})},
+    [dispatch]
+    )
 
   const selectedSortBy= fecha;
-  const setSortBy= (value) => {
-    videoCenterDispatch({type:SET_FECHA,payload:{fecha:value}})
-  }
+  const setSortBy= useCallback(
+    (value) => {
+      dispatch({type:SET_FECHA,payload:{fecha:value}})
+    },
+    [dispatch]
+  )
+ 
 
-  function checkIsSelected(selected, option) {
+  const checkIsSelected = useCallback((selected, option) => {
     if (selected === option) {
       return true;
     } else {
       return false;
     }
-  }
+  },[])
 
   return (
     <View  style={sortFilterStyles.container} >
-      <CenterSortHeader routeScreen={'VideoCenter'} iconName="videocam" />
+      <CenterSortHeader title={'Videos'} routeScreen={'VideoCenter'} iconName="videocam" />
       <View style={sortFilterStyles.contentContainer}>
         <View>
-          <Text style={sortFilterStyles.title}>Sort and Filter Videos</Text>
+          <Text style={sortFilterStyles.title}>Filtrar Videos</Text>
         </View>
         {/* <Button
         onPress={() => navigation.navigate('VideoCenter')}
