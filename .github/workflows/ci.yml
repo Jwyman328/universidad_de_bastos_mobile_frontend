@@ -1,16 +1,18 @@
 on:
-  pull_request:
+  push:
     branches: '*'
 
 jobs:
   test:
     name: Tests
-    runs-on: ubuntu-latest
+    runs-on: macos-10.15
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - uses: actions/setup-node@master
-    - uses: c-hive/gha-yarn-cache@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18.3"
+
 
     - name: Install node modules
       run: |
@@ -18,3 +20,5 @@ jobs:
     - name: Run test
       run: |
         npm test
+
+
